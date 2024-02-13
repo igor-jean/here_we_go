@@ -1,0 +1,15 @@
+{
+    "name": "user/here_we_go",
+    "autoload": {
+        "psr-4": {
+            "User\\HereWeGo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Igor Jean",
+            "email": "igorjean79@gmail.com"
+        }
+    ],
+    "require": {}
+}

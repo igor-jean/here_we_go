@@ -1,0 +1,16 @@
+<nav>
+    <ul>
+        <li><a href="">Accueil</a></li>
+        <li>
+            <a href="">Categories</a>
+            <ul>
+                <li>Cinema</li>
+                <li>Musique</li>
+                <li>Exposition</li>
+                <li>Conférence</li>
+            </ul>
+        </li>
+        <li><input type="search" name="" id=""></li>
+        <li><a href="?controller=pages&action=connexion">Connexion / Inscription</a></li>
+    </ul>
+</nav>
