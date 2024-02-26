@@ -11,6 +11,17 @@
       require_once('views/evenements/newEvent.php');
     }
     
+    public function monCompte() {
+      $id_utilisateur = intval($_SESSION["id_utilisateur"]);
+      $user = Utilisateur::find($id_utilisateur);
+      $vehicules = Vehicule::findVehicule($id_utilisateur);
+      $events = Evenement::findPastEvents($id_utilisateur);
+      $eventsUpcoming = Evenement::findUpcomingEvents($id_utilisateur);
+      $listEventsRegistered = Evenement::listEventsRegistered($id_utilisateur);
+      
+      require_once('views/utilisateurs/monCompte.php');
+    }
+
     public function showEvent() {
       $id_utilisateur = $_SESSION["id_utilisateur"];
       $id_event = $_GET["id_event"];
@@ -38,8 +49,11 @@
       $code_unique_label = $_POST["code_unique_label"];
       $id_utilisateur = $_SESSION["id_utilisateur"];
       $id_categorie = $_POST["id_categorie"];
+      $id_event = Evenement::generateRandomId();
       
-      Evenement::addEvents($titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie);
+      Evenement::addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie);
+      Utilisateur::registrationEvent($id_utilisateur, $id_event);
+      $this->monCompte();
     }
     public function inscriptionEvent() {
       $id_utilisateur = $_SESSION["id_utilisateur"];

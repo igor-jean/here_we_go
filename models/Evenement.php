@@ -129,58 +129,128 @@ public static function find($id_event) {
       }
       return $list;
     }
-  // trouver les evenements auquels l'utilisateur est inscrit 
-    public static function listEventsRegistered($id_user) {
+// trouver les evenement créé par l'utilisateur qui se sont deja passé et les trier tu plus recent au plus eloigné
+    public static function findPastEvents($id_user) {
         $db = Db::getInstance();
         $list = [];
-        $req = $db->prepare("SELECT evenement.*, inscription_utilisateur_event.id_event FROM evenement INNER JOIN inscription_utilisateur_event ON evenement.id_event = inscription_utilisateur_event.id_event WHERE inscription_utilisateur_event.id_utilisateur = :id_utilisateur;
-        ");
+        // Sélectionner les événements de l'utilisateur qui se sont déjà déroulés, triés par date dans l'ordre décroissant
+        $req = $db->prepare('SELECT * FROM evenement WHERE id_utilisateur = :id_utilisateur AND date_event < CURDATE() ORDER BY date_event DESC');
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
         foreach ($events as $event) {
-          $list[] = new Evenement(
-              $event['id_event'],
-              $event['titre'],
-              $event['date_event'],
-              $event['heure_event'],
-              $event['ville'],
-              $event['adresse'],
-              $event['code_postal'],
-              $event['description_courte'],
-              $event['description_longue'],
-              $event['nb_places'],
-              $event['prix'],
-              $event['lien_billeterie'],
-              $event['lien_event'],
-              $event['nom_structure'],
-              $event['nb_visiteur'],
-              $event['code_unique_label'],
-              $event['id_utilisateur'],
-              $event['id_categorie']
-          );
-      }
-      return $list;
+            $list[] = new Evenement(
+                $event['id_event'],
+                $event['titre'],
+                $event['date_event'],
+                $event['heure_event'],
+                $event['ville'],
+                $event['adresse'],
+                $event['code_postal'],
+                $event['description_courte'],
+                $event['description_longue'],
+                $event['nb_places'],
+                $event['prix'],
+                $event['lien_billeterie'],
+                $event['lien_event'],
+                $event['nom_structure'],
+                $event['nb_visiteur'],
+                $event['code_unique_label'],
+                $event['id_utilisateur'],
+                $event['id_categorie']
+            );
+        }
+        return $list;
+    }
+    
+// trouver les evenement créé par l'utilisateur qui ne sont pas encore passé et les trier tu plus proche au plus eloigné
+    public static function findUpcomingEvents($id_user) {
+        $db = Db::getInstance();
+        $list = [];
+        // Sélectionner les événements de l'utilisateur qui n'ont pas encore eu lieu, triés par date
+        $req = $db->prepare('SELECT * FROM evenement WHERE id_utilisateur = :id_utilisateur AND date_event >= CURDATE() ORDER BY date_event ASC');
+        $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
+        $req->execute();
+        $events = $req->fetchAll();
+        foreach ($events as $event) {
+            $list[] = new Evenement(
+                $event['id_event'],
+                $event['titre'],
+                $event['date_event'],
+                $event['heure_event'],
+                $event['ville'],
+                $event['adresse'],
+                $event['code_postal'],
+                $event['description_courte'],
+                $event['description_longue'],
+                $event['nb_places'],
+                $event['prix'],
+                $event['lien_billeterie'],
+                $event['lien_event'],
+                $event['nom_structure'],
+                $event['nb_visiteur'],
+                $event['code_unique_label'],
+                $event['id_utilisateur'],
+                $event['id_categorie']
+            );
+        }
+        return $list;
+    }
+    
+  // trouver les evenements auquels l'utilisateur est inscrit 
+    public static function listEventsRegistered($id_user) {
+        $db = Db::getInstance();
+    $list = [];
+    $currentDate = date("Y-m-d"); // Date actuelle
 
+    $req = $db->prepare("SELECT evenement.*, inscription_utilisateur_event.id_event FROM evenement 
+                         INNER JOIN inscription_utilisateur_event 
+                         ON evenement.id_event = inscription_utilisateur_event.id_event 
+                         WHERE inscription_utilisateur_event.id_utilisateur = :id_utilisateur 
+                         AND evenement.date_event >= :current_date 
+                         ORDER BY evenement.date_event ASC");
+
+    $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
+    $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
+    $req->execute();
+    $events = $req->fetchAll();
+
+    foreach ($events as $event) {
+        $list[] = new Evenement(
+            $event['id_event'],
+            $event['titre'],
+            $event['date_event'],
+            $event['heure_event'],
+            $event['ville'],
+            $event['adresse'],
+            $event['code_postal'],
+            $event['description_courte'],
+            $event['description_longue'],
+            $event['nb_places'],
+            $event['prix'],
+            $event['lien_billeterie'],
+            $event['lien_event'],
+            $event['nom_structure'],
+            $event['nb_visiteur'],
+            $event['code_unique_label'],
+            $event['id_utilisateur'],
+            $event['id_categorie']
+        );
+    }
+
+    return $list;
     }
 
 
-// créer un avenement 
-    public static function addEvents($titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie) {
+// créer un evenement 
+    public static function addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie) {
 
       
         $db = Db::getInstance();
-        $id_event = null;
         $dateNow = date("Y-m-d");
         $inscrit = 0;
 
-        do {
-            $id_event = Evenement::generateRandomId(); //verifie si le nombre generé existe deja
-            $req_check = $db->prepare("SELECT id_event FROM evenement WHERE id_event = :id_event");
-            $req_check->bindParam(":id_event", $id_event);
-            $req_check->execute();
-            $exists = $req_check->fetch();
-        } while ($exists); 
+
 
 
       $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, nb_visiteur, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :nb_visiteur, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
@@ -205,19 +275,28 @@ public static function find($id_event) {
       $req->bindParam(":date_ajout", $dateNow, PDO::PARAM_STR);
       $req->bindParam(":inscrit", $inscrit, PDO::PARAM_INT);
       $req->execute();
-      header("Location: ?controller=utilisateurs&action=monCompte");
       
     } 
-    // genere un chiffre aléatoire 
     public static function generateRandomId() {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
-        
+        $db = Db::getInstance();
+    
+        // Générer un identifiant aléatoire de 7 caractères
         for ($i = 0; $i < 7; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
-        
-        return $randomString;
+    
+        // Vérifier si l'identifiant généré existe déjà dans la table des événements
+        do {
+            $id_event = $randomString;
+            $req_check = $db->prepare("SELECT id_event FROM evenement WHERE id_event = :id_event");
+            $req_check->bindParam(":id_event", $id_event);
+            $req_check->execute();
+            $exists = $req_check->fetch();
+        } while ($exists);
+    
+        return $id_event;
     }
     
 // Modifier un evenement 

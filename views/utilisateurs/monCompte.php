@@ -42,7 +42,7 @@
     <tfoot>
         <tr>
             <td>
-                <a href="?controller=utilisateur&action=ajouterVehicule">Ajouter un vehicule</a>
+                <a href="?controller=utilisateurs&action=ajouterVehicule">Ajouter un vehicule</a>
             </td>
         </tr>
     </tfoot>
@@ -50,7 +50,7 @@
 
 
 
-<h2>Evenements créé</h2>
+<h2>Liste des evenements créé et qui se sont deja passé:</h2>
 
 <ul>
     <?php foreach ($events as $event) { ?>
@@ -72,9 +72,29 @@
     <?php } ?>
 </ul>
 
+<h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
+<ul>
+    <?php foreach ($eventsUpcoming as $event) { ?>
+        <li>Titre: <?php echo $event->getTitre(); ?></li>
+        <li>Date: <?php echo $event->getDateEvent(); ?></li>
+        <li>Heure: <?php echo $event->getHeureEvent(); ?></li>
+        <li>Ville: <?php echo $event->getVille(); ?></li>
+        <li>Adresse: <?php echo $event->getAdresse(); ?></li>
+        <li>Code Postal: <?php echo $event->getCodePostal(); ?></li>
+        <li>Description Courte: <?php echo $event->getDescriptionCourte(); ?></li>
+        <li>Description Longue: <?php echo $event->getDescriptionLongue(); ?></li>
+        <li>Nombre de Places: <?php echo $event->getNbPlaces(); ?></li>
+        <li>Prix: <?php echo $event->getPrix(); ?></li>
+        <li>Lien Billeterie: <?php echo $event->getLienBilleterie(); ?></li>
+        <li>Lien Event: <?php echo $event->getLienEvent(); ?></li>
+        <li>Nom Structure: <?php echo $event->getNomStructure(); ?></li>
+        <br>
+        <br>
+    <?php } ?>
+</ul>
 
 
-<h2>Evenements auxquel je suis inscrit </h2>
+<h2>Liste des Evenements auxquel je suis inscrit </h2>
 
 <ul>
     <?php foreach ($listEventsRegistered as $event) { ?>

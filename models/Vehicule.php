@@ -15,7 +15,25 @@
         $this->nb_places = $nb_places;
         $this->id_vehicule = $id_vehicule;
         $this->id_utilisateur = $id_utilisateur;
-    }
+        }
+
+        public static function add($libelle_vehicule, $imatriculation, $nb_places, $id_vehicule, $id_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("INSERT INTO vehicule_utilisateur (libelle_vehicule, imatriculation, nb_places, id_vehicule, id_utilisateur) VALUES (:libelle_vehicule, :imatriculation, :nb_places, :id_vehicule, :id_utilisateur)");
+                $req->bindParam(":libelle_vehicule", $libelle_vehicule, PDO::PARAM_STR);
+                $req->bindParam(":imatriculation", $imatriculation, PDO::PARAM_STR);
+                $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
+                $req->bindParam(":id_vehicule", $id_vehicule, PDO::PARAM_INT);
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+        }
+        public static function delete($id_vehicule_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("DELETE FROM vehicule_utilisateur WHERE id_vehicule_utilisateur = :id_vehicule_utilisateur");
+                $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+        }
+            
 //     FONCTION POUR TROUVER LES VEHICULES D4UN UTILISATEUR
     public static function findVehicule($id_utilisateur) {
         $db = Db::getInstance();

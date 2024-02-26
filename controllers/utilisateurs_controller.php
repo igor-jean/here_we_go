@@ -34,7 +34,8 @@
       $id_utilisateur = intval($_SESSION["id_utilisateur"]);
       $user = Utilisateur::find($id_utilisateur);
       $vehicules = Vehicule::findVehicule($id_utilisateur);
-      $events = Evenement::findAllperUser($id_utilisateur);
+      $events = Evenement::findPastEvents($id_utilisateur);
+      $eventsUpcoming = Evenement::findUpcomingEvents($id_utilisateur);
       $listEventsRegistered = Evenement::listEventsRegistered($id_utilisateur);
       
       require_once('views/utilisateurs/monCompte.php');
@@ -76,6 +77,27 @@
       $nb_places = $_POST["nb_places"];
       $id_vehicule = $_POST["id_vehicule"];
       Vehicule::update($id_vehicule_utilisateur, $libelle_vehicule, $imatriculation, $nb_places, $id_vehicule);
+      $this->monCompte();
+    }
+    
+    public function ajouterVehicule() {
+      $types = TypeVehicule::all();
+      require_once('views/utilisateurs/ajouterVehicule.php');
+    }
+
+    public function addVehicule() {
+      $libelle_vehicule = $_POST["libelle_vehicule"];
+      $immatriculation = $_POST["immatriculation"];
+      $nb_places = $_POST["nb_places"];
+      $id_vehicule = $_POST["id_vehicule"];
+      $id_utilisateur = $_SESSION["id_utilisateur"];
+      Vehicule::add($libelle_vehicule, $immatriculation, $nb_places, $id_vehicule, $id_utilisateur);
+      $this->monCompte();
+    }
+    
+    public function deleteVehicule() {
+      $id_vehicule_utilisateur = $_GET["id_vehicule_utilisateur"];
+      Vehicule::delete($id_vehicule_utilisateur);
       $this->monCompte();
     }
   }
