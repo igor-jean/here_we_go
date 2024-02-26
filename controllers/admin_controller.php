@@ -21,6 +21,7 @@
         }
         public function categorieVehiculeAdministration() {
             $categories = Categorie::all();
+            $vehicules = TypeVehicule::all();
             require_once('views/admin/categorieVehiculeAdministration.php');
         }
 // validation d'un evenement
@@ -94,13 +95,37 @@
         public function ajouterCategorie() {
             require_once('views/admin/ajouterCategorie.php');
         }
-
+        
         public function addCategorie() {
             $libelle_categorie = $_POST["libelle_categorie"];
             $couleur = $_POST["couleur"];
             Categorie::add($libelle_categorie, $couleur);
             $this->categorieVehiculeAdministration();
         }
+        
+        public function voirTypeVehicule() {
+            $id_vehicule = $_GET["id_vehicule"];
+            $vehicule = TypeVehicule::find($id_vehicule);
+            require_once('views/admin/voirTypeVehicule.php');
+        }
+        
+        public function updateTypeVehicule() {
+            $id_vehicule = $_POST["id_vehicule"];
+            $type = $_POST["type"];
+            TypeVehicule::update($id_vehicule, $type);
+            $this->categorieVehiculeAdministration();
+        }
+        
+        public function ajouterTypeVehicule() {
+            require_once('views/admin/ajouterTypeVehicule.php');
+        }
+        
+        public function addTypeVehicule() {
+            $type = $_POST["type"];
+            TypeVehicule::add($type);
+            $this->categorieVehiculeAdministration();
+        }
+
 
 
 
