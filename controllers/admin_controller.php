@@ -2,11 +2,20 @@
     class AdminController {
         public function indexAdministration() {
             $nbDemande = Evenement::requestToAddEvent();
+            $demandeUser = Utilisateur::requestToValidate();
             require_once('views/admin/indexAdministration.php');
         }
         public function utilisateursAdministration() {
+            // Récupérer le numéro de page à partir de la requête HTTP
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        
+            // Appeler la fonction getUsersPerPage() avec le numéro de page
+            $utilisateurs = Utilisateur::getUsersPerPage($page);
+            $toValidates = Utilisateur::findUserForValidation();
+            $demandes = Utilisateur::requestToValidate();
             require_once('views/admin/utilisateurs.php');
         }
+        
         public function evenementsAdministration() {
             $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
             $perPage = isset($_GET['perPage']) ? intval($_GET['perPage']) : 5;
@@ -125,8 +134,41 @@
             TypeVehicule::add($type);
             $this->categorieVehiculeAdministration();
         }
+        public function validateUser() {
+            $id_utilisateur = $_GET["id_utilisateur"];
+            Utilisateur::validate($id_utilisateur);
+            $this->utilisateursAdministration();
+        }
+        
+        public function voirUser() {   
+            $id_utilisateur = $_GET["id_utilisateur"];
+            $utilisateur = Utilisateur::find($id_utilisateur);
+            require_once('views/admin/voirUser.php');
+        }
+        
+        public function modifierUtilisateur() {
+            $id_utilisateur = $_POST["id_utilisateur"];
+            $mail = $_POST["mail"];
+            $nom = $_POST["nom"];
+            $prenom = $_POST["prenom"];
+            $avatar = $_POST["avatar"];
+            $ville = $_POST["ville"];
+            $telephone = $_POST["telephone"];
+            $role = $_POST["role"];
+            Utilisateur::updateUser($id_utilisateur, $mail, $nom, $prenom, $avatar, $ville, $telephone, $role);
+            $this->utilisateursAdministration();
+        }
+        
+        public function supprimerUtilisateur() {
+            $id_utilisateur = $_GET["id_utilisateur"];
+            require_once('views/admin/confirmationSupressionUtilisateur.php');
+        }
 
-
+        public function deleteUser() {
+            $id_utilisateur = $_GET["id_utilisateur"];
+            Utilisateur::delete($id_utilisateur);
+            $this->utilisateursAdministration();
+        }
 
 
 

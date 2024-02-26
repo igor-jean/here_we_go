@@ -31,13 +31,13 @@
             $req = $db->query('SELECT * FROM utilisateur');
       
             foreach($req->fetchAll() as $users) {
-              $list[] = new Utilisateur($users['id_utilisateur'], $users['mail'], $users['mot_de_passe'], $users['nom'], $users['prenom'], $users['avatar'], $users['ville'], $users['telephone'], $users['role']);
+              $list[] = new Utilisateur($users['id_utilisateur'], $users['mail'], $users['mot_de_passe'], $users['nom'], $users['prenom'], $users['avatar'], $users['ville'], $users['telephone'], $users['id_role']);
             }
       
             return $list;
           }
       
-          public static function findUser($id_utilisateur) {
+          public static function find($id_utilisateur) {
             $db = Db::getInstance();
             $id_article = intval($id_utilisateur);
             $req = $db->prepare('SELECT * FROM Utilisateur WHERE id_utilisateur = :id_utilisateur');
@@ -72,37 +72,48 @@
         }
         
       
-          public static function updateUser($id_article, $mail, $description, $date) {
-            $db = Db::getInstance();
-            $req = $db->prepare("UPDATE Utilisateur SET mail = :mail, mot_de_passe = :mot_de_passe, nom = :nom, prenom = :prenom, avatar = :avatar, ville = :ville, telephone = :telephone, role = :role, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, nb_visiteur = :nb_visiteur, code_unique_label = :code_unique_label WHERE id_utilisateur = :id_utilisateur");
-            $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
-            $req->bindParam(":mail", $mail, PDO::PARAM_STR);
-            $req->bindParam(":mot_de_passe", $mot_de_passe, PDO::PARAM_STR);
-            $req->bindParam(":nom", $nom, PDO::PARAM_STR);
-            $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
-            $req->bindParam(":avatar", $avatar, PDO::PARAM_STR);
-            $req->bindParam(":ville", $ville, PDO::PARAM_INT);
-            $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
-            $req->bindParam(":role", $role, PDO::PARAM_STR);
-            $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
-            $req->bindParam(":prix", $prix, PDO::PARAM_STR);
-            $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
-            $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
-            $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
-            $req->bindParam(":nb_visiteur", $nb_visiteur, PDO::PARAM_INT);
-            $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
-            $req->execute();
-            header("Location: ?controller=articles&action=index");
-        }
-        
-        public static function deleteUser($id_article) {
+        public static function updateUser($id_utilisateur, $mail, $nom, $prenom, $avatar, $ville, $telephone, $role) {
+                try {
+                    $db = Db::getInstance();
+                    $req = $db->prepare("UPDATE utilisateur SET mail = :mail, nom = :nom, prenom = :prenom, avatar = :avatar, ville = :ville, telephone = :telephone, id_role = :role WHERE id_utilisateur = :id_utilisateur");
+                    $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                    $req->bindParam(":mail", $mail, PDO::PARAM_STR);
+                    $req->bindParam(":nom", $nom, PDO::PARAM_STR);
+                    $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
+                    $req->bindParam(":avatar", $avatar, PDO::PARAM_STR);
+                    $req->bindParam(":ville", $ville, PDO::PARAM_STR);
+                    $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
+                    $req->bindParam(":role", $role, PDO::PARAM_INT);
+                    $req->execute();
+                    return true;
+                } catch (Exception $e) {
+                    echo "Une erreur s'est produite : ".$e->getMessage();
+                    return false;
+                }
+            }
+            
+            
+            
+        public static function delete($id_utilisateur) {
                 $db = Db::getInstance();
-                $req = $db->prepare("DELETE FROM articles WHERE id_utilisateur = :id_utilisateur");
+                
+                // Supprimer d'abord les enregistrements associés dans la table inscription_utilisateur_event
+                $req = $db->prepare("DELETE FROM inscription_utilisateur_event WHERE id_event IN (SELECT id_event FROM evenement WHERE id_utilisateur = :id_utilisateur)");
                 $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
                 $req->execute();
-                header("Location: ?controller=articles&action=index");
-        }
-        
+                
+                // Ensuite, supprimer les enregistrements associés dans la table inscription_utilisateur_covoiturage
+                $req = $db->prepare("DELETE FROM inscription_utilisateur_covoiturage WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+                
+                // Enfin, supprimer l'utilisateur dans la table utilisateur
+                $req = $db->prepare("DELETE FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+            }
+            
+            
         public static function userConnexion($mail, $pwd) {
                 $db = Db::getInstance();
                 $req = $db->prepare("SELECT utilisateur.*, role.id_role FROM utilisateur JOIN role ON role.id_role = utilisateur.id_role WHERE mail = :mail");
@@ -142,7 +153,7 @@
                 $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
                 $req->execute();
         }
-
+        
         public static function unsubscribeEvent($id_utilisateur, $id_event) {
                 $db = Db::getInstance();
                 $req = $db->prepare("DELETE FROM inscription_utilisateur_event WHERE id_utilisateur = :id_utilisateur AND id_event = :id_event");
@@ -150,6 +161,53 @@
                 $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
                 $req->execute();
         }
+        
+        public static function findUserForValidation() {
+                $db = Db::getInstance();
+                $list = [];
+                $req = $db->prepare("SELECT * FROM utilisateur WHERE inscrit = 0");
+                $req->execute();
+                foreach($req->fetchAll() as $users) {
+                        $list[] = new Utilisateur($users['id_utilisateur'], $users['mail'], $users['mot_de_passe'], $users['nom'], $users['prenom'], $users['avatar'], $users['ville'], $users['telephone'], $users['id_role']);
+                }
+                
+                return $list;
+        }
+        
+        public static function requestToValidate() {
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT COUNT(*) AS demandes FROM utilisateur WHERE inscrit = 0 ");
+                $req->execute();
+                $users = $req->fetchColumn();
+                return $users;
+        }
+        public static function validate($id_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("UPDATE Utilisateur SET inscrit = 1 WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+        }
+
+        public static function countTotalUsers() {
+                $db = Db::getInstance();
+                $count = $db->query('SELECT COUNT(*) FROM utilisateur')->fetchColumn();
+                return $count;
+        }
+            
+        public static function getUsersPerPage($page = 1) {
+        $list = [];
+        $db = Db::getInstance();
+        $offset = ($page - 1) * 50; // Toujours afficher 50 utilisateurs par page
+        $req = $db->prepare('SELECT * FROM utilisateur LIMIT :offset, 50');
+        $req->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $req->execute();
+        foreach($req->fetchAll() as $user) {
+                $list[] = new Utilisateur($user['id_utilisateur'], $user['mail'], $user['mot_de_passe'], $user['nom'], $user['prenom'], $user['avatar'], $user['ville'], $user['telephone'], $user['id_role']);
+        }
+        return $list;
+        }
+            
+
 
         public function getId_utilisateur()
         {

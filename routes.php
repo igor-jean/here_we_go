@@ -24,6 +24,7 @@
           break;
           
           case 'admin':
+            require_once('models/Utilisateur.php');
             require_once('models/Categorie.php');
             require_once('models/TypeVehicule.php');
             require_once('models/Evenement.php');
@@ -51,7 +52,7 @@
                        'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent"],
                        'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte"],
                        'vehicules' => ["findVehicule"],
-                      "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule"],
+                      "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
                     "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage"]);
 
   if (array_key_exists($controller, $controllers)) {

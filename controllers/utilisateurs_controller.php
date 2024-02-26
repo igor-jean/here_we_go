@@ -35,7 +35,7 @@
       require_once('models/Evenement.php');
       
       $id_utilisateur = intval($_SESSION["id_utilisateur"]);
-      $user = Utilisateur::findUser($id_utilisateur);
+      $user = Utilisateur::find($id_utilisateur);
       $vehicules = Vehicule::findVehicule($id_utilisateur);
       $events = Evenement::findAllperUser($id_utilisateur);
       $listEventsRegistered = Evenement::listEventsRegistered($id_utilisateur);
