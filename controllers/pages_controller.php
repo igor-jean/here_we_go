@@ -12,5 +12,6 @@
     public function connexion() {
       require_once('views/pages/connexion.php');
     }
+    
   }
 ?>

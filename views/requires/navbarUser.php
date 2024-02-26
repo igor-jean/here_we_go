@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <li><a href="">Accueil</a></li>
+        <li><a href="?controller=pages&action=home">Accueil</a></li>
         <li>
             <a href="">Categories</a>
             <ul>

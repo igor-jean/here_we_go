@@ -9,5 +9,6 @@
             <li>Code Postal : <?php echo $event->code_postal;?></li>
             <li>Description : <?php echo $event->description_courte;?></li>
             <li>Prix : <?php echo $event->prix;?> €</li>
+            <li><a href="?controller=evenements&action=showEvent&id_event=<?php echo $event->id_event;?>">Voir</a></li>
         </ul>
     <?php } ?>

@@ -20,6 +20,6 @@ else {
 ?>
   
   <?php require_once('routes.php'); ?>
-  
+  <script src="main.js"></script>
 </body>
 </html>

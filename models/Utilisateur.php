@@ -77,56 +77,80 @@
             $req = $db->prepare("UPDATE Utilisateur SET mail = :mail, mot_de_passe = :mot_de_passe, nom = :nom, prenom = :prenom, avatar = :avatar, ville = :ville, telephone = :telephone, role = :role, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, nb_visiteur = :nb_visiteur, code_unique_label = :code_unique_label WHERE id_utilisateur = :id_utilisateur");
             $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
             $req->bindParam(":mail", $mail, PDO::PARAM_STR);
-              $req->bindParam(":mot_de_passe", $mot_de_passe, PDO::PARAM_STR);
-              $req->bindParam(":nom", $nom, PDO::PARAM_STR);
-              $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
-              $req->bindParam(":avatar", $avatar, PDO::PARAM_STR);
-              $req->bindParam(":ville", $ville, PDO::PARAM_INT);
-              $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
-              $req->bindParam(":role", $role, PDO::PARAM_STR);
-              $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
-              $req->bindParam(":prix", $prix, PDO::PARAM_STR);
-              $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
-              $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
-              $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
-              $req->bindParam(":nb_visiteur", $nb_visiteur, PDO::PARAM_INT);
-              $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
+            $req->bindParam(":mot_de_passe", $mot_de_passe, PDO::PARAM_STR);
+            $req->bindParam(":nom", $nom, PDO::PARAM_STR);
+            $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
+            $req->bindParam(":avatar", $avatar, PDO::PARAM_STR);
+            $req->bindParam(":ville", $ville, PDO::PARAM_INT);
+            $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
+            $req->bindParam(":role", $role, PDO::PARAM_STR);
+            $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
+            $req->bindParam(":prix", $prix, PDO::PARAM_STR);
+            $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
+            $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
+            $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
+            $req->bindParam(":nb_visiteur", $nb_visiteur, PDO::PARAM_INT);
+            $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
             $req->execute();
             header("Location: ?controller=articles&action=index");
-          }
-      
-          public static function deleteUser($id_article) {
-            $db = Db::getInstance();
-            $req = $db->prepare("DELETE FROM articles WHERE id_utilisateur = :id_utilisateur");
-            $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
-            $req->execute();
-            header("Location: ?controller=articles&action=index");
-          }
+        }
+        
+        public static function deleteUser($id_article) {
+                $db = Db::getInstance();
+                $req = $db->prepare("DELETE FROM articles WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+                header("Location: ?controller=articles&action=index");
+        }
+        
+        public static function userConnexion($mail, $pwd) {
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT utilisateur.*, role.id_role FROM utilisateur JOIN role ON role.id_role = utilisateur.id_role WHERE mail = :mail");
+                $req->bindParam(":mail", $mail);
+                $req->execute();
+                $reponse = $req ->fetch(PDO::FETCH_ASSOC);
+                if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
+                        session_start();
+                        $_SESSION["login"] = "admin";
+                        $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                        header("Location: ?controller=pages&action=home");
+                }elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
+                        session_start();
+                        $_SESSION["login"] = "user";
+                        $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                        header("Location: ?controller=pages&action=home");
+                }else {
+                        $_SESSION["error"] = "Mail ou mot de passe incorrect.";
+                        header("Location: ?controller=pages&action=home");
+                }
+        }
+        
+        public static function verifyRegistrationEvent($id_utilisateur, $id_event) {
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT * FROM inscription_utilisateur_event WHERE id_utilisateur = :id_utilisateur AND id_event = :id_event");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+                $req->execute();
+                $count = $req->rowCount();
+                return $count > 0;
+        }
+        
+        public static function registrationEvent($id_utilisateur, $id_event) {
+                $db = Db::getInstance();
+                $req = $db->prepare("INSERT INTO inscription_utilisateur_event (id_utilisateur, id_event, date_inscription_event) VALUES (:id_utilisateur, :id_event, CURDATE())");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+                $req->execute();
+        }
 
-          public static function userConnexion($mail, $pwd) {
-            $db = Db::getInstance();
-            $req = $db->prepare("SELECT utilisateur.*, role.id_role FROM utilisateur JOIN role ON role.id_role = utilisateur.id_role WHERE mail = :mail");
-            $req->bindParam(":mail", $mail);
-            $req->execute();
-            $reponse = $req ->fetch(PDO::FETCH_ASSOC);
-            if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
-                session_start();
-                $_SESSION["login"] = "admin";
-                $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                header("Location: ?controller=pages&action=home");
-            }elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
-                session_start();
-                $_SESSION["login"] = "user";
-                $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                header("Location: ?controller=pages&action=home");
-            }else {
-                $_SESSION["error"] = "Mail ou mot de passe incorrect.";
-                header("Location: ?controller=pages&action=home");
-            }
-          }
+        public static function unsubscribeEvent($id_utilisateur, $id_event) {
+                $db = Db::getInstance();
+                $req = $db->prepare("DELETE FROM inscription_utilisateur_event WHERE id_utilisateur = :id_utilisateur AND id_event = :id_event");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+                $req->execute();
+        }
 
-
-            
         public function getId_utilisateur()
         {
                 return $this->id_utilisateur;

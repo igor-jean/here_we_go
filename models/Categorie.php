@@ -46,6 +46,32 @@
       
             return $list;
           }
+
+        public static function find($id_categorie) {
+            $db = Db::getInstance();
+            $req = $db->prepare('SELECT * FROM categorie WHERE id_categorie = :id_categorie');
+            $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
+            $req->execute();
+            $categorie = $req->fetch();
+            return new Categorie($categorie["id_categorie"], $categorie["libelle_categorie"], $categorie["couleur"]);
+        }
+
+        public static function update($id_categorie, $libelle_categorie, $couleur) {
+            $db = Db::getInstance();
+            $req = $db->prepare('UPDATE categorie SET libelle_categorie = :libelle_categorie, couleur = :couleur WHERE id_categorie = :id_categorie');
+            $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
+            $req->bindParam(":libelle_categorie", $libelle_categorie, PDO::PARAM_STR);
+            $req->bindParam(":couleur", $couleur, PDO::PARAM_STR);
+            $req->execute();
+        }
+
+        public static function add($libelle_categorie, $couleur) {
+            $db = Db::getInstance();
+            $req = $db->prepare('INSERT INTO categorie(libelle_categorie, couleur) VALUES (:libelle_categorie, :couleur)');
+            $req->bindParam(":libelle_categorie", $libelle_categorie, PDO::PARAM_STR);
+            $req->bindParam(":couleur", $couleur, PDO::PARAM_STR);
+            $req->execute();
+        }
     }
 
 

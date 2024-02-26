@@ -16,10 +16,11 @@
     public $nom_structure;
     public $nb_visiteur;
     public $code_unique_label;
+    public $id_utilisateur;
+    public $id_categorie;
 
 
-
-    public function __construct($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label) {
+    public function __construct($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie) {
       $this->id_event = $id_event;
       $this->titre = $titre;
       $this->date_event = $date_event;
@@ -36,31 +37,67 @@
       $this->nom_structure = $nom_structure;
       $this->nb_visiteur = $nb_visiteur;
       $this->code_unique_label = $code_unique_label;
+      $this->id_utilisateur = $id_utilisateur;
+      $this->id_categorie = $id_categorie;
 
     }
-    
+    //  FONCTIION POUR AFFICHER TOUS LES EVENEMENTS
     public static function all() {
       $list = [];
       $db = Db::getInstance();
       $req = $db->query('SELECT * FROM evenement');
 
       foreach($req->fetchAll() as $events) {
-        $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label']);
+        $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label'], $events['id_utilisateur'], $events['id_categorie']);
       }
 
       return $list;
     }
+// FONCTION POUR AFFICHER LES EVENEMENTS ET FAIRE UNE PAGINATION 5/10/15
+    public static function allForPagination($page = 1, $perPage = 5) {
+        $list = [];
+        $db = Db::getInstance();
 
-    public static function find($id_event) {
-      $db = Db::getInstance();
-      $id_article = intval($id_event);
-      $req = $db->prepare('SELECT * FROM evenement WHERE id_event = :id_event');
-      $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
-      $req->execute();
-      $post = $req->fetch();
-      return new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label']);
+        // Calculer le décalage pour la pagination
+        $offset = ($page - 1) * $perPage;
+
+        // Sélectionner le nombre total d'événements
+        $countQuery = $db->query('SELECT COUNT(*) AS total FROM evenement');
+        $totalEvents = $countQuery->fetchColumn();
+
+        // Calculer le nombre total de pages
+        $totalPages = ceil($totalEvents / $perPage);
+
+        // Sélectionner les événements pour la page donnée
+        $req = $db->prepare('SELECT * FROM evenement LIMIT :perPage OFFSET :offset');
+        $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+        $req->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $req->execute();
+
+        foreach($req->fetchAll() as $event) {
+            $list[] = new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
+        }
+
+        return [
+            'events' => $list,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ];
     }
 
+
+
+
+// trouver un evenement par son id
+public static function find($id_event) {
+    $db = Db::getInstance();
+    $req = $db->prepare('SELECT * FROM evenement WHERE id_event = :id_event');
+    $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+    $req->execute();
+    $event = $req->fetch();
+    return new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
+  }
+// trouver les evenement créé par l'utilisateur 
     public static function findAllperUser($id_user) {
       $db = Db::getInstance();
       $list = [];
@@ -92,7 +129,7 @@
       }
       return $list;
     }
-  
+  // trouver les evenements auquels l'utilisateur est inscrit 
     public static function listEventsRegistered($id_user) {
         $db = Db::getInstance();
         $list = [];
@@ -128,15 +165,17 @@
     }
 
 
-
+// créer un avenement 
     public static function addEvents($titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie) {
 
       
-      $db = Db::getInstance();
-      $id_event = null;
-        
+        $db = Db::getInstance();
+        $id_event = null;
+        $dateNow = date("Y-m-d");
+        $inscrit = 0;
+
         do {
-            $id_event = Evenement::generateRandomId(); 
+            $id_event = Evenement::generateRandomId(); //verifie si le nombre generé existe deja
             $req_check = $db->prepare("SELECT id_event FROM evenement WHERE id_event = :id_event");
             $req_check->bindParam(":id_event", $id_event);
             $req_check->execute();
@@ -144,7 +183,7 @@
         } while ($exists); 
 
 
-      $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, nb_visiteur, code_unique_label, id_utilisateur, id_categorie) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :nb_visiteur, :code_unique_label, :id_utilisateur, :id_categorie)");
+      $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, nb_visiteur, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :nb_visiteur, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
       $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
       $req->bindParam(":titre", $titre, PDO::PARAM_STR);
       $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);
@@ -163,28 +202,30 @@
       $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
       $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
       $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
+      $req->bindParam(":date_ajout", $dateNow, PDO::PARAM_STR);
+      $req->bindParam(":inscrit", $inscrit, PDO::PARAM_INT);
       $req->execute();
       header("Location: ?controller=utilisateurs&action=monCompte");
       
     } 
-    
+    // genere un chiffre aléatoire 
     public static function generateRandomId() {
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      $randomString = '';
-  
-      for ($i = 0; $i < 7; $i++) {
-          $randomString .= $characters[rand(0, strlen($characters) - 1)];
-      }
-  
-      return $randomString;
-  }
-
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        
+        for ($i = 0; $i < 7; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        
+        return $randomString;
+    }
     
-    public static function updateEvent($id_article, $titre, $description, $date) {
-      $db = Db::getInstance();
-      $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, nb_visiteur = :nb_visiteur, code_unique_label = :code_unique_label WHERE id_event = :id_event");
-      $req->bindParam(":id_event", $id_event, PDO::PARAM_INT);
-      $req->bindParam(":titre", $titre, PDO::PARAM_STR);
+// Modifier un evenement 
+    public static function updateEvent($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_categorie) {
+        $db = Db::getInstance();
+        $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, inscrit = 0 WHERE id_event = :id_event");
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->bindParam(":titre", $titre, PDO::PARAM_STR);
         $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);
         $req->bindParam(":heure_event", $heure_event, PDO::PARAM_STR);
         $req->bindParam(":ville", $ville, PDO::PARAM_STR);
@@ -197,24 +238,77 @@
         $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
         $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
         $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
-        $req->bindParam(":nb_visiteur", $nb_visiteur, PDO::PARAM_INT);
-        $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
-      $req->execute();
-      header("Location: ?controller=evenements&action=index");
+        $req->execute();
+    }
+    // Supprimer un evenement 
+    public static function deleteEvent($id_event) {
+        $db = Db::getInstance();
+        
+        // Supprimer les entrées correspondantes dans inscription_utilisateur_event
+        $req1 = $db->prepare("DELETE FROM inscription_utilisateur_event WHERE id_event = :id_event");
+        $req1->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req1->execute();
+    
+        // Ensuite, supprimer l'événement de la table evenement
+        $req2 = $db->prepare("DELETE FROM evenement WHERE id_event = :id_event");
+        $req2->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req2->execute();
+    }
+    
+    
+    
+    
+    // fonction pour afficher le nombre de demande d'ajout d'evenement pour les admins 
+    
+    public static function requestToAddEvent() {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT COUNT(*) AS demandes FROM evenement WHERE inscrit = 0 ");
+        $req->execute();
+        $pendingEvents = $req->fetchColumn();
+        return $pendingEvents;
+    }
+// FONCTION POUR AFFICHER LA LISTE DES EVENEMENTS A VALIDER
+    public static function displayListValidate() {
+        $db = Db::getInstance();
+        $list = [];
+        $req = $db->prepare("SELECT * FROM evenement WHERE inscrit = 0");
+        $req->execute();
+        $events = $req->fetchAll();
+        foreach ($events as $event) {
+          $list[] = new Evenement(
+              $event['id_event'],
+              $event['titre'],
+              $event['date_event'],
+              $event['heure_event'],
+              $event['ville'],
+              $event['adresse'],
+              $event['code_postal'],
+              $event['description_courte'],
+              $event['description_longue'],
+              $event['nb_places'],
+              $event['prix'],
+              $event['lien_billeterie'],
+              $event['lien_event'],
+              $event['nom_structure'],
+              $event['nb_visiteur'],
+              $event['code_unique_label'],
+              $event['id_utilisateur'],
+              $event['id_categorie']
+          );
+      }
+      return $list;
     }
 
-    public static function deleteEvent($id_article) {
-      $db = Db::getInstance();
-      $req = $db->prepare("DELETE FROM articles WHERE id_event = :id_event");
-      $req->bindParam(":id_event", $id_event, PDO::PARAM_INT);
-      $req->execute();
-      header("Location: ?controller=evenements&action=index");
-    }
+// Valider l'événement
+public static function validateEvent($id_event) {
+    $db = Db::getInstance();
+    $req = $db->prepare("UPDATE evenement SET inscrit = 1 WHERE id_event = :id_event");
+    $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+    $req->execute();
+}
 
-
-
-        // Getters
-        public function getIdEvent() {
+    // Getters
+    public function getIdEvent() {
           return $this->id_event;
       }
   
@@ -274,9 +368,6 @@
           return $this->nb_visiteur;
       }
   
-      public function getCodeUniqueLabel() {
-          return $this->code_unique_label;
-      }
   
       // Setters
       public function setIdEvent($id_event) {
@@ -342,5 +433,39 @@
       public function setCodeUniqueLabel($code_unique_label) {
           $this->code_unique_label = $code_unique_label;
       }
+
+    public function getId_utilisateur() {
+        return $this->id_utilisateur;
+    }
+
+
+    public function setId_utilisateur($id_utilisateur) {
+        $this->id_utilisateur = $id_utilisateur;
+        return $this;
+    }
+
+    public function getCode_unique_label() {
+        return $this->code_unique_label;
+    }
+
+    /**
+     * Get the value of id_categorie
+     */ 
+    public function getId_categorie()
+    {
+        return $this->id_categorie;
+    }
+
+    /**
+     * Set the value of id_categorie
+     *
+     * @return  self
+     */ 
+    public function setId_categorie($id_categorie)
+    {
+        $this->id_categorie = $id_categorie;
+
+        return $this;
+    }
   }
 ?>
