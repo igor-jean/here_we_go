@@ -27,7 +27,40 @@
         }
         return $list;
       }
+
+      public static function find($id_vehicule_utilisateur) {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM vehicule_utilisateur WHERE id_vehicule_utilisateur = :id_vehicule_utilisateur');
+        $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur, PDO::PARAM_INT);
+        $req->execute();
+        $vehicule = $req->fetch(PDO::FETCH_ASSOC); // Utilisez PDO::FETCH_ASSOC pour obtenir un tableau associatif
+        if($vehicule) {
+            return new Vehicule($vehicule['id_vehicule_utilisateur'], $vehicule['libelle_vehicule'], $vehicule['imatriculation'], $vehicule['nb_places'], $vehicule['id_vehicule'], $vehicule['id_utilisateur']);
+        } else {
+            return null; // Retourne null si aucun véhicule n'est trouvé avec l'ID donné
+        }
+        }
     
+
+      public static function findTypeVehicule($id_vehicule) {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT type FROM type_vehicule WHERE id_vehicule = :id_vehicule');
+        $req->bindParam(":id_vehicule", $id_vehicule, PDO::PARAM_INT);
+        $req->execute();
+        $result = $req->fetch();
+        return $result['type'];
+        }
+
+        public static function update($id_vehicule_utilisateur, $libelle_vehicule, $imatriculation, $nb_places, $id_vehicule) {
+                $db = Db::getInstance();
+                $req = $db->prepare("UPDATE vehicule_utilisateur SET libelle_vehicule = :libelle_vehicule, imatriculation = :imatriculation, nb_places = :nb_places, id_vehicule = :id_vehicule WHERE id_vehicule_utilisateur = :id_vehicule_utilisateur");
+                $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur, PDO::PARAM_INT);
+                $req->bindParam(":libelle_vehicule", $libelle_vehicule, PDO::PARAM_STR);
+                $req->bindParam(":imatriculation", $imatriculation, PDO::PARAM_STR);
+                $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
+                $req->bindParam(":id_vehicule", $id_vehicule, PDO::PARAM_INT);
+                $req->execute();
+        }
 //       SETTER ET GETTER
         public function getId_vehicule_utilisateur()
         {

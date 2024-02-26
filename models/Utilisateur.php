@@ -91,6 +91,69 @@
                     return false;
                 }
             }
+            public static function updateUserByUser($id_utilisateur, $mail, $nom, $prenom, $avatar, $ville, $telephone) {
+                $db = Db::getInstance();
+                $date = date("d-m-Y");
+                $heure = date("s");
+                
+                // Vérifier si un fichier d'avatar est téléchargé
+                if($avatar['name'] != "") {
+                    $nameImage = $heure . "Sec-" . $date . "-" . basename(filter_var($avatar['name'], FILTER_SANITIZE_URL));
+                    
+                    // Déplacer le fichier téléchargé vers le répertoire de destination
+                    if(move_uploaded_file($avatar['tmp_name'], 'imgUploaded/' . $nameImage)) {
+                        try {
+                            // Préparer et exécuter la requête SQL pour mettre à jour les informations de l'utilisateur avec le nouvel avatar
+                            $req = $db->prepare("UPDATE utilisateur SET mail = :mail, nom = :nom, prenom = :prenom, avatar = :avatar, ville = :ville, telephone = :telephone WHERE id_utilisateur = :id_utilisateur");
+                            $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                            $req->bindParam(":mail", $mail, PDO::PARAM_STR);
+                            $req->bindParam(":nom", $nom, PDO::PARAM_STR);
+                            $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
+                            $req->bindParam(":avatar", $nameImage, PDO::PARAM_STR);
+                            $req->bindParam(":ville", $ville, PDO::PARAM_STR);
+                            $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
+                            $req->execute();
+                            
+                            // Retourner true si la mise à jour a réussi
+                            return true;
+                        } catch (Exception $e) {
+                            // Afficher un message d'erreur en cas d'échec de la mise à jour
+                            echo "Une erreur s'est produite : " . $e->getMessage();
+                            return false;
+                        }
+                    } else {
+                        // En cas d'échec du déplacement du fichier, retourner false
+                        return false;
+                    }
+                } else {
+                    try {
+                        // Préparer et exécuter la requête SQL pour mettre à jour les informations de l'utilisateur sans modifier l'avatar
+                        $req = $db->prepare("UPDATE utilisateur SET mail = :mail, nom = :nom, prenom = :prenom, ville = :ville, telephone = :telephone WHERE id_utilisateur = :id_utilisateur");
+                        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                        $req->bindParam(":mail", $mail, PDO::PARAM_STR);
+                        $req->bindParam(":nom", $nom, PDO::PARAM_STR);
+                        $req->bindParam(":prenom", $prenom, PDO::PARAM_STR);
+                        $req->bindParam(":ville", $ville, PDO::PARAM_STR);
+                        $req->bindParam(":telephone", $telephone, PDO::PARAM_STR);
+                        $req->execute();
+                        
+                        // Retourner true si la mise à jour a réussi
+                        return true;
+                    } catch (Exception $e) {
+                        // Afficher un message d'erreur en cas d'échec de la mise à jour
+                        echo "Une erreur s'est produite : " . $e->getMessage();
+                        return false;
+                    }
+                }
+            }
+        
+        public static function avatarDefault($id_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("UPDATE utilisateur SET avatar = 'avatar.png' WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+        }
+            
             
             
             

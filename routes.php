@@ -11,6 +11,9 @@
       break;
 
       case 'utilisateurs':
+        require_once('models/TypeVehicule.php');
+        require_once('models/Vehicule.php');
+        require_once('models/Evenement.php');
         require_once('models/Utilisateur.php');
         $controller = new UsersController();
         break;
@@ -50,7 +53,7 @@
 
   $controllers = array('pages' => ['home', 'error', 'connexion'],
                        'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent"],
-                       'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte"],
+                       'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut", "voirVehicule", "updateVehicule"],
                        'vehicules' => ["findVehicule"],
                       "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
                     "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage"]);

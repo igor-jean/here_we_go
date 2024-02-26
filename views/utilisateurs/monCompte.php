@@ -2,26 +2,51 @@
 <h2>infos persos</h2>
 
 <ul>
+    <li><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100px;"></li>
     <li>Mail : <?php echo $user->getMail();?></li>
     <li>Ville : <?php echo $user->getVille();?></li>
     <li>Nom : <?php echo $user->getNom();?></li>
     <li>Prenom : <?php echo $user->getPrenom();?></li>
+    <li><a href="?controller=utilisateurs&action=modifierInfosPerso">Modifier mes infos perso</a></li>
 </ul>
 
 
 
 <h2>Mes vehicules :</h2>
 
-<ul>
-    <?php foreach ($vehicules as $vehicule) {
-         echo "
-         <li>".$vehicule->getLibelle_vehicule()."</li>
-         <li>".$vehicule->getImmatriculation()."</li>
-         <li>".$vehicule->getNb_places()."</li>
-         ";
+<table>
+    <thead>
+        <tr>
+            <th>Vehicule</th>
+            <th>Immatriculation</th>
+            <th>places</th>
+            <th>Type de vehicule</th>
+            <th>Modifier</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($vehicules as $vehicule) {
+            echo "
+               <tr>
+                    <td>".$vehicule->getLibelle_vehicule()."</td>
+                    <td>".$vehicule->getImmatriculation()."</td>
+                    <td>".$vehicule->getNb_places()."</td>
+                    <td>".Vehicule::findTypeVehicule($vehicule->getId_vehicule())."</td>
+                    <td><a href='?controller=utilisateurs&action=voirVehicule&id_vehicule_utilisateur=".$vehicule->getId_vehicule_utilisateur()."'>Modifier</a></td>
+                </tr> 
+            ";
+        }
+        ?>
         
-    }    ?>
-</ul>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <a href="?controller=utilisateur&action=ajouterVehicule">Ajouter un vehicule</a>
+            </td>
+        </tr>
+    </tfoot>
+</table>
 
 
 
