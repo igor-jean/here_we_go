@@ -28,6 +28,9 @@
             </div>
         </form>
         <div class="nav-item">
+            <a href="?controller=admin&action=indexAdministration">Gestion du site</a>
+        </div>
+        <div class="nav-item">
             <a href="?controller=utilisateurs&action=monCompte">Mon compte</a>
         </div>
         <div class="nav-item">

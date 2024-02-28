@@ -184,18 +184,15 @@
                 $req->execute();
                 $reponse = $req ->fetch(PDO::FETCH_ASSOC);
                 if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
-                        session_start();
+                        // session_start();
                         $_SESSION["login"] = "admin";
                         $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                        header("Location: ?controller=pages&action=home");
                 }elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
-                        session_start();
+                        // session_start();
                         $_SESSION["login"] = "user";
                         $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                        header("Location: ?controller=pages&action=home");
                 }else {
                         $_SESSION["error"] = "Mail ou mot de passe incorrect.";
-                        header("Location: ?controller=pages&action=home");
                 }
         }
         
