@@ -1,8 +1,7 @@
 <h1>VALIDER UN EVENEMENT </h1>
 
 
-<form action="?controller=admin&action=validate" method="post">
-    <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent(); ?>">
+
     <ul>
         <li><?php echo $event->getTitre(); ?></li>
         <li><?php echo $event->getDateEvent(); ?></li>
@@ -21,5 +20,7 @@
         <li><?php echo $categorie->getLibelleCategorie(); ?></li>
     </ul>
 
-    <input type="submit" value="VALIDER">
-</form>
+    <a href="?controller=admin&action=validate&id_event=<?php echo $event->getIdEvent(); ?>">Valider</a>
+    <a href="?controller=admin&action=delete&id_event=<?php echo $id_event; ?>">Supprimer</a>
+    <br>
+    <a href="?controller=admin&action=evenementsAdministration">Retour</a>

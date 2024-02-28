@@ -35,10 +35,7 @@
                 ?>
             </select><br>
         </div>
-        <div>
-            <label for="id_event">ID de l'événement:</label><br>
-            <input type="text" id="id_event" name="id_event" required><br>
-        </div>
+            <input type="hidden" id="id_event" name="id_event" value="<?php echo $id_event;  ?>">
         <div>
             <input type="submit" value="Ajouter">
         </div>

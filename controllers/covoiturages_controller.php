@@ -15,6 +15,7 @@
         public function createCovoiturage() {
             $id_utilisateur = $_SESSION["id_utilisateur"];
             $vehicules = Vehicule::findVehicule($id_utilisateur);
+            $id_event = $_GET["id_event"];
             require_once('views/covoiturages/createCovoiturage.php');
         }
         public function addCovoiturage() {
@@ -42,7 +43,27 @@
             Covoiturage::unsubscribeCovoiturage($id_covoiturage, $id_utilisateur);
             $this->showCovoiturage();
         }
+        
+        public function confirmationSuppression() {
+            $id_covoiturage = $_GET["id_covoiturage"];
+            $id_event = $_GET["id_event"];
+            require_once('views/covoiturages/confirmationSuppression.php');
+        }
+        
+        public function supprimerToutCovoit() {
+            $id_covoiturage = $_GET["id_covoiturage"];
+            Covoiturage::deleteCovoiturage($id_covoiturage);
+            header("Location: ?controller=pages&action=home");
+        }
+        
+        public function supprimerCovoitPerAdmin() {
+            $id_covoiturage = $_GET["id_covoiturage"];
+            $id_event = $_GET["id_event"];
+            Covoiturage::deleteCovoiturage($id_covoiturage);
+            header("Location: ?controller=admin&action=updateAnEvent&id_event=$id_event");
+        }
+        
     }
-
-
-?>
+    
+    
+    ?>

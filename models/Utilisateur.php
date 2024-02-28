@@ -261,7 +261,7 @@
         $list = [];
         $db = Db::getInstance();
         $offset = ($page - 1) * 50; // Toujours afficher 50 utilisateurs par page
-        $req = $db->prepare('SELECT * FROM utilisateur LIMIT :offset, 50');
+        $req = $db->prepare('SELECT * FROM utilisateur WHERE inscrit = 1 LIMIT :offset, 50');
         $req->bindParam(':offset', $offset, PDO::PARAM_INT);
         $req->execute();
         foreach($req->fetchAll() as $user) {

@@ -50,10 +50,10 @@ class Covoiturage {
         ");
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->execute();
-    
+        
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         $covoiturages = [];
-    
+        
         foreach ($result as $row) {
             // Instanciation de l'objet Covoiturage
             $covoiturage = new Covoiturage(
@@ -67,19 +67,67 @@ class Covoiturage {
                 $row['id_vehicule_utilisateur'],
                 $row['id_event']
             );
-    
+            
             // Ajout du nom du conducteur à l'objet Covoiturage
             $covoiturage->prenom_conducteur = $row['prenom_conducteur'];
-    
+            
             // Ajout de l'objet Covoiturage à la liste des covoiturages
             $covoiturages[] = $covoiturage;
         }
-    
+        
         return $covoiturages;
     }
+    // sélectionne les covoiturages futurs pour un utilisateur spécifié en fonction de la date actuelle
+    public static function getCovoituragesFutursUtilisateur($id_utilisateur) {
+        $list = [];
+        $currentDate = date("Y-m-d");
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT covoiturage.* FROM covoiturage INNER JOIN evenement ON covoiturage.id_event = evenement.id_event INNER JOIN vehicule_utilisateur ON covoiturage.id_vehicule_utilisateur = vehicule_utilisateur.id_vehicule_utilisateur WHERE vehicule_utilisateur.id_utilisateur = :id_utilisateur AND evenement.date_event >= :current_date");
+        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_STR);
+        $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
+        $req->execute();
+        foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $resultat) {
+            $covoiturage = new Covoiturage(
+                $resultat['id_covoiturage'],
+                $resultat['montant_par_pers'],
+                $resultat['information_de_contact'],
+                $resultat['lieu_depart'],
+                $resultat['descriptif'],
+                $resultat['nb_place'],
+                $resultat['heure_depart'],
+                $resultat['id_vehicule_utilisateur'],
+                $resultat['id_event']
+            );
+            $list[] = $covoiturage;
+        }
+        return $list;
+    }
+    // Afficher les covoiturage auxqueks je suis inscrit 
+    public static function getCovoituragesInscritUtilisateur($id_utilisateur) {
+        $list = [];
+        $currentDate = date("Y-m-d");
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT covoiturage.* FROM covoiturage INNER JOIN inscription_utilisateur_covoiturage ON covoiturage.id_covoiturage = inscription_utilisateur_covoiturage.id_covoiturage INNER JOIN evenement ON covoiturage.id_event = evenement.id_event WHERE inscription_utilisateur_covoiturage.id_utilisateur = :id_utilisateur AND evenement.date_event >= :current_date");
+        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+        $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
+        $req->execute();
+        foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $resultat) {
+            $covoiturage = new Covoiturage(
+                $resultat['id_covoiturage'],
+                $resultat['montant_par_pers'],
+                $resultat['information_de_contact'],
+                $resultat['lieu_depart'],
+                $resultat['descriptif'],
+                $resultat['nb_place'],
+                $resultat['heure_depart'],
+                $resultat['id_vehicule_utilisateur'],
+                $resultat['id_event']
+            );
+            $list[] = $covoiturage;
+        }
+        return $list;
+    }
     
-    
-
     //Afficher un covoiturage 
     public static function find($id_covoiturage) {
         $db = Db::getInstance();
@@ -166,6 +214,60 @@ class Covoiturage {
         $count = $req->rowCount();
         return $count > 0;
     }
+    // Verifier si l'utilisateur a deja proposer un covoiturage pour cet evenenement
+    public static function checkIfOnlyOne($id_utilisateur, $id_event) {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT * FROM covoiturage INNER JOIN vehicule_utilisateur ON covoiturage.id_vehicule_utilisateur = vehicule_utilisateur.id_vehicule_utilisateur WHERE vehicule_utilisateur.id_utilisateur = :id_utilisateur AND covoiturage.id_event = :id_event");
+        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->execute();
+        $count = $req->rowCount();
+        return $count > 0;
+    }
+    // Supprimer covoit et ses inscription
+    public static function deleteCovoiturage($id_covoiturage) {
+        // Supprimer les inscriptions associées au covoiturage
+        $queryDeleteInscriptions = "DELETE FROM inscription_utilisateur_covoiturage WHERE id_covoiturage = :id_covoiturage";
+        $stmtDeleteInscriptions = Db::getInstance()->prepare($queryDeleteInscriptions);
+        $stmtDeleteInscriptions->bindParam(':id_covoiturage', $id_covoiturage);
+        $stmtDeleteInscriptions->execute();
+    
+        // Supprimer le covoiturage lui-même
+        $queryDeleteCovoiturage = "DELETE FROM covoiturage WHERE id_covoiturage = :id_covoiturage";
+        $stmtDeleteCovoiturage = Db::getInstance()->prepare($queryDeleteCovoiturage);
+        $stmtDeleteCovoiturage->bindParam(':id_covoiturage', $id_covoiturage);
+        $stmtDeleteCovoiturage->execute();
+    }
+    //Trouver l'id covoiturage avec l'id utilisateur et l'id event 
+    public static function findCovoiturageId($id_utilisateur, $id_event) {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT covoiturage.id_covoiturage FROM covoiturage INNER JOIN evenement ON covoiturage.id_event = evenement.id_event INNER JOIN vehicule_utilisateur ON covoiturage.id_vehicule_utilisateur = vehicule_utilisateur.id_vehicule_utilisateur WHERE vehicule_utilisateur.id_utilisateur = :id_utilisateur AND covoiturage.id_event = :id_event");
+        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->execute();
+        $row = $req->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return $row['id_covoiturage'];
+        } else {
+            return null;
+        }
+    }
+    // Afficher les covoiturage d'un evenement
+    public static function getCovoituragesPerEvent($id_event) {
+        $list = [];
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM covoiturage WHERE id_event = :id_event');
+        $req->bindParam(':id_event', $id_event, PDO::PARAM_STR);
+        $req->execute();
+    
+        foreach($req->fetchAll() as $covoiturage) {
+            $list[] = new Covoiturage($covoiturage['id_covoiturage'], $covoiturage['montant_par_pers'], $covoiturage['information_de_contact'], $covoiturage['lieu_depart'], $covoiturage['descriptif'], $covoiturage['nb_place'], $covoiturage['heure_depart'], $covoiturage['id_vehicule_utilisateur'], $covoiturage['id_event']);
+        }
+    
+        return $list;
+    }
+    
+    
     // Getters
     public function getIdCovoiturage() {
         return $this->id_covoiturage;

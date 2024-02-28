@@ -20,7 +20,7 @@
                 <th>".$toValidate->getPrenom()."</th>
                 <th>".$toValidate->getMail()."</th>
                 <th><a href='?controller=admin&action=validateUser&id_utilisateur=".$toValidate->getId_utilisateur()."'>[O]</a></th>
-                <th><a href='".$toValidate->getId_utilisateur()."'>[X]</a></th>
+                <th><a href='?controller=admin&action=deleteUser&id_utilisateur=".$toValidate->getId_utilisateur()."'>[X]</a></th>
             </tr>
             ";
         }
@@ -54,3 +54,4 @@
         
     </tbody>
 </table>
+<a href="?controller=admin&action=indexAdministration">Retour</a>

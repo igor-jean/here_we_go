@@ -8,15 +8,17 @@
         require_once('models/Covoiturage.php');
         require_once('models/Evenement.php');
         $controller = new PagesController();
-      break;
-
-      case 'utilisateurs':
-        require_once('models/TypeVehicule.php');
-        require_once('models/Vehicule.php');
-        require_once('models/Evenement.php');
-        require_once('models/Utilisateur.php');
-        $controller = new UsersController();
         break;
+        
+        case 'utilisateurs':
+          require_once('models/Covoiturage.php');
+          require_once('models/TypeVehicule.php');
+          require_once('models/Vehicule.php');
+          require_once('models/Evenement.php');
+          require_once('models/Utilisateur.php');
+          require_once('models/Categorie.php');
+          $controller = new UsersController();
+          break;
         
         case 'evenements':
           require_once('models/Vehicule.php');
@@ -32,6 +34,7 @@
             require_once('models/Categorie.php');
             require_once('models/TypeVehicule.php');
             require_once('models/Evenement.php');
+            require_once('models/Covoiturage.php');
             $controller = new AdminController();
             break;
             
@@ -52,12 +55,19 @@
     $controller->{ $action }();
   }
 
-  $controllers = array('pages' => ['home', 'error', 'connexion'],
-                       'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent", "monCompte"],
-                       'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut", "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule"],
-                       'vehicules' => ["findVehicule"],
-                      "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
-                    "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage"]);
+  $controllers = [
+    'pages' => ['home', 'error', 'connexion'],
+    
+    'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent", "monCompte", "update", "confirmerSuppression", "delete"],
+
+    'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent"],
+    
+    'vehicules' => ["findVehicule"],
+
+    "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
+
+    "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage", "confirmationSuppression", "supprimerToutCovoit", "supprimerCovoitPerAdmin"]
+  ];
 
   if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

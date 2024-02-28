@@ -79,6 +79,16 @@
                 $req->bindParam(":id_vehicule", $id_vehicule, PDO::PARAM_INT);
                 $req->execute();
         }
+// Verifier si l'utilisateur a un vehicule
+        public static function utilisateurPossedeVehicule($id_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT COUNT(*) AS count FROM vehicule_utilisateur WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+                $resultat = $req->fetch(PDO::FETCH_ASSOC);
+                return $resultat['count'] > 0; // Retourne true si l'utilisateur possède au moins un véhicule, sinon false
+            }
+            
 //       SETTER ET GETTER
         public function getId_vehicule_utilisateur()
         {

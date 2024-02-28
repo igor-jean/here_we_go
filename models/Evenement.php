@@ -41,11 +41,11 @@
       $this->id_categorie = $id_categorie;
 
     }
-    //  FONCTIION POUR AFFICHER TOUS LES EVENEMENTS
+    // AFFICHER TOUS LES EVENEMENTS
     public static function all() {
       $list = [];
       $db = Db::getInstance();
-      $req = $db->query('SELECT * FROM evenement');
+      $req = $db->query('SELECT * FROM evenement WHERE inscrit = 1');
 
       foreach($req->fetchAll() as $events) {
         $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label'], $events['id_utilisateur'], $events['id_categorie']);
@@ -53,7 +53,7 @@
 
       return $list;
     }
-// FONCTION POUR AFFICHER LES EVENEMENTS ET FAIRE UNE PAGINATION 5/10/15
+// AFFICHER LES EVENEMENTS ET FAIRE UNE PAGINATION 5/10/15
     public static function allForPagination($page = 1, $perPage = 5) {
         $list = [];
         $db = Db::getInstance();
@@ -69,7 +69,7 @@
         $totalPages = ceil($totalEvents / $perPage);
 
         // Sélectionner les événements pour la page donnée
-        $req = $db->prepare('SELECT * FROM evenement LIMIT :perPage OFFSET :offset');
+        $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 LIMIT :perPage OFFSET :offset');
         $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
         $req->bindValue(':offset', $offset, PDO::PARAM_INT);
         $req->execute();
@@ -243,17 +243,17 @@ public static function find($id_event) {
 
 
 // créer un evenement 
-    public static function addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $nb_visiteur, $code_unique_label, $id_utilisateur, $id_categorie) {
+    public static function addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_utilisateur, $id_categorie) {
 
       
         $db = Db::getInstance();
         $dateNow = date("Y-m-d");
         $inscrit = 0;
+        $departement = substr($code_postal, 0, 2);
+        $code_unique_label = self::checkAndGenerateUniqueLabel($departement);
 
 
-
-
-      $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, nb_visiteur, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :nb_visiteur, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
+      $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
       $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
       $req->bindParam(":titre", $titre, PDO::PARAM_STR);
       $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);
@@ -268,7 +268,6 @@ public static function find($id_event) {
       $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
       $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
       $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
-      $req->bindParam(":nb_visiteur", $nb_visiteur, PDO::PARAM_INT);
       $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
       $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
       $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
@@ -298,6 +297,50 @@ public static function find($id_event) {
     
         return $id_event;
     }
+    // Generer le code unique label
+    public static function generateUniqueLabel($departement) {
+        // Récupérer l'année en cours
+        $annee = date("Y");
+        
+        // Obtenir les deux derniers chiffres de l'année
+        $anneeDerniersChiffres = substr($annee, -2);
+        
+        // Générer 5 caractères aléatoires comprenant des chiffres et des lettres
+        $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5);
+        
+        // Formater le code avec le "-" et le numéro de département
+        $codeUnique = $randomString . "-" . $anneeDerniersChiffres . $departement;
+        
+        return $codeUnique;
+    }
+    //Verifier si le code existe deja et en créer un nouveau s'il existe deja
+    public static function checkAndGenerateUniqueLabel($codePostal) {
+        do {
+            // Générer un nouveau code unique label
+            $codeUnique = self::generateUniqueLabel($codePostal);
+            
+            // Vérifier s'il existe déjà dans la base de données
+            if (!self::isUniqueLabelExists($codeUnique)) {
+                // Le code unique n'existe pas encore, donc on peut le retourner
+                return $codeUnique;
+            }
+            // Si le code unique existe déjà, on recommence la boucle pour en générer un nouveau
+        } while (true);
+    }
+    //Verifie si le code est dans la base
+    private static function isUniqueLabelExists($codeUnique) {
+        // Requête pour vérifier si le code unique existe déjà dans la base de données
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT COUNT(*) FROM evenement WHERE code_unique_label = :codeUnique');
+        $req->bindParam(':codeUnique', $codeUnique);
+        $req->execute();
+        $count = $req->fetchColumn();
+        
+        // Retourne vrai si le code unique existe déjà, sinon faux
+        return $count > 0;
+    }
+    
+    
     
 // Modifier un evenement 
     public static function updateEvent($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_categorie) {

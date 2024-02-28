@@ -42,9 +42,9 @@
         }
         
         public function validate() {
-            $id_event = $_POST["id_event"];
+            $id_event = $_GET["id_event"];
             Evenement::validateEvent($id_event);
-            $this->indexAdministration();
+            $this->evenementsAdministration();
         }
         // modifier un evenement
         
@@ -53,6 +53,7 @@
             $event = Evenement::find($id_event);
             $categories = Categorie::all();
             $categorieFinded = Categorie::find($event->getId_categorie());
+            $covoits = Covoiturage::getCovoituragesPerEvent($id_event);
             require_once('views/admin/updateAnEvent.php');
         }
         

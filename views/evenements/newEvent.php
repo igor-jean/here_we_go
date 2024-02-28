@@ -41,12 +41,6 @@
     
     <label for="nom_structure">Nom de la structure:</label>
     <input type="text" id="nom_structure" name="nom_structure"><br>
-    
-    <label for="nb_visiteur">Nombre de visiteurs:</label>
-    <input type="number" id="nb_visiteur" name="nb_visiteur"><br>
-    
-    <label for="code_unique_label">Code unique:</label>
-    <input type="text" id="code_unique_label" name="code_unique_label"><br>
 
     <select name="id_categorie" id="id_categorie">
         <?php foreach ($categories as $categorie) {
@@ -57,3 +51,4 @@
 
     <input type="submit" value="Ajouter">
 </form>
+<a href="?controller=pages&action=home">Retour</a>

@@ -1,7 +1,7 @@
 <h1>MODIFIER EVENEMENT</h1>
 
 
-<form action="?controller=admin&action=update" method="post">
+<form action="?controller=evenements&action=update" method="post">
     <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent() ;?>">
     <label for="titre">Titre de l'événement:</label>
     <input value="<?php echo $event->getTitre();?>" type="text" id="titre" name="titre"><br>
@@ -55,7 +55,7 @@
     </select>
 
     <input type="submit" value="Modifier">
-    <button><a href="?controller=admin&action=confirmerSuppression&id_event=<?php echo $event->getIdEvent() ;?>">Supprimer</a></button>
+    <button><a href="?controller=evenements&action=confirmerSuppression&id_event=<?php echo $event->getIdEvent() ;?>">Supprimer</a></button>
 </form>
 
 
@@ -69,7 +69,6 @@
             <th>Lieu de départ</th>
             <th>Nombre de places</th>
             <th>Heure de départ</th>
-            <th>Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -80,10 +79,9 @@
                 <td><?php echo $covoit->getLieuDepart(); ?></td>
                 <td><?php echo $covoit->getNbPlace(); ?></td>
                 <td><?php echo $covoit->getHeureDepart(); ?></td>
-                <td><a href="?controller=covoiturages&action=supprimerCovoitPerAdmin&id_event=<?php echo $covoit->getIdEvent(); ?>&id_covoiturage=<?php echo $covoit->getIdCovoiturage(); ?>">[X]</a></td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
 
-<a href="?controller=admin&action=evenementsAdministration">Retour</a>
+<a href="?controller=utilisateurs&action=monCompte">Retour</a>

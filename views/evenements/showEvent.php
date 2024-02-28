@@ -2,10 +2,14 @@
 <p><span><?php echo date('d/m/Y',strtotime($event->date_event));?></span> - <span><?php echo date('H:i',strtotime($event->heure_event));?></span> - <span><?php echo $event->ville;?></span></p>
 <p>
     <?php
-        if ($result) {
-            echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event='.$event->id_event.'">Se desinscrire</a>';
-        } else {
-            echo '<a href="?controller=evenements&action=inscriptionEvent&id_event='.$event->id_event.'">S\'inscrire</a>';
+        if(isset($_SESSION["login"])) {
+            if($checkIfOnlyOne) {
+                echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event='.$event->id_event.'&id_covoiturage='.$id_covoit.'">Se desinscrire</a>';
+            }elseif($result) {
+                echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event='.$event->id_event.'">Se desinscrire</a>';
+            } else {
+                echo '<a href="?controller=evenements&action=inscriptionEvent&id_event='.$event->id_event.'">S\'inscrire</a>';
+            }
         }
     ?>
 </p>
@@ -31,7 +35,7 @@
     <span>lien de l'événement</span>
     <span><?php echo $event->lien_event;?></span>
 </div>
-
+<?php  if(isset($_SESSION["login"])) { ?>
 <h3>Covoiturage</h3>
 
 <table>
@@ -46,8 +50,14 @@
         </tr>
   </thead>
   <tbody>
-    <a href="?controller=covoiturages&action=createCovoiturage&id_event=<?php echo $event->id_event;?>">Proposer son covoiturage</a>
-    <?php
+    
+      <?php
+      if(!$vehicule) {
+          echo '<a href="?controller=utilisateurs&action=ajouterVehicule">Proposer son covoiturage</a>';
+      }elseif($result && !$checkIfOnlyOne) {
+        echo '<a href="?controller=covoiturages&action=createCovoiturage&id_event='.$event->id_event.'">Proposer son covoiturage</a>';
+      }
+      
         foreach ($covoits as $covoit) {
             echo "
                 <tr>
@@ -64,5 +74,5 @@
         ?>
   </tbody>
 </table>
-
+<?php } ?>
 <a href="?controller=pages&action=home">Retour</a>

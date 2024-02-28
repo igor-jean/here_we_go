@@ -5,3 +5,4 @@
     <input type="color" name="couleur" id="couleur">
     <input type="submit" value="Ajouter">
 </form>
+<a href="?controller=admin&action=categorieVehiculeAdministration">Retour</a>

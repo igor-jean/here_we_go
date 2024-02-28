@@ -37,7 +37,8 @@
       $events = Evenement::findPastEvents($id_utilisateur);
       $eventsUpcoming = Evenement::findUpcomingEvents($id_utilisateur);
       $listEventsRegistered = Evenement::listEventsRegistered($id_utilisateur);
-      
+      $covoits = Covoiturage::getCovoituragesFutursUtilisateur($id_utilisateur);
+      $covoitsInscrit = Covoiturage::getCovoituragesInscritUtilisateur($id_utilisateur);
       require_once('views/utilisateurs/monCompte.php');
     }
     
@@ -56,7 +57,16 @@
       $telephone = $_POST["telephone"];
       $avatar =isset($_FILES["avatar"])?$_FILES["avatar"]:"";
       Utilisateur::updateUserByUser($id_utilisateur, $mail, $nom, $prenom, $avatar, $ville, $telephone);
-      $this->monCompte();
+      header("Location: ?controller=utilisateurs&action=monCompte");
+    }
+
+    public function voirEvent() {
+      $id_event = $_GET["id_event"];
+      $event = Evenement::find($id_event);
+      $categories = Categorie::all();
+      $categorieFinded = Categorie::find($event->getId_categorie());
+      $covoits = Covoiturage::getCovoituragesPerEvent($id_event);
+      require_once('views/utilisateurs/voirEvent.php');
     }
 
     public function avatarParDefaut() {

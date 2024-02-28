@@ -88,6 +88,7 @@
         <li>Lien Billeterie: <?php echo $event->getLienBilleterie(); ?></li>
         <li>Lien Event: <?php echo $event->getLienEvent(); ?></li>
         <li>Nom Structure: <?php echo $event->getNomStructure(); ?></li>
+        <li><a href="?controller=utilisateurs&action=voirEvent&id_event=<?php echo $event->getIdEvent(); ?>">Modifier</a></li>
         <br>
         <br>
     <?php } ?>
@@ -115,3 +116,23 @@
         <br>
     <?php } ?>
 </ul>
+
+<h2>Covoiturage que je propose :</h2>
+<?php foreach ($covoits as $covoit) { ?>
+        <li>Evenenement: <?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></li>
+        <li>Date: <?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></li>
+        <li>Heure de depart: <?php echo $covoit->getHeureDepart(); ?></li>
+        <li>lieu de depart : <?php echo $covoit->getLieuDepart(); ?></li>
+        <li><a href="">Voir</a></li>
+    <?php } ?>
+
+
+<h2>Covoiturage auxquels je suis inscrit :</h2>
+
+<?php foreach ($covoitsInscrit as $covoit) { ?>
+        <li>Evenenement: <?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></li>
+        <li>Date: <?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></li>
+        <li>Heure de depart: <?php echo $covoit->getHeureDepart(); ?></li>
+        <li>lieu de depart : <?php echo $covoit->getLieuDepart(); ?></li>
+        <li><a href="">Voir</a></li>
+    <?php } ?>

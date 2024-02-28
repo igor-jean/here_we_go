@@ -58,3 +58,5 @@
         </tr>
     </tfoot>
 </table>
+
+<a href="?controller=admin&action=indexAdministration">Retour</a>

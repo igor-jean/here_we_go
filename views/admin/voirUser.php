@@ -20,3 +20,5 @@
         <input type="submit" value="Modifier">
         <a href="?controller=admin&action=supprimerUtilisateur&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?> ">Supprimer</a>
     </form>
+
+    <a href="?controller=admin&action=utilisateursAdministration">Retour</a>

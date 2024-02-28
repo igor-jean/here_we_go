@@ -24,3 +24,5 @@ $event->getIdEvent()."'>Modifier</a></li>";
     echo "<a href='?controller=admin&action=evenementsAdministration&page=$i&perPage=$perPage'>$i</a> ";
 }
 ?>
+<br>
+<a href="?controller=admin&action=indexAdministration">Retour</a>
