@@ -6,15 +6,7 @@
       $pwd = $_POST["pwd"];
 
       Utilisateur::userConnexion($mail, $pwd);
-      if(isset($_SESSION["login"]) && $_SESSION["login"] === "admin") {
-        $this->monCompte();
-      }
-      elseif(isset($_SESSION["login"]) && $_SESSION["login"] === "user") {
-        $this->monCompte();
-      }
-      else {
-        header("Location: ?controller=pages&action=home");
-      }
+      header("Location: ?controller=pages&action=home");
     }
 
     public function register() {

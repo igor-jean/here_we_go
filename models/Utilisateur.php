@@ -177,24 +177,25 @@
             }
             
             
-        public static function userConnexion($mail, $pwd) {
+            public static function userConnexion($mail, $pwd) {
                 $db = Db::getInstance();
                 $req = $db->prepare("SELECT utilisateur.*, role.id_role FROM utilisateur JOIN role ON role.id_role = utilisateur.id_role WHERE mail = :mail");
                 $req->bindParam(":mail", $mail);
                 $req->execute();
-                $reponse = $req ->fetch(PDO::FETCH_ASSOC);
+                $reponse = $req->fetch(PDO::FETCH_ASSOC);
+                
                 if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
-                        // session_start();
-                        $_SESSION["login"] = "admin";
-                        $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                }elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
-                        // session_start();
-                        $_SESSION["login"] = "user";
-                        $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                }else {
-                        $_SESSION["error"] = "Mail ou mot de passe incorrect.";
+                    $_SESSION["login"] = "admin";
+                    $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                    
+                } elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
+                    $_SESSION["login"] = "user";
+                    $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                } else {
+                    $_SESSION["error"] = "Mail ou mot de passe incorrect.";
                 }
-        }
+            }
+            
         
         public static function verifyRegistrationEvent($id_utilisateur, $id_event) {
                 $db = Db::getInstance();
