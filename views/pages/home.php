@@ -7,7 +7,7 @@
         <div class="article-wrapper">
             <div class="couleur_evenement" style="background-color: <?php echo $eventColor; ?>">
                 <figure>
-                    <img src="<?php echo $event->photos[0]; ?>" alt="<?php echo $event->titre; ?>" />
+                    <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
                 </figure>
                 <ul>
                     <div class="article-body">

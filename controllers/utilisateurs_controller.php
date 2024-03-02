@@ -111,5 +111,33 @@
       Vehicule::delete($id_vehicule_utilisateur);
       $this->monCompte();
     }
+
+    public function ajoutPhoto() {        
+      $id_event = $_GET["id_event"];
+      $dejaPresent = PhotosEvenement::checkIfPhotoExistsForEvent($id_event);
+      $photoActuelle = PhotosEvenement::findByIdEvent($id_event);
+      require_once('views/utilisateurs/ajoutPhoto.php');
+    }
+
+    public function addPhoto() {        
+      $id_event = $_POST["id_event"];
+      $chemin = $_FILES["chemin"];
+      PhotosEvenement::add($chemin, $id_event);
+      $this->monCompte();
+    }
+    public function updatePhoto() {        
+      $id_event = $_POST["id_event"];
+      $chemin = $_FILES["chemin"];
+      PhotosEvenement::update($id_event, $chemin);
+      $this->monCompte();
+    }
+
+    public function deletePhoto() {        
+      $id_event = $_GET["id_event"];
+      PhotosEvenement::delete($id_event);
+      $this->monCompte();
+    }
+
+    
   }
 ?>
