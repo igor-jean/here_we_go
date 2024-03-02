@@ -43,6 +43,7 @@
       
       Evenement::addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_utilisateur, $id_categorie);
       Utilisateur::registrationEvent($id_utilisateur, $id_event);
+      PhotosEvenement::addPhotoParDefault($id_event);
       header("Location: ?controller=utilisateurs&action=monCompte");
     }
     public function inscriptionEvent() {
@@ -88,7 +89,9 @@
     public function confirmerSuppression() {
         $id_event = $_GET["id_event"];
         require_once('views/evenements/confirmerSuppression.php');
-    }
+      }
+      
+   
 
   }
 ?>

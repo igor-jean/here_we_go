@@ -5,13 +5,16 @@
     switch($controller) {
 
       case 'pages':
+        require_once('models/PhotosEvenement.php');
         require_once('models/Covoiturage.php');
         require_once('models/Evenement.php');
+        require_once('models/Categorie.php');
         $controller = new PagesController();
         break;
         
         case 'utilisateurs':
           require_once('models/Covoiturage.php');
+          require_once('models/PhotosEvenement.php');
           require_once('models/TypeVehicule.php');
           require_once('models/Vehicule.php');
           require_once('models/Evenement.php');
@@ -19,15 +22,16 @@
           require_once('models/Categorie.php');
           $controller = new UsersController();
           break;
-        
-        case 'evenements':
-          require_once('models/Vehicule.php');
-          require_once('models/Utilisateur.php');
-          require_once('models/Evenement.php');
-          require_once('models/Categorie.php');
-          require_once('models/Covoiturage.php');
-          $controller = new EventsController();
-          break;
+          
+          case 'evenements':
+            require_once('models/PhotosEvenement.php');
+            require_once('models/Vehicule.php');
+            require_once('models/Utilisateur.php');
+            require_once('models/Evenement.php');
+            require_once('models/Categorie.php');
+            require_once('models/Covoiturage.php');
+            $controller = new EventsController();
+            break;
           
           case 'admin':
             require_once('models/Utilisateur.php');
@@ -56,11 +60,11 @@
   }
 
   $controllers = [
-    'pages' => ['home', 'error', 'connexion'],
+    'pages' => ['home', 'error', 'connexion', "categorie"],
     
     'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent", "monCompte", "update", "confirmerSuppression", "delete"],
 
-    'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent"],
+    'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent", "ajoutPhoto", "addPhoto", "updatePhoto", "deletePhoto"],
     
     'vehicules' => ["findVehicule"],
 

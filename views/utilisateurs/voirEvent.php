@@ -1,6 +1,6 @@
 <h1>MODIFIER EVENEMENT</h1>
 
-
+<a class="btn btn-secondary" href="?controller=utilisateurs&action=ajoutPhoto&id_event=<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter une photo d'Evenement</a>
 <form action="?controller=evenements&action=update" method="post">
     <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent() ;?>">
     <label for="titre">Titre de l'événement:</label>

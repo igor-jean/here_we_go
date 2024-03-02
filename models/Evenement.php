@@ -421,13 +421,47 @@ public static function find($id_event) {
       return $list;
     }
 
-// Valider l'événement
-public static function validateEvent($id_event) {
-    $db = Db::getInstance();
-    $req = $db->prepare("UPDATE evenement SET inscrit = 1 WHERE id_event = :id_event");
-    $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
-    $req->execute();
-}
+    // Valider l'événement
+    public static function validateEvent($id_event) {
+        $db = Db::getInstance();
+        $req = $db->prepare("UPDATE evenement SET inscrit = 1 WHERE id_event = :id_event");
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    public static function findByCategoryId($id_categorie) {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM evenement WHERE id_categorie = :id_categorie');
+        $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
+        $req->execute();
+        $events = $req->fetchAll(); 
+    
+        $list = [];
+        foreach ($events as $event) {
+            $list[] = new Evenement(
+                $event['id_event'],
+                $event['titre'],
+                $event['date_event'],
+                $event['heure_event'],
+                $event['ville'],
+                $event['adresse'],
+                $event['code_postal'],
+                $event['description_courte'],
+                $event['description_longue'],
+                $event['nb_places'],
+                $event['prix'],
+                $event['lien_billeterie'],
+                $event['lien_event'],
+                $event['nom_structure'],
+                $event['nb_visiteur'],
+                $event['code_unique_label'],
+                $event['id_utilisateur'],
+                $event['id_categorie']
+            );
+        }
+    
+        return $list;
+    }
 
     // Getters
     public function getIdEvent() {
