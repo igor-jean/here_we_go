@@ -13,6 +13,10 @@ li {
   list-style: none;
 }
 
+main {
+  padding: 100px 0;
+}
+
 @media (min-width: 1200px) {
   .form-inline .input-group {
     width: 300px;
@@ -47,10 +51,6 @@ body {
   background-color: rgb(245, 243, 241);
 }
 
-.container {
-  margin: 0 auto;
-}
-
 .background-index {
   background-image: url(../assets/img/banner-logo-2.png);
   background-repeat: no-repeat;
@@ -74,21 +74,17 @@ h1 {
   font-family: "Rubik Doodle Shadow", system-ui;
   font-weight: 400;
   font-style: normal;
-  padding-left: 22%;
   font-size: 85px;
-  padding-top: 10%;
-  padding-bottom: 7%;
   color: #3e6c77;
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 h2 {
   font-family: "Archivo Black", sans-serif;
   font-weight: 400;
   font-style: normal;
-  padding-left: 22%;
   font-size: 43px;
-  padding-top: 10%;
-  padding-bottom: 7%;
   color: #69BACE;
 }
 

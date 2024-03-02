@@ -1,28 +1,52 @@
-<h1>EVENEMENTS</h1>
+<h1>ÉVÉNEMENTS</h1>
 
-<h2>Gestion des evenements</h2>
+<h2>Gestion des événements</h2>
 
-attente de validation :<?php echo $nbDemande ?>
-<ul>
-    <?php foreach ($events as $event) { 
-        echo "<li><a href='?controller=admin&action=validateAnEvent&id_event=".$event->getIdEvent()."'>".$event->getTitre()."</a>=======>".$event->getVille()."</li><br>";
-    }
-    ?>
-</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Ville</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($events as $event) { ?>
+            <tr>
+                <td><?php echo $event->getTitre(); ?></td>
+                <td><?php echo $event->getVille(); ?></td>
+                <td><a href='?controller=admin&action=validateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-success">Valider</a></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
 
-<h2>liste des evenements avec paginations</h2>
+<h2>Liste des événements avec pagination</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($eventsForPage as $event) { ?>
+                <tr>
+                    <td><?php echo $event->getTitre(); ?></td>
+                    <td><?php echo $event->getVille(); ?></td>
+                    <td><a href='?controller=admin&action=updateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-primary">Modifier</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 
-<ul>
-    <?php
-        foreach ($eventsForPage as $event) {
-            echo "<li>".$event->getTitre()."=======>".$event->getVille()."<a href='?controller=admin&action=updateAnEvent&id_event=".
-$event->getIdEvent()."'>Modifier</a></li>";
-        }
-    ?>
-</ul>
-<?php for ($i = 1; $i <= $totalPages; $i++) {
-    echo "<a href='?controller=admin&action=evenementsAdministration&page=$i&perPage=$perPage'>$i</a> ";
-}
-?>
-<br>
-<a href="?controller=admin&action=indexAdministration">Retour</a>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                <li class="page-item"><a class="page-link" href='?controller=admin&action=evenementsAdministration&page=<?php echo $i; ?>&perPage=<?php echo $perPage; ?>'><?php echo $i; ?></a></li>
+            <?php } ?>
+        </ul>
+    </nav>
+
+<a href="?controller=admin&action=indexAdministration" class="btn btn-danger mt-5" tabindex="-1" role="button">RETOUR</a>

@@ -58,5 +58,4 @@
         </tr>
     </tfoot>
 </table>
-
-<a href="?controller=admin&action=indexAdministration">Retour</a>
+<a href="?controller=admin&action=indexAdministration" class="btn btn-secondary mt-3">Retour</a>

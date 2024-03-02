@@ -1,8 +1,16 @@
+<h1>Ajouter une catégorie</h1>
+
 <form action="?controller=admin&action=addCategorie" method="post">
-    <label for="nom">Nom Categorie:</label>
-    <input type="text" name="libelle_categorie" id="nom">
-    <label for="couleur">Couleur associée</label>
-    <input type="color" name="couleur" id="couleur">
-    <input type="submit" value="Ajouter">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom Catégorie :</label>
+        <input type="text" class="form-control" name="libelle_categorie" id="nom">
+    </div>
+    <div class="mb-3">
+        <label for="couleur" class="form-label">Couleur associée :</label>
+        <input type="color" class="form-control" name="couleur" id="couleur">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
 </form>
-<a href="?controller=admin&action=categorieVehiculeAdministration">Retour</a>
+
+<a href="?controller=admin&action=categorieVehiculeAdministration" class="btn btn-secondary mt-3">Retour</a>

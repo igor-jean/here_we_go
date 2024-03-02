@@ -1,18 +1,27 @@
-<h2>Ajouter un véhicule</h2>
-    <form action="?controller=utilisateurs&action=addVehicule" method="post">
-        <label for="libelle">Libellé du véhicule:</label><br>
-        <input type="text" id="libelle" name="libelle_vehicule"><br>
-        <label for="immatriculation">Immatriculation:</label><br>
-        <input type="text" id="immatriculation" name="immatriculation"><br>
-        <label for="nb_places">Nombre de places:</label><br>
-        <input type="number" id="nb_places" name="nb_places"><br>
-        <label for="id_vehicule">Type du véhicule:</label><br>
-        <select name="id_vehicule" id="id_vehicule">
+<h1>Ajouter un véhicule</h1>
+<form action="?controller=utilisateurs&action=addVehicule" method="post">
+    <div class="mb-3">
+        <label for="libelle" class="form-label">Libellé du véhicule :</label>
+        <input type="text" class="form-control" id="libelle" name="libelle_vehicule">
+    </div>
+    <div class="mb-3">
+        <label for="immatriculation" class="form-label">Immatriculation :</label>
+        <input type="text" class="form-control" id="immatriculation" name="immatriculation">
+    </div>
+    <div class="mb-3">
+        <label for="nb_places" class="form-label">Nombre de places :</label>
+        <input type="number" class="form-control" id="nb_places" name="nb_places">
+    </div>
+    <div class="mb-3">
+        <label for="id_vehicule" class="form-label">Type du véhicule :</label>
+        <select class="form-select" id="id_vehicule" name="id_vehicule">
             <?php foreach ($types as $type) {
                 echo "<option value='".$type->getIdVehicule()."'>".$type->getType()."</option>";
-            }
-            ?>
+            } ?>
         </select>
-        <input type="submit" value="Ajouter">
-    </form>
-    <a href="?controller=utilisateurs&action=monCompte">Retour</a>
+    </div>
+    <div class="mt-3">
+        <a href="?controller=utilisateurs&action=monCompte" class="btn btn-danger">Retour</a>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </div>
+</form>
