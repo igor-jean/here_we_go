@@ -6,6 +6,7 @@
       $pwd = $_POST["pwd"];
 
       Utilisateur::userConnexion($mail, $pwd);
+      header("Location: ?controller=pages&action=home");
     }
 
     public function register() {
