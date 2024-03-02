@@ -308,6 +308,9 @@ article {
   transition: all 0.4s ease-in-out;
   overflow: hidden;
 }
+article:hover {
+  transform: scale(1.02) !important;
+}
 
 article a::after {
   position: absolute;

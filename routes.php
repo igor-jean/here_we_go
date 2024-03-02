@@ -8,6 +8,7 @@
         require_once('models/PhotosEvenement.php');
         require_once('models/Covoiturage.php');
         require_once('models/Evenement.php');
+        require_once('models/Categorie.php');
         $controller = new PagesController();
         break;
         
@@ -59,7 +60,7 @@
   }
 
   $controllers = [
-    'pages' => ['home', 'error', 'connexion'],
+    'pages' => ['home', 'error', 'connexion', "categorie"],
     
     'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent", "monCompte", "update", "confirmerSuppression", "delete"],
 

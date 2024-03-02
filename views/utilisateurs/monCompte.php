@@ -49,81 +49,106 @@
 </table>
 
 
+<h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
+
+<section class="articles mt-5 mb-5">
+    <?php foreach ($eventsUpcoming as $event) { ?>
+    <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
+        <div class="article-wrapper">
+            <figure>
+                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
+            </figure>
+            <ul>
+                <div class="article-body">
+                    <li><h3><?php echo $event->getTitre(); ?></h3></li>
+                    <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
+                    <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
+                    <li>Prix : <?php echo $event->getPrix(); ?> €</li>
+                    <li><?php echo $event->getDescriptionCourte(); ?></li>
+                    <a href="?controller=utilisateurs&action=voirEvent&id_event=<?php echo $event->getIdEvent();?>" class="read-more">
+                        Modifier <span class="sr-only">about this is some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </ul>
+        </div>
+    </article>
+    <?php } ?>
+</section>
+
+
+
+
 
 <h2>Liste des evenements créé et qui se sont deja passé:</h2>
 
-<ul>
-    <?php foreach ($events as $event) { ?>
-        <li>Titre: <?php echo $event->getTitre(); ?></li>
-        <li>Date: <?php echo $event->getDateEvent(); ?></li>
-        <li>Heure: <?php echo $event->getHeureEvent(); ?></li>
-        <li>Ville: <?php echo $event->getVille(); ?></li>
-        <li>Adresse: <?php echo $event->getAdresse(); ?></li>
-        <li>Code Postal: <?php echo $event->getCodePostal(); ?></li>
-        <li>Description Courte: <?php echo $event->getDescriptionCourte(); ?></li>
-        <li>Description Longue: <?php echo $event->getDescriptionLongue(); ?></li>
-        <li>Nombre de Places: <?php echo $event->getNbPlaces(); ?></li>
-        <li>Prix: <?php echo $event->getPrix(); ?></li>
-        <li>Lien Billeterie: <?php echo $event->getLienBilleterie(); ?></li>
-        <li>Lien Event: <?php echo $event->getLienEvent(); ?></li>
-        <li>Nom Structure: <?php echo $event->getNomStructure(); ?></li>
-        <br>
-        <br>
-    <?php } ?>
-</ul>
 
-<h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
-<ul>
-    <?php foreach ($eventsUpcoming as $event) { ?>
-        <li>Titre: <?php echo $event->getTitre(); ?></li>
-        <li>Date: <?php echo $event->getDateEvent(); ?></li>
-        <li>Heure: <?php echo $event->getHeureEvent(); ?></li>
-        <li>Ville: <?php echo $event->getVille(); ?></li>
-        <li>Adresse: <?php echo $event->getAdresse(); ?></li>
-        <li>Code Postal: <?php echo $event->getCodePostal(); ?></li>
-        <li>Description Courte: <?php echo $event->getDescriptionCourte(); ?></li>
-        <li>Description Longue: <?php echo $event->getDescriptionLongue(); ?></li>
-        <li>Nombre de Places: <?php echo $event->getNbPlaces(); ?></li>
-        <li>Prix: <?php echo $event->getPrix(); ?></li>
-        <li>Lien Billeterie: <?php echo $event->getLienBilleterie(); ?></li>
-        <li>Lien Event: <?php echo $event->getLienEvent(); ?></li>
-        <li>Nom Structure: <?php echo $event->getNomStructure(); ?></li>
-        <li><a href="?controller=utilisateurs&action=voirEvent&id_event=<?php echo $event->getIdEvent(); ?>">Modifier</a></li>
-        <br>
-        <br>
+<section class="articles mt-5 mb-5">
+    <?php foreach ($events as $event) { ?>
+    <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
+        <div class="article-wrapper">
+            <figure>
+                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
+            </figure>
+            <ul>
+                <div class="article-body">
+                    <li><h3><?php echo $event->getTitre(); ?></h3></li>
+                    <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
+                    <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
+                    <li>Prix : <?php echo $event->getPrix(); ?> €</li>
+                    <li><?php echo $event->getDescriptionCourte(); ?></li>
+                </div>
+            </ul>
+        </div>
+    </article>
     <?php } ?>
-</ul>
+</section>
+
+
 
 
 <h2>Liste des Evenements auxquel je suis inscrit </h2>
 
-<ul>
+
+<section class="articles mt-5 mb-5">
     <?php foreach ($listEventsRegistered as $event) { ?>
-        <li>Titre: <?php echo $event->getTitre(); ?></li>
-        <li>Date: <?php echo $event->getDateEvent(); ?></li>
-        <li>Heure: <?php echo $event->getHeureEvent(); ?></li>
-        <li>Ville: <?php echo $event->getVille(); ?></li>
-        <li>Adresse: <?php echo $event->getAdresse(); ?></li>
-        <li>Code Postal: <?php echo $event->getCodePostal(); ?></li>
-        <li>Description Courte: <?php echo $event->getDescriptionCourte(); ?></li>
-        <li>Description Longue: <?php echo $event->getDescriptionLongue(); ?></li>
-        <li>Nombre de Places: <?php echo $event->getNbPlaces(); ?></li>
-        <li>Prix: <?php echo $event->getPrix(); ?></li>
-        <li>Lien Billeterie: <?php echo $event->getLienBilleterie(); ?></li>
-        <li>Lien Event: <?php echo $event->getLienEvent(); ?></li>
-        <li>Nom Structure: <?php echo $event->getNomStructure(); ?></li>
-        <br>
-        <br>
+    <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
+        <div class="article-wrapper">
+            <figure>
+                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
+            </figure>
+            <ul>
+                <div class="article-body">
+                    <li><h3><?php echo $event->getTitre(); ?></h3></li>
+                    <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
+                    <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
+                    <li>Prix : <?php echo $event->getPrix(); ?> €</li>
+                    <li><?php echo $event->getDescriptionCourte(); ?></li>
+                    <a href="?controller=evenements&action=showEvent&id_event=<?php echo $event->getIdEvent();?>" class="read-more">
+                        Voir <span class="sr-only">about this is some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </ul>
+        </div>
+    </article>
     <?php } ?>
-</ul>
+</section>
+
 
 <h2>Covoiturage que je propose :</h2>
 <?php foreach ($covoits as $covoit) { ?>
+    <ul>
         <li>Evenenement: <?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></li>
         <li>Date: <?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></li>
         <li>Heure de depart: <?php echo $covoit->getHeureDepart(); ?></li>
         <li>lieu de depart : <?php echo $covoit->getLieuDepart(); ?></li>
         <li><a href="">Voir</a></li>
+    </ul>
     <?php } ?>
 
 

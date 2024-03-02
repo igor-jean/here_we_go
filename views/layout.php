@@ -17,6 +17,7 @@ ob_start();
 </head>
 <body>
 <?php
+require_once('models/Categorie.php');
 if(isset($_SESSION["login"]) && $_SESSION["login"] === "admin") {
   require_once "requires/navbarAdmin.php";
 }
@@ -27,8 +28,9 @@ else {
   require_once "requires/navbar.php";
 }
 ?>
-  
-  <?php require_once('routes.php'); ?>
+  <div class="container">
+    <?php require_once('routes.php'); ?>
+  </div>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

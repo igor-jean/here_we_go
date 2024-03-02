@@ -72,6 +72,18 @@
             $req->bindParam(":couleur", $couleur, PDO::PARAM_STR);
             $req->execute();
         }
+
+        public static function findByEventId($id_event) {
+            $db = Db::getInstance();
+            $req = $db->prepare('SELECT c.* FROM categorie c INNER JOIN evenement e ON c.id_categorie = e.id_categorie WHERE e.id_event = :id_event');
+            $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+            $req->execute();
+            $categorie = $req->fetch();
+            return new Categorie($categorie["id_categorie"], $categorie["libelle_categorie"], $categorie["couleur"]);
+        }
+        
+        
+        
     }
 
 

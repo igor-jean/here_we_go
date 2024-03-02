@@ -69,6 +69,8 @@ body {
 
 }
 
+
+
 .bg-color {
     background-color: #F9E0CF;
 }
@@ -321,6 +323,10 @@ article {
     transform-origin: center;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
+
+    &:hover {
+        transform: scale(1.02) !important;
+    }
 }
 
 article a::after {

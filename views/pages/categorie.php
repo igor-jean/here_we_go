@@ -1,4 +1,4 @@
-<h1>Liste des événements</h1>
+<h1><?php echo $categorie->getLibelleCategorie();?></h1>
 
 <section class="articles mt-5 mb-5">
     <?php foreach ($events as $event) {?>
