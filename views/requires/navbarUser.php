@@ -10,10 +10,10 @@
             <div class="nav-item dropdown">
                 <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categorie</a>
                 <div class="dropdown-menu">					
-                    <a href="#" class="dropdown-item">Cinéma</a>
-                    <a href="#" class="dropdown-item">Musique</a>
-                    <a href="#" class="dropdown-item">Exposition</a>
-                    <a href="#" class="dropdown-item">Conférence</a>
+                <?php foreach (Categorie::all() as $key) {
+                        echo '<a href="?controller=pages&action=categorie&id_categorie='.$key->getIdCategorie().'" class="dropdown-item">'.$key->getLibelleCategorie().'</a>';
+                        
+                    } ?>
                 </div>
             </div>
             <form class="navbar-form form-inline">

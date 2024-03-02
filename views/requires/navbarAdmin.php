@@ -12,7 +12,7 @@
                     <?php foreach (Categorie::all() as $key) {
                         echo '<a href="?controller=pages&action=categorie&id_categorie='.$key->getIdCategorie().'" class="dropdown-item">'.$key->getLibelleCategorie().'</a>';
                         
-                    } ?>					
+                    } ?>
  
                 </div>
             </div>
