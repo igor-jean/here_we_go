@@ -16,22 +16,25 @@
                     <a href="#" class="dropdown-item">Conférence</a>
                 </div>
             </div>
-        </div>
-        <form class="navbar-form form-inline">
-            <div class="input-group search-box">								
-                <input type="text" id="search" class="form-control" placeholder="Recherche ..">
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="material-icons">&#xE8B6;</i>
-                    </span>
+            <form class="navbar-form form-inline">
+                <div class="input-group search-box">								
+                    <input type="text" id="search" class="form-control" placeholder="Recherche ..">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="material-icons">&#xE8B6;</i>
+                        </span>
+                    </div>
                 </div>
+            </form>
+            <div class="nav-item">
+                <a href="?controller=evenements&action=newEvent" class="nav-item nav-link">Ajouter un evenement</a>
             </div>
-        </form>
-        <div class="nav-item">
-            <a href="?controller=utilisateurs&action=monCompte">Mon compte</a>
-        </div>
-        <div class="nav-item">
-        <a href="?controller=utilisateurs&action=deconnexion">Deconnexion</a>
+            <div class="nav-item">
+                <a href="?controller=utilisateurs&action=monCompte" class="nav-item nav-link">Mon compte</a>
+            </div>
+            <div class="nav-item">
+            <a href="?controller=utilisateurs&action=deconnexion" class="nav-item nav-link">Deconnexion</a>
+            </div>
         </div>
     </div>
 </nav>
