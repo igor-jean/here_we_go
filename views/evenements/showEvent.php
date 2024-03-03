@@ -14,6 +14,10 @@
         ?>
     </p>
     <h3>Description:</h3>
+    <audio controls>
+        <source src="data:audio/mpeg;base64,<?= $audio ?>" type="audio/mpeg">
+    </audio>
+
     <p><?php echo $event->description_longue; ?></p>
     <div>
         <span>Adresse</span>

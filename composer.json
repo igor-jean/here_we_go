@@ -11,5 +11,7 @@
             "email": "igorjean79@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "google/cloud-text-to-speech": "^1.8"
+    }
 }

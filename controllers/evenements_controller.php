@@ -20,6 +20,7 @@
       $checkIfOnlyOne = Covoiturage::checkIfOnlyOne($id_utilisateur, $id_event);
       $id_covoit = Covoiturage::findCovoiturageId($id_utilisateur, $id_event);
       $vehicule = Vehicule::utilisateurPossedeVehicule($id_utilisateur);
+      $audio = TextToSpeechModel::generateAudio($event->description_longue);
       require_once('views/evenements/showEvent.php');
     }
     

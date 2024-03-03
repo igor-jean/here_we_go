@@ -1,4 +1,7 @@
 <?php
+    require 'vendor/autoload.php';
+    putenv('GOOGLE_APPLICATION_CREDENTIALS=alien-sol-416112-45a374d2449c.json');
+
     require_once "connexion.php";
 
     if(isset($_GET["controller"]) && isset($_GET["action"])) {

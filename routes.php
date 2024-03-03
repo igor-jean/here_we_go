@@ -24,6 +24,7 @@
           break;
           
           case 'evenements':
+            require_once('models/TextToSpeechModel.php');
             require_once('models/PhotosEvenement.php');
             require_once('models/Vehicule.php');
             require_once('models/Utilisateur.php');
@@ -32,31 +33,35 @@
             require_once('models/Covoiturage.php');
             $controller = new EventsController();
             break;
-          
-          case 'admin':
-            require_once('models/Utilisateur.php');
-            require_once('models/Categorie.php');
-            require_once('models/TypeVehicule.php');
-            require_once('models/Evenement.php');
-            require_once('models/Covoiturage.php');
-            $controller = new AdminController();
-            break;
             
-            case 'vehicules':
-              $controller = new VehiculesControllers();
-              require_once "models/Vehicule.php";
+            case 'admin':
+              require_once('models/Utilisateur.php');
+              require_once('models/Categorie.php');
+              require_once('models/TypeVehicule.php');
+              require_once('models/Evenement.php');
+              require_once('models/Covoiturage.php');
+              $controller = new AdminController();
               break;
               
-              case 'covoiturages':
-                $controller = new CovoituragesControllers();
-                // require_once('models/Utilisateur.php');
+              case 'vehicules':
+                $controller = new VehiculesControllers();
                 require_once "models/Vehicule.php";
-                require_once "models/Covoiturage.php";
                 break;
-
-    }
-
-    $controller->{ $action }();
+                
+                case 'covoiturages':
+                  $controller = new CovoituragesControllers();
+                  // require_once('models/Utilisateur.php');
+                  require_once "models/Vehicule.php";
+                  require_once "models/Covoiturage.php";
+                  break;
+                  
+                  case 'TextToSpeech':
+                    $controller = new TextToSpeechModel();
+                    require_once('models/TextToSpeechModel.php');
+                    break;
+                  }
+                  
+                  $controller->{ $action }();
   }
 
   $controllers = [
@@ -67,6 +72,8 @@
     'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent", "ajoutPhoto", "addPhoto", "updatePhoto", "deletePhoto"],
     
     'vehicules' => ["findVehicule"],
+
+    'TextToSpeech' => ["generateAudio"],
 
     "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
 
