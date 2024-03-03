@@ -14,11 +14,13 @@
         ?>
     </p>
     <h3>Description:</h3>
-    <audio controls>
-        <source src="data:audio/mpeg;base64,<?= $audio ?>" type="audio/mpeg">
-    </audio>
+    <div>
+        <button id="btn-audio">Audio</button>
+        <div id="text-to-audio">
+        </div>
+    </div>
 
-    <p><?php echo $event->description_longue; ?></p>
+    <p id="texte-long"><?php echo $event->description_longue; ?></p>
     <div>
         <span>Adresse</span>
         <span><?php echo $event->adresse; ?></span>

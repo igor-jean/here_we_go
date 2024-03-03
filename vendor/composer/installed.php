@@ -3,7 +3,7 @@
         'name' => 'user/here_we_go',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5f7c4256b100c72c0a6a750f3f3b7ee9bd331560',
+        'reference' => 'a9a19d3be9bd903dc148289fb2ec3e8524d975fe',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -226,7 +226,7 @@
         'user/here_we_go' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5f7c4256b100c72c0a6a750f3f3b7ee9bd331560',
+            'reference' => 'a9a19d3be9bd903dc148289fb2ec3e8524d975fe',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

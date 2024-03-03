@@ -56,7 +56,7 @@
                   break;
                   
                   case 'TextToSpeech':
-                    $controller = new TextToSpeechModel();
+                    $controller = new TextToSpeechController();
                     require_once('models/TextToSpeechModel.php');
                     break;
                   }
