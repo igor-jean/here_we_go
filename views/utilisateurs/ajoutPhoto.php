@@ -1,5 +1,5 @@
 <h2>Ajouter une photo d'événement</h2>
-<img src="photo_evenement/<?php echo $photoActuelle["chemin"] ;?>" alt="">
+<img src="photo_evenement/<?php echo $photoActuelle["chemin"] ;?>" alt="" style="width: 300px">
 
 <form action="<?php if($dejaPresent){echo "?controller=utilisateurs&action=updatePhoto";} else {echo "?controller=utilisateurs&action=addPhoto";}  ; ?>" method="post" enctype="multipart/form-data">
     <label for="chemin">Choisir une photo :</label><br>

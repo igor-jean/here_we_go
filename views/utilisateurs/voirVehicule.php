@@ -1,5 +1,9 @@
 <h1>Modifier mon vehicule</h1>
-
+<?php if(isset($_GET['error'])) {
+    $errorMessage = urldecode($_GET['error']);
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}
+?>
 <form action="?controller=utilisateurs&action=updateVehicule" method="post">
         <input type="hidden" name="id_vehicule_utilisateur" value="<?php echo $vehicule->getId_vehicule_utilisateur(); ?>">
         <div class="mb-3">

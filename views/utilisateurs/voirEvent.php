@@ -1,5 +1,9 @@
 <h1>MODIFIER EVENEMENT</h1>
-
+<?php if(isset($_GET['error'])) {
+    $errorMessage = urldecode($_GET['error']);
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}
+?>
 <a class="btn btn-secondary" href="?controller=utilisateurs&action=ajoutPhoto&id_event=<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter une photo d'Evenement</a>
 <form action="?controller=evenements&action=update" method="post">
     <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent() ;?>">

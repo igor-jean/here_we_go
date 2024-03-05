@@ -1,5 +1,13 @@
 <h1>Liste des événements</h1>
-
+<?php
+if(isset($_GET['errorMessage'])) {
+    $errorMessage = urldecode($_GET['errorMessage']);
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}elseif(isset($_GET['error'])) {
+    $error = urldecode($_GET['error']);
+    echo '<div class="error-message">' . $error . '</div>';
+}
+?>
 <section class="articles mt-5 mb-5">
     <?php foreach ($events as $event) {?>
     <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">

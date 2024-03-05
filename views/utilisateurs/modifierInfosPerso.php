@@ -1,4 +1,9 @@
 <h1>Informations personnelles</h1>
+<?php if(isset($_GET['error'])) {
+    $errorMessage = urldecode($_GET['error']);
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}
+?>
 <form action="?controller=utilisateurs&action=updateInfosPerso" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="mail" class="form-label">Email :</label>

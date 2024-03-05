@@ -1,4 +1,9 @@
 <h1>Ajouter un véhicule</h1>
+<?php if(isset($_GET['error'])) {
+    $errorMessage = urldecode($_GET['error']);
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}
+?>
 <form action="?controller=utilisateurs&action=addVehicule" method="post">
     <div class="mb-3">
         <label for="libelle" class="form-label">Libellé du véhicule :</label>

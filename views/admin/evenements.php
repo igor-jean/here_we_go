@@ -6,6 +6,7 @@
     <thead>
         <tr>
             <th>Titre</th>
+            <th>Date</th>
             <th>Ville</th>
             <th>Actions</th>
         </tr>
@@ -14,6 +15,7 @@
         <?php foreach ($events as $event) { ?>
             <tr>
                 <td><?php echo $event->getTitre(); ?></td>
+                <td><?php echo $event->getDateEvent(); ?></td>
                 <td><?php echo $event->getVille(); ?></td>
                 <td><a href='?controller=admin&action=validateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-success">Valider</a></td>
             </tr>
@@ -26,6 +28,7 @@
         <thead>
             <tr>
                 <th>Titre</th>
+                <th>Date</th>
                 <th>Ville</th>
                 <th>Actions</th>
             </tr>
@@ -34,6 +37,7 @@
             <?php foreach ($eventsForPage as $event) { ?>
                 <tr>
                     <td><?php echo $event->getTitre(); ?></td>
+                    <td><?php echo $event->getDateEvent(); ?></td>
                     <td><?php echo $event->getVille(); ?></td>
                     <td><a href='?controller=admin&action=updateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-primary">Modifier</a></td>
                 </tr>

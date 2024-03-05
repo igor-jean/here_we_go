@@ -24,7 +24,7 @@ class TypeVehicule {
     public static function all() {
         $list = [];
         $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM type_vehicule');
+        $req = $db->query('SELECT * FROM type_vehicule ORDER BY type ASC');
         foreach($req->fetchAll() as $vehicule) {
             $list[] = new TypeVehicule($vehicule['id_vehicule'], $vehicule['type']);
         }

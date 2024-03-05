@@ -77,7 +77,7 @@
 
     "admin" => ["indexAdministration", "utilisateursAdministration", "evenementsAdministration", "categorieVehiculeAdministration", "validateAnEvent","validate", "updateAnEvent", "update", "delete", "confirmerSuppression", "voirCategorie", "updateCategorie", "ajouterCategorie", "addCategorie", "voirTypeVehicule", "ajouterTypeVehicule", "updateTypeVehicule", "addTypeVehicule", "validateUser", "voirUser", "modifierUtilisateur", "supprimerUtilisateur", "deleteUser", "confirmationSupressionUtilisateur"],
 
-    "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage", "confirmationSuppression", "supprimerToutCovoit", "supprimerCovoitPerAdmin"]
+    "covoiturages" => ["showCovoiturage", "inscriptionCovoiturage", "desinscriptionCovoiturage", "addCovoiturage", "createCovoiturage", "confirmationSuppression", "supprimerToutCovoit", "supprimerCovoitPerAdmin", "modifCovoiturage", "updateCovoiturage"]
   ];
 
   if (array_key_exists($controller, $controllers)) {
