@@ -138,6 +138,53 @@
       $this->monCompte();
     }
 
+    public function telechargerSimpleCSV() {
+      $id_event = $_GET["id_event"];
+      $event = Evenement::find($id_event);
+      $datas = [
+          ["titre","date", "heure_event", "ville", "adresse", "code_postal", "description_courte", "description_longue", "nb_places", "prix", "lien_billeterie", "lien_event", "nom_structure", "nb_visiteur", "code_unique_label"],
+          [$event->getTitre(), $event->getDateEvent(), $event->getHeureEvent(), $event->getVille(), $event->getAdresse(), $event->getCodePostal(), $event->getDescriptionCourte(), $event->getDescriptionLongue(), $event->getNbPlaces(), $event->getPrix(), $event->getLienBilleterie(), $event->getLienEvent(), $event->getNomStructure(), $event->getNbVisiteur()]
+      ];
+  
+      Evenement::createCSV($datas);
+    }
+
+    public function telechargerTousCSV() {
+      $id_user = $_SESSION["id_utilisateur"];
+      $events = Evenement::findAllperUser($id_user);
+      $filename = "tousLesEvenement.csv";
+      // Initialiser le tableau de données avec le titre des colonnes
+      $datas = [
+          ["titre","date", "heure_event", "ville", "adresse", "code_postal", "description_courte", "description_longue", "nb_places", "prix", "lien_billeterie", "lien_event", "nom_structure", "nb_visiteur", "code_unique_label"]
+      ];
+  
+      // Parcourir tous les événements récupérés
+      foreach ($events as $event) {
+          // Ajouter une nouvelle ligne pour chaque événement
+          $datas[] = [
+              $event->getTitre(), 
+              $event->getDateEvent(), 
+              $event->getHeureEvent(), 
+              $event->getVille(), 
+              $event->getAdresse(), 
+              $event->getCodePostal(), 
+              $event->getDescriptionCourte(), 
+              $event->getDescriptionLongue(), 
+              $event->getNbPlaces(), 
+              $event->getPrix(), 
+              $event->getLienBilleterie(), 
+              $event->getLienEvent(), 
+              $event->getNomStructure(), 
+              $event->getNbVisiteur()
+              // $event->getCodeUniqueLabel() // S'il est nécessaire d'ajouter cette valeur, assurez-vous de l'obtenir depuis la classe Evenement
+          ];
+      }
+  
+      // Créer le fichier CSV avec toutes les lignes d'événements
+      Evenement::createCSV($datas, $filename);
+  }
+  
+  
     
   }
 ?>
