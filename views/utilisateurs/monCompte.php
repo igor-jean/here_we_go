@@ -50,13 +50,13 @@
 
 
 <h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
-
+<a href="?controller=utilisateurs&action=telechargerTousCSV" >Telecharger le CSV de tous les Evenements créé</a>
 <section class="articles mt-5 mb-5">
     <?php foreach ($eventsUpcoming as $event) { ?>
     <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
         <div class="article-wrapper">
             <figure>
-                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
+                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" alt="" />
             </figure>
             <ul>
                 <div class="article-body">

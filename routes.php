@@ -69,7 +69,7 @@
     
     'evenements' => ['newEvent', 'add', "showEvent", "inscriptionEvent", "desinscriptionEvent", "monCompte", "update", "confirmerSuppression", "delete"],
 
-    'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent", "ajoutPhoto", "addPhoto", "updatePhoto", "deletePhoto"],
+    'utilisateurs' => ['index', 'login', 'userConnexion', "register", "deconnexion", "monCompte", "modifierInfosPerso", "updateInfosPerso", "avatarParDefaut",        "voirVehicule", "updateVehicule", "ajouterVehicule", "addVehicule", "deleteVehicule", "voirEvent", "ajoutPhoto", "addPhoto", "updatePhoto", "deletePhoto", "telechargerSimpleCSV", "telechargerTousCSV"],
     
     'vehicules' => ["findVehicule"],
 

@@ -421,6 +421,31 @@ public static function find($id_event) {
       return $list;
     }
 
+
+    public static function createCSV($datas, $filename = "evenement.csv", $delimiter = ";") {
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+    
+        // Nettoyer le tampon de sortie
+        ob_end_clean();
+    
+        $file = fopen('php://output', 'w');
+    
+    
+        // Écrire les données dans le fichier CSV
+        foreach ($datas as $data) {
+            fputcsv($file, $data, $delimiter);
+        }
+    
+        fclose($file);
+    
+        // Flusher le tampon de sortie
+        ob_flush();
+    
+        // Utiliser exit pour éviter toute sortie inattendue après
+        exit();
+    }
+
     // Valider l'événement
     public static function validateEvent($id_event) {
         $db = Db::getInstance();

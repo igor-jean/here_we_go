@@ -256,19 +256,17 @@
         }
             
         public static function getUsersPerPage($page = 1) {
-        $list = [];
-        $db = Db::getInstance();
-        $offset = ($page - 1) * 50; // Toujours afficher 50 utilisateurs par page
-        $req = $db->prepare('SELECT * FROM utilisateur WHERE inscrit = 1 LIMIT :offset, 50');
-        $req->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $req->execute();
-        foreach($req->fetchAll() as $user) {
-                $list[] = new Utilisateur($user['id_utilisateur'], $user['mail'], $user['mot_de_passe'], $user['nom'], $user['prenom'], $user['avatar'], $user['ville'], $user['telephone'], $user['id_role']);
+                $list = [];
+                $db = Db::getInstance();
+                $offset = ($page - 1) * 50; // Toujours afficher 50 utilisateurs par page
+                $req = $db->prepare('SELECT * FROM utilisateur WHERE inscrit = 1 LIMIT :offset, 50');
+                $req->bindParam(':offset', $offset, PDO::PARAM_INT);
+                $req->execute();
+                foreach($req->fetchAll() as $user) {
+                        $list[] = new Utilisateur($user['id_utilisateur'], $user['mail'], $user['mot_de_passe'], $user['nom'], $user['prenom'], $user['avatar'], $user['ville'], $user['telephone'], $user['id_role']);
+                }
+                return $list;
         }
-        return $list;
-        }
-            
-
 
         public function getId_utilisateur()
         {

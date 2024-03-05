@@ -58,6 +58,8 @@
     <button><a href="?controller=evenements&action=confirmerSuppression&id_event=<?php echo $event->getIdEvent() ;?>">Supprimer</a></button>
 </form>
 
+<a href="?controller=utilisateurs&action=telechargerSimpleCSV&id_event=<?php echo $event->getIdEvent() ;?>" >Telecharger CSV</a>
+
 
 <h2>Covoiturage</h2>
 
