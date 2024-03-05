@@ -1,8 +1,12 @@
 <?php
   class PagesController {
     public function home() {
-      $events = Evenement::all();
-      require_once('views/pages/home.php');
+      try {
+        $events = Evenement::allFuturEvent();
+        require_once('views/pages/home.php');
+      } catch(Exception $e) {
+        echo "Erreur :".$e->getMessage();
+    }
     }
 
     public function error() {
@@ -14,10 +18,15 @@
     }
     
     public function categorie() {
-      $id_categorie = $_GET["id_categorie"];
-      $categorie = Categorie::find($id_categorie);
-      $events = Evenement::findByCategoryId($id_categorie);
-      require_once('views/pages/categorie.php');
+      try {
+        $id_categorie = $_GET["id_categorie"];
+        $categorie = Categorie::find($id_categorie);
+        $events = Evenement::findByCategoryId($id_categorie);
+        require_once('views/pages/categorie.php');
+      } catch(Exception $e) {
+        echo "Erreur :".$e->getMessage();
     }
+
+      }
   }
 ?>

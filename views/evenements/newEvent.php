@@ -1,6 +1,13 @@
 <h1>CREER EVENEMENT</h1>
 
-
+<?php
+// Vérification de la présence d'une erreur dans l'URL
+if(isset($_GET['error'])) {
+    $errorMessage = urldecode($_GET['error']);
+    // Affichage de l'erreur dans votre vue
+    echo '<div class="error-message">' . $errorMessage . '</div>';
+}
+?>
 <form action="?controller=evenements&action=add" method="post">
         <div class="mb-3">
             <label for="titre" class="form-label">Titre de l'événement :</label>

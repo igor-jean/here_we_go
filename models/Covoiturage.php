@@ -34,10 +34,30 @@ class Covoiturage {
         $req->bindParam(":heure_depart", $heure_depart);
         $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur);
         $req->bindParam(":id_event", $id_event);
-        $req->execute();
         
+        if (!$req->execute()) {
+            throw new Exception('L\'ajout du covoiturage a échoué.');
+        }
     }
     
+    public static function update($id_covoiturage, $montant_par_pers, $information_de_contact, $lieu_depart, $descriptif, $nb_place, $heure_depart, $id_vehicule_utilisateur, $id_event) {
+        $db = Db::getInstance();
+        $req = $db->prepare( "UPDATE covoiturage SET montant_par_pers = :montant_par_pers, information_de_contact = :information_de_contact, lieu_depart = :lieu_depart, descriptif = :descriptif, nb_place = :nb_place, heure_depart = :heure_depart,  id_vehicule_utilisateur = :id_vehicule_utilisateur WHERE id_covoiturage = :id_covoiturage");
+        $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
+        $req->bindParam(":montant_par_pers", $montant_par_pers, PDO::PARAM_INT);
+        $req->bindParam(":information_de_contact", $information_de_contact, PDO::PARAM_STR);
+        $req->bindParam(":lieu_depart", $lieu_depart, PDO::PARAM_STR);
+        $req->bindParam(":descriptif", $descriptif, PDO::PARAM_STR);
+        $req->bindParam(":nb_place", $nb_place, PDO::PARAM_INT);
+        $req->bindParam(":heure_depart", $heure_depart, PDO::PARAM_STR);
+        $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur, PDO::PARAM_INT);
+        
+        if (!$req->execute()) {
+            throw new Exception('La mise à jour du covoiturage a échoué.');
+        }
+    }
+    
+
     // Afficher les covoiturage pour un evenement
     public static function getCovoituragesByEventId($id_event) {
         $db = Db::getInstance();
@@ -86,6 +106,9 @@ class Covoiturage {
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_STR);
         $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Il y a une erreure.');
+        }
         foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $resultat) {
             $covoiturage = new Covoiturage(
                 $resultat['id_covoiturage'],
@@ -102,7 +125,7 @@ class Covoiturage {
         }
         return $list;
     }
-    // Afficher les covoiturage auxqueks je suis inscrit 
+    // Afficher les covoiturage auxquels je suis inscrit 
     public static function getCovoituragesInscritUtilisateur($id_utilisateur) {
         $list = [];
         $currentDate = date("Y-m-d");
@@ -111,6 +134,9 @@ class Covoiturage {
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Il y a une erreur.');
+        }
         foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $resultat) {
             $covoiturage = new Covoiturage(
                 $resultat['id_covoiturage'],
@@ -134,15 +160,13 @@ class Covoiturage {
         $req = $db->prepare("SELECT * FROM covoiturage WHERE id_covoiturage = :id_covoiturage");
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->execute();
-    
+
         $row = $req->fetch(PDO::FETCH_ASSOC);
-    
-        // Si aucun résultat trouvé, renvoie null
+
         if (!$row) {
-            return null;
+            throw new Exception('Aucun covoiturage trouvé avec cet identifiant.');
         }
-    
-        // Crée un objet Covoiturage avec les données récupérées
+
         return new Covoiturage(
             $row['id_covoiturage'],
             $row['montant_par_pers'],
@@ -195,6 +219,9 @@ class Covoiturage {
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     }
     // se desinscrire d'un covoit
     public static function unsubscribeCovoiturage($id_covoiturage, $id_utilisateur) {
@@ -203,6 +230,9 @@ class Covoiturage {
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     }
     // verifier si l'utilisateur est inscrit au covoiturage
     public static function verificationInscriptionCovoit($id_utilisateur, $id_covoiturage) {
@@ -211,6 +241,9 @@ class Covoiturage {
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $count = $req->rowCount();
         return $count > 0;
     }
@@ -221,6 +254,9 @@ class Covoiturage {
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $count = $req->rowCount();
         return $count > 0;
     }
@@ -231,12 +267,18 @@ class Covoiturage {
         $stmtDeleteInscriptions = Db::getInstance()->prepare($queryDeleteInscriptions);
         $stmtDeleteInscriptions->bindParam(':id_covoiturage', $id_covoiturage);
         $stmtDeleteInscriptions->execute();
+        if (!$stmtDeleteInscriptions->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     
         // Supprimer le covoiturage lui-même
         $queryDeleteCovoiturage = "DELETE FROM covoiturage WHERE id_covoiturage = :id_covoiturage";
         $stmtDeleteCovoiturage = Db::getInstance()->prepare($queryDeleteCovoiturage);
         $stmtDeleteCovoiturage->bindParam(':id_covoiturage', $id_covoiturage);
         $stmtDeleteCovoiturage->execute();
+        if (!$stmtDeleteCovoiturage->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     }
     //Trouver l'id covoiturage avec l'id utilisateur et l'id event 
     public static function findCovoiturageId($id_utilisateur, $id_event) {
@@ -245,6 +287,7 @@ class Covoiturage {
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->execute();
+        
         $row = $req->fetch(PDO::FETCH_ASSOC);
         if ($row) {
             return $row['id_covoiturage'];
@@ -259,6 +302,9 @@ class Covoiturage {
         $req = $db->prepare('SELECT * FROM covoiturage WHERE id_event = :id_event');
         $req->bindParam(':id_event', $id_event, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     
         foreach($req->fetchAll() as $covoiturage) {
             $list[] = new Covoiturage($covoiturage['id_covoiturage'], $covoiturage['montant_par_pers'], $covoiturage['information_de_contact'], $covoiturage['lieu_depart'], $covoiturage['descriptif'], $covoiturage['nb_place'], $covoiturage['heure_depart'], $covoiturage['id_vehicule_utilisateur'], $covoiturage['id_event']);

@@ -41,7 +41,8 @@
             $db = Db::getInstance();
             $id_article = intval($id_utilisateur);
             $req = $db->prepare('SELECT * FROM Utilisateur WHERE id_utilisateur = :id_utilisateur');
-            $req->execute(array('id_utilisateur' => $id_utilisateur));
+            $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+            $req->execute();
             $user = $req->fetch();
             return new Utilisateur($user['id_utilisateur'], $user['mail'], $user['mot_de_passe'], $user['nom'], $user['prenom'], $user['avatar'], $user['ville'], $user['telephone'], $user['id_role']);
           }
@@ -184,16 +185,23 @@
                 $req->execute();
                 $reponse = $req->fetch(PDO::FETCH_ASSOC);
                 
-                if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
-                    $_SESSION["login"] = "admin";
-                    $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                    
-                } elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
-                    $_SESSION["login"] = "user";
-                    $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
-                } else {
-                    $_SESSION["error"] = "Mail ou mot de passe incorrect.";
-                }
+                try {
+                        if(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 1) {
+                                $_SESSION["login"] = "admin";
+                                $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                                
+                        } elseif(password_verify($pwd, $reponse["mot_de_passe"]) && $reponse["id_role"] == 2) {
+                                $_SESSION["login"] = "user";
+                                $_SESSION["id_utilisateur"] = $reponse["id_utilisateur"];
+                        } else {
+                                throw new Exception("Le login ou le mot de passe est incorrecte.");
+                        }
+
+                } catch(Exception $e) {
+                        $errorMessage = urlencode($e->getMessage());
+                        return $errorMessage;
+                        exit();
+                    }
             }
             
         
@@ -226,7 +234,7 @@
         public static function findUserForValidation() {
                 $db = Db::getInstance();
                 $list = [];
-                $req = $db->prepare("SELECT * FROM utilisateur WHERE inscrit = 0");
+                $req = $db->prepare("SELECT * FROM utilisateur WHERE inscrit = 0 ORDER BY nom ASC");
                 $req->execute();
                 foreach($req->fetchAll() as $users) {
                         $list[] = new Utilisateur($users['id_utilisateur'], $users['mail'], $users['mot_de_passe'], $users['nom'], $users['prenom'], $users['avatar'], $users['ville'], $users['telephone'], $users['id_role']);
@@ -259,7 +267,7 @@
                 $list = [];
                 $db = Db::getInstance();
                 $offset = ($page - 1) * 50; // Toujours afficher 50 utilisateurs par page
-                $req = $db->prepare('SELECT * FROM utilisateur WHERE inscrit = 1 LIMIT :offset, 50');
+                $req = $db->prepare('SELECT * FROM utilisateur WHERE inscrit = 1 ORDER BY nom ASC LIMIT :offset, 50');
                 $req->bindParam(':offset', $offset, PDO::PARAM_INT);
                 $req->execute();
                 foreach($req->fetchAll() as $user) {

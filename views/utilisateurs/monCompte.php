@@ -141,23 +141,41 @@
 
 
 <h2>Covoiturage que je propose :</h2>
-<?php foreach ($covoits as $covoit) { ?>
-    <ul>
-        <li>Evenenement: <?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></li>
-        <li>Date: <?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></li>
-        <li>Heure de depart: <?php echo $covoit->getHeureDepart(); ?></li>
-        <li>lieu de depart : <?php echo $covoit->getLieuDepart(); ?></li>
-        <li><a href="">Voir</a></li>
-    </ul>
+<table>
+    <tr>
+        <th>Evenenement</th>
+        <th>Date</th>
+        <th>Heure de depart</th>
+        <th>Lieu de depart</th>
+        <th>Action</th>
+    </tr>
+    <?php foreach ($covoits as $covoit) { ?>
+    <tr>
+        <td><?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></td>
+        <td><?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></td>
+        <td><?php echo $covoit->getHeureDepart(); ?></td>
+        <td><?php echo $covoit->getLieuDepart(); ?></td>
+        <td><a href="?controller=covoiturages&action=modifCovoiturage&id_covoiturage=<?php echo $covoit->getIdCovoiturage(); ?>">Voir</a></td>
+    </tr>
     <?php } ?>
-
+</table>
 
 <h2>Covoiturage auxquels je suis inscrit :</h2>
-
-<?php foreach ($covoitsInscrit as $covoit) { ?>
-        <li>Evenenement: <?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></li>
-        <li>Date: <?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></li>
-        <li>Heure de depart: <?php echo $covoit->getHeureDepart(); ?></li>
-        <li>lieu de depart : <?php echo $covoit->getLieuDepart(); ?></li>
-        <li><a href="">Voir</a></li>
+<table>
+    <tr>
+        <th>Evenenement</th>
+        <th>Date</th>
+        <th>Heure de depart</th>
+        <th>Lieu de depart</th>
+        <th>Action</th>
+    </tr>
+    <?php foreach ($covoitsInscrit as $covoit) { ?>
+    <tr>
+        <td><?php echo Evenement::find($covoit->getIdEvent())->getTitre(); ?></td>
+        <td><?php echo Evenement::find($covoit->getIdEvent())->getDateEvent(); ?></td>
+        <td><?php echo $covoit->getHeureDepart(); ?></td>
+        <td><?php echo $covoit->getLieuDepart(); ?></td>
+        <td><a href="?controller=covoiturages&action=showCovoiturage&id_covoiturage=<?php echo $covoit->getIdCovoiturage(); ?>">Voir</a></td>
+    </tr>
     <?php } ?>
+</table>

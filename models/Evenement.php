@@ -43,46 +43,72 @@
     }
     // AFFICHER TOUS LES EVENEMENTS
     public static function all() {
-      $list = [];
-      $db = Db::getInstance();
-      $req = $db->query('SELECT * FROM evenement WHERE inscrit = 1');
+        try {
+            $list = [];
+            $db = Db::getInstance();
+            $req = $db->query('SELECT * FROM evenement WHERE inscrit = 1 ORDER BY date_event ASC');
 
-      foreach($req->fetchAll() as $events) {
-        $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label'], $events['id_utilisateur'], $events['id_categorie']);
-      }
+            foreach($req->fetchAll() as $events) {
+                $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label'], $events['id_utilisateur'], $events['id_categorie']);
+            }
 
-      return $list;
+            return $list;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération de tous les événements : " . $e->getMessage());
+        }
     }
+    // AFFICHER LES EVENEMENT QUI NE SONT PAS ENCORE PASSE
+    public static function allFuturEvent() {
+        try {
+            $list = [];
+            $db = Db::getInstance();
+            $currentDate = date('Y-m-d');
+            $req = $db->query("SELECT * FROM evenement WHERE inscrit = 1 AND date_event >= '$currentDate' ORDER BY date_event ASC");
+    
+            foreach($req->fetchAll() as $events) {
+                $list[] = new Evenement($events['id_event'], $events['titre'], $events['date_event'], $events['heure_event'], $events['ville'], $events['adresse'], $events['code_postal'], $events['description_courte'], $events['description_longue'], $events['nb_places'], $events['prix'], $events['lien_billeterie'], $events['lien_event'], $events['nom_structure'], $events['nb_visiteur'], $events['code_unique_label'], $events['id_utilisateur'], $events['id_categorie']);
+            }
+    
+            return $list;
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des événements à venir : " . $e->getMessage());
+        }
+    }
+    
 // AFFICHER LES EVENEMENTS ET FAIRE UNE PAGINATION 5/10/15
     public static function allForPagination($page = 1, $perPage = 5) {
-        $list = [];
-        $db = Db::getInstance();
+        try {
+            $list = [];
+            $db = Db::getInstance();
 
-        // Calculer le décalage pour la pagination
-        $offset = ($page - 1) * $perPage;
+            // Calculer le décalage pour la pagination
+            $offset = ($page - 1) * $perPage;
 
-        // Sélectionner le nombre total d'événements
-        $countQuery = $db->query('SELECT COUNT(*) AS total FROM evenement');
-        $totalEvents = $countQuery->fetchColumn();
+            // Sélectionner le nombre total d'événements
+            $countQuery = $db->query('SELECT COUNT(*) AS total FROM evenement');
+            $totalEvents = $countQuery->fetchColumn();
 
-        // Calculer le nombre total de pages
-        $totalPages = ceil($totalEvents / $perPage);
+            // Calculer le nombre total de pages
+            $totalPages = ceil($totalEvents / $perPage);
 
-        // Sélectionner les événements pour la page donnée
-        $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 LIMIT :perPage OFFSET :offset');
-        $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
-        $req->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $req->execute();
+            // Sélectionner les événements pour la page donnée
+            $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 ORDER BY date_event ASC LIMIT :perPage OFFSET :offset ');
+            $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+            $req->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $req->execute();
 
-        foreach($req->fetchAll() as $event) {
-            $list[] = new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
+            foreach($req->fetchAll() as $event) {
+                $list[] = new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
+            }
+
+            return [
+                'events' => $list,
+                'totalPages' => $totalPages,
+                'currentPage' => $page
+            ];
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des événements pour la pagination : " . $e->getMessage());
         }
-
-        return [
-            'events' => $list,
-            'totalPages' => $totalPages,
-            'currentPage' => $page
-        ];
     }
 
 
@@ -95,6 +121,9 @@ public static function find($id_event) {
     $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
     $req->execute();
     $event = $req->fetch();
+    if (!$event) {
+        throw new Exception('Une erreure s\'est produite.');
+    }
     return new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
   }
 // trouver les evenement créé par l'utilisateur 
@@ -105,6 +134,9 @@ public static function find($id_event) {
       $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
       $req->execute();
       $events = $req->fetchAll();
+      if (!$events) {
+        throw new Exception('Une erreure s\'est produite.');
+    }
       foreach ($events as $event) {
           $list[] = new Evenement(
               $event['id_event'],
@@ -134,10 +166,13 @@ public static function find($id_event) {
         $db = Db::getInstance();
         $list = [];
         // Sélectionner les événements de l'utilisateur qui se sont déjà déroulés, triés par date dans l'ordre décroissant
-        $req = $db->prepare('SELECT * FROM evenement WHERE id_utilisateur = :id_utilisateur AND date_event < CURDATE() ORDER BY date_event DESC');
+        $req = $db->prepare('SELECT * FROM evenement WHERE id_utilisateur = :id_utilisateur AND date_event < CURDATE() ORDER BY date_event ASC');
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
+        if (!$events) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],
@@ -172,6 +207,9 @@ public static function find($id_event) {
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
+        if (!$events) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],
@@ -214,6 +252,9 @@ public static function find($id_event) {
     $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
     $req->execute();
     $events = $req->fetchAll();
+    if (!$events) {
+        throw new Exception('Une erreure s\'est produite.');
+    }
 
     foreach ($events as $event) {
         $list[] = new Evenement(
@@ -244,38 +285,40 @@ public static function find($id_event) {
 
 // créer un evenement 
     public static function addEvents($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_utilisateur, $id_categorie) {
-
-      
         $db = Db::getInstance();
         $dateNow = date("Y-m-d");
         $inscrit = 0;
         $departement = substr($code_postal, 0, 2);
         $code_unique_label = self::checkAndGenerateUniqueLabel($departement);
 
-
-      $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
-      $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
-      $req->bindParam(":titre", $titre, PDO::PARAM_STR);
-      $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);
-      $req->bindParam(":heure_event", $heure_event, PDO::PARAM_STR);
-      $req->bindParam(":ville", $ville, PDO::PARAM_STR);
-      $req->bindParam(":adresse", $adresse, PDO::PARAM_STR);
-      $req->bindParam(":code_postal", $code_postal, PDO::PARAM_INT);
-      $req->bindParam(":description_courte", $description_courte, PDO::PARAM_STR);
-      $req->bindParam(":description_longue", $description_longue, PDO::PARAM_STR);
-      $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
-      $req->bindParam(":prix", $prix, PDO::PARAM_STR);
-      $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
-      $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
-      $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
-      $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
-      $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
-      $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
-      $req->bindParam(":date_ajout", $dateNow, PDO::PARAM_STR);
-      $req->bindParam(":inscrit", $inscrit, PDO::PARAM_INT);
-      $req->execute();
+        $req = $db->prepare("INSERT INTO evenement (id_event, titre, date_event, heure_event, ville, adresse, code_postal, description_courte, description_longue, nb_places, prix, lien_billeterie, lien_event, nom_structure, code_unique_label, id_utilisateur, id_categorie, date_ajout, inscrit) VALUES (:id_event, :titre, :date_event, :heure_event, :ville, :adresse, :code_postal, :description_courte, :description_longue, :nb_places, :prix, :lien_billeterie, :lien_event, :nom_structure, :code_unique_label, :id_utilisateur, :id_categorie, :date_ajout, :inscrit)");
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->bindParam(":titre", $titre, PDO::PARAM_STR);
+        $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);
+        $req->bindParam(":heure_event", $heure_event, PDO::PARAM_STR);
+        $req->bindParam(":ville", $ville, PDO::PARAM_STR);
+        $req->bindParam(":adresse", $adresse, PDO::PARAM_STR);
+        $req->bindParam(":code_postal", $code_postal, PDO::PARAM_INT);
+        $req->bindParam(":description_courte", $description_courte, PDO::PARAM_STR);
+        $req->bindParam(":description_longue", $description_longue, PDO::PARAM_STR);
+        $req->bindParam(":nb_places", $nb_places, PDO::PARAM_INT);
+        $req->bindParam(":prix", $prix, PDO::PARAM_STR);
+        $req->bindParam(":lien_billeterie", $lien_billeterie, PDO::PARAM_STR);
+        $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
+        $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
+        $req->bindParam(":code_unique_label", $code_unique_label, PDO::PARAM_STR);
+        $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
+        $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
+        $req->bindParam(":date_ajout", $dateNow, PDO::PARAM_STR);
+        $req->bindParam(":inscrit", $inscrit, PDO::PARAM_INT);
+        
+        // Exécuter la requête et vérifier si elle s'est bien déroulée
+        if (!$req->execute()) {
+            throw new Exception('Une erreur s\'est produite lors de l\'ajout de l\'événement.');
+        }
+    }
       
-    } 
+    
     public static function generateRandomId() {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
@@ -334,6 +377,9 @@ public static function find($id_event) {
         $req = $db->prepare('SELECT COUNT(*) FROM evenement WHERE code_unique_label = :codeUnique');
         $req->bindParam(':codeUnique', $codeUnique);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $count = $req->fetchColumn();
         
         // Retourne vrai si le code unique existe déjà, sinon faux
@@ -361,6 +407,9 @@ public static function find($id_event) {
         $req->bindParam(":lien_event", $lien_event, PDO::PARAM_STR);
         $req->bindParam(":nom_structure", $nom_structure, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     }
     // Supprimer un evenement 
     public static function deleteEvent($id_event) {
@@ -370,11 +419,21 @@ public static function find($id_event) {
         $req1 = $db->prepare("DELETE FROM inscription_utilisateur_event WHERE id_event = :id_event");
         $req1->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req1->execute();
-    
-        // Ensuite, supprimer l'événement de la table evenement
-        $req2 = $db->prepare("DELETE FROM evenement WHERE id_event = :id_event");
+
+        // Supprimer les photos 
+        $req2 = $db->prepare("DELETE FROM photos_evenement WHERE id_event = :id_event");
         $req2->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req2->execute();
+
+        // Exécuter la première requête de suppression
+        if (!$req1->execute()) {
+            throw new Exception('Une erreur s\'est produite lors de la suppression des inscriptions à l\'événement.');
+        }
+        
+        // Ensuite, supprimer l'événement de la table evenement
+        $req3 = $db->prepare("DELETE FROM evenement WHERE id_event = :id_event");
+        $req3->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req3->execute();
     }
     
     
@@ -386,6 +445,9 @@ public static function find($id_event) {
         $db = Db::getInstance();
         $req = $db->prepare("SELECT COUNT(*) AS demandes FROM evenement WHERE inscrit = 0 ");
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $pendingEvents = $req->fetchColumn();
         return $pendingEvents;
     }
@@ -393,8 +455,11 @@ public static function find($id_event) {
     public static function displayListValidate() {
         $db = Db::getInstance();
         $list = [];
-        $req = $db->prepare("SELECT * FROM evenement WHERE inscrit = 0");
+        $req = $db->prepare("SELECT * FROM evenement WHERE inscrit = 0 ORDER BY date_event ASC");
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $events = $req->fetchAll();
         foreach ($events as $event) {
           $list[] = new Evenement(
@@ -452,6 +517,9 @@ public static function find($id_event) {
         $req = $db->prepare("UPDATE evenement SET inscrit = 1 WHERE id_event = :id_event");
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
     }
 
     public static function findByCategoryId($id_categorie) {
@@ -459,6 +527,9 @@ public static function find($id_event) {
         $req = $db->prepare('SELECT * FROM evenement WHERE id_categorie = :id_categorie');
         $req->bindParam(":id_categorie", $id_categorie, PDO::PARAM_INT);
         $req->execute();
+        if (!$req->execute()) {
+            throw new Exception('Une erreure s\'est produite.');
+        }
         $events = $req->fetchAll(); 
     
         $list = [];

@@ -38,7 +38,7 @@
     public static function findVehicule($id_utilisateur) {
         $db = Db::getInstance();
         $list = [];
-        $req = $db->prepare('SELECT * FROM vehicule_utilisateur WHERE id_utilisateur = :id_utilisateur');
+        $req = $db->prepare('SELECT * FROM vehicule_utilisateur WHERE id_utilisateur = :id_utilisateur ORDER BY libelle_vehicule ASC');
         $req->execute(array('id_utilisateur' => $id_utilisateur));
         foreach ($req->fetchAll() as $vehicule) {
             $list[] = new Vehicule($vehicule['id_vehicule_utilisateur'], $vehicule['libelle_vehicule'], $vehicule['imatriculation'], $vehicule['nb_places'], $vehicule['id_vehicule'], $vehicule['id_utilisateur']);
@@ -48,14 +48,14 @@
 
       public static function find($id_vehicule_utilisateur) {
         $db = Db::getInstance();
-        $req = $db->prepare('SELECT * FROM vehicule_utilisateur WHERE id_vehicule_utilisateur = :id_vehicule_utilisateur');
+        $req = $db->prepare('SELECT * FROM vehicule_utilisateur WHERE id_vehicule_utilisateur = :id_vehicule_utilisateur ');
         $req->bindParam(":id_vehicule_utilisateur", $id_vehicule_utilisateur, PDO::PARAM_INT);
         $req->execute();
-        $vehicule = $req->fetch(PDO::FETCH_ASSOC); // Utilisez PDO::FETCH_ASSOC pour obtenir un tableau associatif
+        $vehicule = $req->fetch(PDO::FETCH_ASSOC);
         if($vehicule) {
             return new Vehicule($vehicule['id_vehicule_utilisateur'], $vehicule['libelle_vehicule'], $vehicule['imatriculation'], $vehicule['nb_places'], $vehicule['id_vehicule'], $vehicule['id_utilisateur']);
         } else {
-            return null; // Retourne null si aucun véhicule n'est trouvé avec l'ID donné
+            return null;
         }
         }
     
