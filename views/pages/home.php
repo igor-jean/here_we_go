@@ -1,4 +1,3 @@
-<h1>Liste des événements</h1>
 <?php
 if(isset($_GET['errorMessage'])) {
     $errorMessage = urldecode($_GET['errorMessage']);

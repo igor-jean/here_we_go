@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Covoiturage</h1>
 
 <p>Trajet proposé par <?php echo $conducteur;?></p>
@@ -18,3 +19,5 @@
 }else {
     echo '<a href="?controller=covoiturages&action=inscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Reserver</a>';
 }
+?>
+</div>

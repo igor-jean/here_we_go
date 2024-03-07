@@ -13,10 +13,6 @@ li {
   list-style: none;
 }
 
-main {
-  padding: 100px 0;
-}
-
 @media (min-width: 1200px) {
   .form-inline .input-group {
     width: 300px;
