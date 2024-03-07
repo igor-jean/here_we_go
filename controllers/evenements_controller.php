@@ -33,11 +33,9 @@
         $id_covoit = Covoiturage::findCovoiturageId($id_utilisateur, $id_event);
         $vehicule = Vehicule::utilisateurPossedeVehicule($id_utilisateur);
         require_once('views/evenements/showEvent.php');
-        exit();
       } catch(Exception $e) {
         $errorMessage = urlencode($e->getMessage());
         header("Location: ?controller=pages&action=home&error=$errorMessage");
-        exit();
     }
     }
     

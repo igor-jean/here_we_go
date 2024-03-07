@@ -73,7 +73,7 @@
                         <td>" . $covoit->getLieuDepart() . "</td>
                         <td>" . $covoit->getHeureDepart() . "</td>
                         <td>" . $covoit->prenom_conducteur . "</td>
-                        <td><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "' class='btn btn-primary'>Voir plus</a></td>
+                        <td><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir plus</a></td>
                     </tr>
                 ";
                 }

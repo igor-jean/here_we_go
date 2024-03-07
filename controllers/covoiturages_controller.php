@@ -5,10 +5,12 @@
             try {
                 $id_utilisateur = $_SESSION["id_utilisateur"];
                 $id_covoiturage = $_GET["id_covoiturage"];
+                $id_event = $_GET["id_event"];
                 $inscrit = Covoiturage::verificationInscriptionCovoit($id_utilisateur, $id_covoiturage);
                 $conducteur = Covoiturage::getNomConducteur($id_covoiturage);
                 $covoit = Covoiturage::find($id_covoiturage);
                 $vehicule = Covoiturage::getVoituresByCovoiturageId($id_covoiturage);
+                $verif = Covoiturage::checkIfOnlyOne($id_utilisateur, $id_event);
                 require_once('views/covoiturages/showCovoiturage.php');
             } catch(Exception $e) {
                 echo "Erreur :".$e->getMessage();
