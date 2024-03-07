@@ -29,9 +29,7 @@ else {
 }
 ?>
 <main>
-  <div class="container">
     <?php require_once('routes.php'); ?>
-  </div>
 </main>
 <?php require_once "requires/footer.php"; ?>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
