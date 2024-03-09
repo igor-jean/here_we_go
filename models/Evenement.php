@@ -170,9 +170,6 @@ public static function find($id_event) {
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
-        if (!$events) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],
@@ -207,9 +204,6 @@ public static function find($id_event) {
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
-        if (!$events) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],

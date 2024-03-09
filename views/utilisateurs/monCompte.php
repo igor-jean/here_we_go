@@ -1,7 +1,7 @@
 <div class="container">
     <h2>infos persos</h2>
     <ul>
-        <li><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100px;"></li>
+        <li><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100px;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>"></li>
         <li>Mail : <?php echo $user->getMail();?></li>
         <li>Ville : <?php echo $user->getVille();?></li>
         <li>Nom : <?php echo $user->getNom();?></li>
