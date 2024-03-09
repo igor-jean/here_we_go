@@ -639,6 +639,7 @@ ul {
 .datepicker {
   display: none;
   width: 300px;
+  margin-left: 30px;
 }
 .datepicker #search {
   width: 100%;
@@ -646,6 +647,7 @@ ul {
 
 #boutton-datepicker {
   cursor: pointer;
+  width: 102px;
 }
 
 .none {
@@ -654,4 +656,10 @@ ul {
 
 .visible {
   display: block;
+}
+
+#boutton-rechercher {
+  background: transparent;
+  border: none;
+  margin-right: 30px;
 }/*# sourceMappingURL=styles.css.map */

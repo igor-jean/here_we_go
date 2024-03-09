@@ -17,15 +17,15 @@
                 </div>
             </div>
         </div>
-        <form class="navbar-form form-inline">
-            <div class="input-group search-box">								
-                <input type="text" id="search" class="form-control" placeholder="Recherche ..">
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="material-icons">&#xE8B6;</i>
-                    </span>
-                </div>
+        <div id="boutton-datepicker" class="nav-item"><span class="nav-item nav-link boutton-datepicker-textcontent">Par Date</span></div>
+        <form action="?controller=evenements&action=resultsSearch" method="post" class="navbar-form form-inline d-flex ">
+            <div class="datepicker">
+                <input type="date" name="date" id="search" class="form-control">
+            </div> 
+            <div id="searchBox" class="input-group search-box">								
+                <input type="text" id="search" class="form-control" name="search" placeholder="Recherche ..">
             </div>
+            <button type="submit" id="boutton-rechercher"><i class="fa fa-search">&#xE8B6;</i></button>
         </form>
         <div class="navbar-nav ml-auto action-buttons">
             <div class="nav-item dropdown">
@@ -79,3 +79,4 @@
         </div>
     </div>
 </nav>
+<script src="js/datepicker.js"></script>

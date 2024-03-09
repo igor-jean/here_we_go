@@ -159,7 +159,11 @@
     }
     
     public function resultsSearch() {
-      $keyword = $_POST['search'];
+      if(isset($_POST["date"])) {
+        $keyword = $_POST["date"];
+      }elseif(isset($_POST["search"])) {
+        $keyword = $_POST['search'];
+      }
       $events = Evenement::searchEventKeyword($keyword);
       require_once('views/evenements/resultsSearch.php');
     }

@@ -555,7 +555,7 @@ public static function find($id_event) {
     //Rechercher un evenement par un mot clé
     public static function searchEventKeyword($keyword){ 
         $db = Db::getInstance(); 
-        $req = $db->prepare('SELECT * FROM evenement WHERE titre like :keyword OR description_courte like :keyword OR description_longue like :keyword OR nom_structure like :keyword'); 
+        $req = $db->prepare('SELECT * FROM evenement WHERE titre like :keyword OR description_courte like :keyword OR description_longue like :keyword OR nom_structure like :keyword OR date_event like :keyword'); 
         $req->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll(); 
