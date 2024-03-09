@@ -1,3 +1,4 @@
+// Utilisation de l'API Text-To-Speech
 const btnAudio = document.getElementById("btn-audio");
 const htmlAudio = document.getElementById("text-to-audio");
 const texteLong = document.getElementById("texte-long").textContent;
@@ -37,3 +38,4 @@ btnAudio.addEventListener("click", () => {
             console.error('Erreur lors de la requête:', error);
         });
 });
+

@@ -552,7 +552,39 @@ public static function find($id_event) {
     
         return $list;
     }
-
+    //Rechercher un evenement par un mot clé
+    public static function searchEventKeyword($keyword){ 
+        $db = Db::getInstance(); 
+        $req = $db->prepare('SELECT * FROM evenement WHERE titre like :keyword OR description_courte like :keyword OR description_longue like :keyword OR nom_structure like :keyword'); 
+        $req->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $req->execute();
+        $events = $req->fetchAll(); 
+        $list = [];
+        foreach ($events as $event) {
+            $list[] = new Evenement(
+                $event['id_event'],
+                $event['titre'],
+                $event['date_event'],
+                $event['heure_event'],
+                $event['ville'],
+                $event['adresse'],
+                $event['code_postal'],
+                $event['description_courte'],
+                $event['description_longue'],
+                $event['nb_places'],
+                $event['prix'],
+                $event['lien_billeterie'],
+                $event['lien_event'],
+                $event['nom_structure'],
+                $event['nb_visiteur'],
+                $event['code_unique_label'],
+                $event['id_utilisateur'],
+                $event['id_categorie']
+            );
+        }
+        return $list;
+    }
+    
     // Getters
     public function getIdEvent() {
           return $this->id_event;

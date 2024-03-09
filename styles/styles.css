@@ -634,4 +634,24 @@ ul {
   color: red;
   background: rgba(250, 198, 198, 0.74);
   border: 2px solid red;
+}
+
+.datepicker {
+  display: none;
+  width: 300px;
+}
+.datepicker #search {
+  width: 100%;
+}
+
+#boutton-datepicker {
+  cursor: pointer;
+}
+
+.none {
+  display: none;
+}
+
+.visible {
+  display: block;
 }/*# sourceMappingURL=styles.css.map */

@@ -154,9 +154,15 @@
         $id_event = $_GET["id_event"];
         require_once('views/evenements/confirmerSuppression.php');
       }  catch(Exception $e) {
-                echo "Erreur :".$e->getMessage();
-            }
+        echo "Erreur :".$e->getMessage();
       }
+    }
+    
+    public function resultsSearch() {
+      $keyword = $_POST['search'];
+      $events = Evenement::searchEventKeyword($keyword);
+      require_once('views/evenements/resultsSearch.php');
+    }
       
    
 

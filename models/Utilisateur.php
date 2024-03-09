@@ -284,6 +284,7 @@
                 $count = $req->fetchColumn();
                 return $count >= 10;
         }
+        
         public function getId_utilisateur()
         {
                 return $this->id_utilisateur;
