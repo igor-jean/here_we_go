@@ -625,6 +625,16 @@ ul {
   left: 90%;
 }
 
+.toggleAvatar::after {
+  content: none;
+}
+
+.dropdownAvatar {
+  position: absolute;
+  right: 70px !important;
+  top: 5px;
+}
+
 #text-to-audio {
   display: none;
 }

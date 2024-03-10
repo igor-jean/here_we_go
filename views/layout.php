@@ -1,6 +1,13 @@
 <?php
 session_start();
 ob_start();
+require_once('models/Utilisateur.php');
+$id_user = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
+if($id_user != "") {
+  $user = Utilisateur::find($id_user);
+  $premium = Utilisateur::premiumAccount($id_user);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

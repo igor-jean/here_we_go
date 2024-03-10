@@ -29,11 +29,12 @@
             <div class="nav-item">
                 <a href="/here_we_go/creation_evenement" class="nav-item nav-link">Ajouter un evenement</a>
             </div>
-            <div class="nav-item">
-                <a href="/here_we_go/monCompte" class="nav-item nav-link">Mon compte</a>
-            </div>
-            <div class="nav-item">
-            <a href="/here_we_go/deconnexion" class="nav-item nav-link">Deconnexion</a>
+            <div class="dropdown dropdownAvatar">
+                <a href="#" data-toggle="dropdown" class="nav-item dropdown-toggle toggleAvatar"><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width : 60px; height : 60px; object-fit : cover; border-radius : 100%;<?php if($premium) echo "border: 5px solid gold;"?>"></a>
+                <div class="dropdown-menu">
+                    <a href="/here_we_go/monCompte" class="dropdown-item">Mon compte</a>
+                    <a href="/here_we_go/deconnexion" class="dropdown-item">Deconnexion</a>
+                </div>
             </div>
         </div>
     </div>
