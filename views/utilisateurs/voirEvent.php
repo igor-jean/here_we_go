@@ -63,6 +63,12 @@
         <button><a href="?controller=evenements&action=confirmerSuppression&id_event=<?php echo $event->getIdEvent() ;?>">Supprimer</a></button>
     </form>
     <a href="?controller=utilisateurs&action=telechargerSimpleCSV&id_event=<?php echo $event->getIdEvent() ;?>" >Telecharger CSV</a>
+    <h2>Partager l'événement :</h2>
+    <iframe src="http://localhost/here_we_go/views/iframe.php?id_event=<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
+    <p>Copiez l'iframe suivant et integrez le sur une page Html</p>
+    <textarea class="iframeText" cols="150" rows="1" readonly>
+        <iframe src="http://localhost/here_we_go/views/iframe.php?id_event=<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
+    </textarea>
     <h2>Covoiturage</h2>
     <table>
         <thead>

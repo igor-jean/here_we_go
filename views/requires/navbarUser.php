@@ -16,14 +16,14 @@
                     } ?>
                 </div>
             </div>
-            <div id="boutton-datepicker" class="nav-item"><span class="nav-item nav-link boutton-datepicker-textcontent">Par Date</span></div>
             <form action="?controller=evenements&action=resultsSearch" method="post" class="navbar-form form-inline d-flex ">
                 <div class="datepicker">
-                    <input type="date" name="date" id="search" class="form-control">
+                    <input type="date" name="date" id="search" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
                 </div> 
                 <div id="searchBox" class="input-group search-box">								
-                    <input type="text" id="search" class="form-control" name="search" placeholder="Recherche ..">
+                    <input type="text" id="search" class="form-control" name="search" placeholder="Recherche .." style="border-radius: 4px 0px 0px 4px !important;">
                 </div>
+                <div id="boutton-datepicker" class="nav-item"><span class="nav-item nav-link boutton-datepicker-textcontent">Par Date</span></div>
                 <button type="submit" id="boutton-rechercher"><i class="fa fa-search">&#xE8B6;</i></button>
             </form>
             <div class="nav-item">

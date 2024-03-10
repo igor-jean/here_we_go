@@ -40,4 +40,7 @@ if(isset($_GET['errorMessage'])) {
         </article>
         <?php } ?>
     </section>
+    <section>
+    <iframe width="1000" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=0.17663955688476565%2C46.534067099437756%2C0.46331405639648443%2C46.6350579278567&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=13/46.5846/0.3200">Afficher une carte plus grande</a></small>
+    </section>
 </div>

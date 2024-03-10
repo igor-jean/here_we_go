@@ -121,9 +121,6 @@ public static function find($id_event) {
     $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
     $req->execute();
     $event = $req->fetch();
-    if (!$event) {
-        throw new Exception('Une erreure s\'est produite.');
-    }
     return new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
   }
 // trouver les evenement créé par l'utilisateur 
