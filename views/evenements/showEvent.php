@@ -56,8 +56,71 @@
         }
         ?>
     </p>
+  <!-- Ajout maps  -->
+<!-- Div pour afficher la carte -->
+<div id="map"></div>
+
+<?php
+$evenement = Evenement::find($id_event);
+$ville_event = $evenement->ville; 
+
+if ($result) {
+    // Convertir le résultat en format JSON et le stocker dans une variable JavaScript
+    echo "<script>var eventAddress = " . json_encode($ville_event) . ";</script>"; // Utilisez 'Ville' au lieu de 'address'
+} else {
+    // Gérer les erreurs
+    echo "<script>console.error('Erreur lors de la récupération des données depuis la base de données.');</script>";
+}
+
+?>
+
+<!-- Script JavaScript pour initialiser la carte et récupérer les coordonnées -->
+<script type="text/javascript">
+    var macarte = null;
+
+    // Fonction d'initialisation de la carte avec des coordonnées dynamiques
+    function initMap(latitude, longitude) {
+        macarte = L.map('map').setView([latitude, longitude], 11);
+        
+        // Ajoute une couche de tuiles OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+            // Il est toujours bien de laisser le lien vers la source des données
+            attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+            minZoom: 1,
+            maxZoom: 20
+        }).addTo(macarte);
+
+        // Ajoute un marqueur à la position des coordonnées récupérées
+        var marker = L.marker([latitude, longitude]).addTo(macarte);
+    }
+
+    // Appelle la fonction d'initialisation lorsque le DOM est chargé
+    window.onload = function(){
+        // Utilise l'adresse de l'événement récupérée depuis PHP pour interroger l'API d'ADDOK et récupérer les coordonnées géographiques
+        fetch('http://api-adresse.data.gouv.fr/search/', {
+            method: 'GET',
+            params: {
+                q: eventAddress
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Récupère les coordonnées géographiques (latitude et longitude) depuis les données de l'API d'ADDOK
+            var latitude = data.lat;
+            var longitude = data.lon;
+
+            // Initialise la carte avec les nouvelles coordonnées
+            initMap(latitude, longitude);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des coordonnées géographiques:', error);
+        });
+    };
+    
+    <!-- fin maps -->
 
     <?php if (isset($_SESSION["login"])) { ?>
+        
         <h3>Covoiturage</h3>
 
         <table class="table">
@@ -96,6 +159,7 @@
             ?>
             </tbody>
         </table>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <?php } ?>
     <a href="?controller=pages&action=home" class="btn btn-primary">Retour</a>
         </div>
