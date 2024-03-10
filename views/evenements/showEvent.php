@@ -120,7 +120,6 @@ if ($result) {
     <!-- fin maps -->
 
     <?php if (isset($_SESSION["login"])) { ?>
-        
         <h3>Covoiturage</h3>
 
         <table class="table">
@@ -159,7 +158,6 @@ if ($result) {
             ?>
             </tbody>
         </table>
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-    <?php } ?>
+        <?php } ?>
     <a href="?controller=pages&action=home" class="btn btn-primary">Retour</a>
         </div>
