@@ -1,6 +1,6 @@
 <h1>Resultats pour <?php echo $keyword ?></h1>
 <section class="articles mt-5 mb-5">
-    <?php foreach ($events as $event) {?>
+    <?php  foreach ($events as $event) {?>
     <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
         <div class="article-wrapper">
             <figure>

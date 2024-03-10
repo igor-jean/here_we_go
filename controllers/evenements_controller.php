@@ -159,7 +159,7 @@
     }
     
     public function resultsSearch() {
-      if(isset($_POST["date"])) {
+      if(isset($_POST["date"]) && $_POST["date"]) {
         $keyword = $_POST["date"];
       }elseif(isset($_POST["search"])) {
         $keyword = $_POST['search'];

@@ -5,7 +5,7 @@
         echo '<div class="error-message">' . $errorMessage . '</div>';
     }
     ?>
-    <a class="btn btn-secondary" href="?controller=utilisateurs&action=ajoutPhoto&id_event=<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter une photo d'Evenement</a>
+    <a class="btn btn-secondary" href="evenement/ajout_photo/<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter une photo d'Evenement</a>
     <form action="?controller=evenements&action=update" method="post">
         <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent() ;?>">
         <label for="titre">Titre de l'événement:</label>
@@ -64,10 +64,10 @@
     </form>
     <a href="?controller=utilisateurs&action=telechargerSimpleCSV&id_event=<?php echo $event->getIdEvent() ;?>" >Telecharger CSV</a>
     <h2>Partager l'événement :</h2>
-    <iframe src="http://localhost/here_we_go/views/iframe.php?id_event=<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
+    <iframe src="/here_we_go/iframe/<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
     <p>Copiez l'iframe suivant et integrez le sur une page Html</p>
     <textarea class="iframeText" cols="150" rows="1" readonly>
-        <iframe src="http://localhost/here_we_go/views/iframe.php?id_event=<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
+        <iframe src="/here_we_go/iframe/<?php echo $event->getIdEvent() ;?>" title="<?php echo $event->getTitre();?>" width="600" height="300"></iframe>
     </textarea>
     <h2>Covoiturage</h2>
     <table>
@@ -93,5 +93,5 @@
         </tbody>
     </table>
     
-    <a href="?controller=utilisateurs&action=monCompte">Retour</a>
+    <a href="/here_we_go/monCompte">Retour</a>
 </div>

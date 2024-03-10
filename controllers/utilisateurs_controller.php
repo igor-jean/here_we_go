@@ -57,7 +57,7 @@
       session_start();
       session_unset();
       session_destroy();
-      header("Location: ?controller=pages&action=home");
+      header("Location: /here_we_go/accueil");
     }
 
     public function monCompte() {

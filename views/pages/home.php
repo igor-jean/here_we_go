@@ -28,7 +28,7 @@ if(isset($_GET['errorMessage'])) {
                         <li><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></li>
                         <li>Prix : <?php echo $event->prix; ?> €</li>
                         <li><?php echo $event->description_courte; ?></li>
-                        <a href="?controller=evenements&action=showEvent&id_event=<?php echo $event->id_event;?>" class="read-more">
+                        <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>" class="read-more">
                             En savoir + <span class="sr-only">about this is some title</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -41,6 +41,6 @@ if(isset($_GET['errorMessage'])) {
         <?php } ?>
     </section>
     <section>
-    <iframe width="1000" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=0.17663955688476565%2C46.534067099437756%2C0.46331405639648443%2C46.6350579278567&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=13/46.5846/0.3200">Afficher une carte plus grande</a></small>
+    <iframe width="1000" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=0.17663955688476565%2C46.534067099437756%2C0.46331405639648443%2C46.6350579278567&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small>
     </section>
 </div>

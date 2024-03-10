@@ -30,5 +30,5 @@
 </style>
 
     
-<a href="?controller=evenements&action=showEvent&id_event=<?php echo $id_event ?>"><span><?php echo $event->getCode_unique_label();?> </span><img src="../assets/img/LOGO_iframe.png" alt=""></a>
+<a href="/here_we_go/fiche_evenement/<?php echo $id_event ?>" target="_blank"><span><?php echo $event->getCode_unique_label();?> </span><img src="../assets/img/LOGO_iframe.png" alt=""></a>
 

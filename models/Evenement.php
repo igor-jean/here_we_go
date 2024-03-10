@@ -416,6 +416,8 @@ public static function find($id_event) {
         $req2->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req2->execute();
 
+        
+
         // Exécuter la première requête de suppression
         if (!$req1->execute()) {
             throw new Exception('Une erreur s\'est produite lors de la suppression des inscriptions à l\'événement.');

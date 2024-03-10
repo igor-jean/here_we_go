@@ -54,5 +54,5 @@
             </ul>
         </nav>
     
-    <a href="?controller=admin&action=indexAdministration" class="btn btn-danger mt-5" tabindex="-1" role="button">RETOUR</a>
+    <a href="/here_we_go/gestion_du_site" class="btn btn-danger mt-5" tabindex="-1" role="button">RETOUR</a>
 </div>

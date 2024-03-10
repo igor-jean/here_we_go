@@ -10,7 +10,6 @@
         <label for="date_event" class="form-label">Date de l'événement:</label>
         <input value="<?php echo $event->getDateEvent(); ?>" type="date" class="form-control" id="date_event" name="date_event">
     </div>
-    <!-- Ajoutez les autres champs ici avec la même structure -->
     <div class="mb-3">
         <label for="id_categorie">Categorie:</label>
         <select name="id_categorie" id="id_categorie" class="form-select mb-3">
