@@ -1,6 +1,4 @@
 <?php
-
-
 class TextToSpeechController {
     public function generateAudio() {
         try {

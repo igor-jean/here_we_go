@@ -1,13 +1,21 @@
 <div class="container">
     <h2>infos persos</h2>
-    <ul>
-        <li><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100px;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>"></li>
-        <li>Mail : <?php echo $user->getMail();?></li>
-        <li>Ville : <?php echo $user->getVille();?></li>
-        <li>Nom : <?php echo $user->getNom();?></li>
-        <li>Prenom : <?php echo $user->getPrenom();?></li>
-        <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
-    </ul>
+    <div class="row">
+        <div class="col-3">
+            <img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100%;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>">
+        </div>
+        <div class="col-9">
+            <ul>
+                <li>Mail : <?php echo $user->getMail();?></li>
+                <li>Ville : <?php echo $user->getVille();?></li>
+                <li>Nom : <?php echo $user->getNom();?></li>
+                <li>Prenom : <?php echo $user->getPrenom();?></li>
+                <li>Téléphone : <?php echo $user->getTelephone();?></li>
+                <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
+            </ul>
+        </div>
+    </div>
+    
     <h2>Mes vehicules :</h2>
     <table>
         <thead>
