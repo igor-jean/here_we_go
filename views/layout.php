@@ -1,10 +1,18 @@
 <?php
 session_start();
 ob_start();
+require_once('models/Utilisateur.php');
+$id_user = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
+if($id_user != "") {
+  $user = Utilisateur::find($id_user);
+  $premium = Utilisateur::premiumAccount($id_user);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <base href="/here_we_go/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />

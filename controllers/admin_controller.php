@@ -111,6 +111,10 @@
         public function delete() {
             try {
                 $id_event = $_GET["id_event"];
+                $covoits = Covoiturage::getCovoituragesPerEvent($id_event);
+                foreach ($covoits as $covoit) {
+                    Covoiturage::deleteCovoiturage($covoit->getIdCovoiturage());
+                }
                 Evenement::deleteEvent($id_event);
                 $this->evenementsAdministration();
             } catch(Exception $e) {

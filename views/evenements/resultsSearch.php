@@ -1,7 +1,6 @@
-<h1><?php echo $categorie->getLibelleCategorie();?></h1>
-
+<h1>Resultats pour <?php echo $keyword ?></h1>
 <section class="articles mt-5 mb-5">
-    <?php foreach ($events as $event) {?>
+    <?php  foreach ($events as $event) {?>
     <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
         <div class="article-wrapper">
             <figure>
@@ -20,7 +19,6 @@
                             <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <p><?php if(Covoiturage::getCovoituragesCountByEventId($event->id_event) > 0) {echo "Il y a ".Covoiturage::getCovoituragesCountByEventId($event->id_event)." covoiturage(s) de disponnible pour cet événement.";}   ?></p>
                 </div>
             </ul>
         </div>

@@ -16,7 +16,7 @@
 <a href="?controller=evenements&action=showEvent&id_event=<?php echo $covoit->getIdEvent();?>">Retour</a>
 <?php if($inscrit) {
     echo '<a href="?controller=covoiturages&action=desinscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Annuler la reservation</a>';
-}else {
+}elseif(!$verif) {
     echo '<a href="?controller=covoiturages&action=inscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Reserver</a>';
 }
 ?>

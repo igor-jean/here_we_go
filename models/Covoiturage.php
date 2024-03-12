@@ -97,6 +97,20 @@ class Covoiturage {
         
         return $covoiturages;
     }
+
+    // Afficher le nombre de covoiturage pour un evenement
+    public static function getCovoituragesCountByEventId($id_event) {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT COUNT(*) AS nombre_covoiturages FROM covoiturage WHERE id_event = :id_event");
+        $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
+        $req->execute();
+
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        return $result['nombre_covoiturages'];
+    }
+
+
+
     // sélectionne les covoiturages futurs pour un utilisateur spécifié en fonction de la date actuelle
     public static function getCovoituragesFutursUtilisateur($id_utilisateur) {
         $list = [];

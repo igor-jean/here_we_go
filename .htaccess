@@ -1,0 +1,65 @@
+RewriteEngine On
+RewriteBase /here_we_go/
+
+# Réécriture pour les catégories
+RewriteRule ^categorie/([0-9]+)$ index.php?controller=pages&action=categorie&id_categorie=$1 [L]
+
+# Réécriture pour la modification d'un vehicule
+RewriteRule ^monCompte/modifier_mon_vehicule/([0-9]+)$ index.php?controller=utilisateurs&action=voirVehicule&id_vehicule_utilisateur=$1
+
+# Réécriture pour la modification d'un covoiturage
+RewriteRule ^monCompte/modifier_mon_covoiturage/([0-9]+)$ index.php?controller=covoiturages&action=modifCovoiturage&id_covoiturage=$1
+
+# Réécriture pour la page d'un covoiturage
+RewriteRule ^covoiturage/([0-9]+)$ index.php?controller=covoiturages&action=showCovoiturage&id_covoiturage=$1
+
+# Réécriture pour la modification d'un evenement(monCompte)
+RewriteRule ^monCompte/modifier_mon_evenement/([\w]+)/?$ index.php?controller=utilisateurs&action=voirEvent&id_event=$1 [L]
+
+# Réécriture pour l'iframe'
+RewriteRule ^iframe/([\w]+)/?$ views/iframe.php?id_event=$1 [L]
+
+# Réécriture pour la page d'un evenement
+RewriteRule ^fiche_evenement/([\w]+)/?$ index.php?controller=evenements&action=showEvent&id_event=$1 [L]
+
+# Réécriture pour l'ajout d'une photo à un evenement'
+RewriteRule ^evenement/ajout_photo/([\w]+)/?$ index.php?controller=utilisateurs&action=ajoutPhoto&id_event=$1 [L]
+
+# Réécriture pour l'accueil
+RewriteRule ^accueil$ index.php?controller=pages&action=home [L]
+
+# Réécriture pour les erreurs 404
+RewriteRule erreur-404 erreur_404.php [L]
+
+# Réécriture pour la recherche
+RewriteRule ^recherche$ index.php?controller=evenements&action=resultsSearch
+
+# Réécriture pour l'ajout d'un événement
+RewriteRule ^creation_evenement$ index.php?controller=evenements&action=newEvent
+
+# Réécriture pour la gestion du site
+RewriteRule ^gestion_du_site$ index.php?controller=admin&action=indexAdministration
+
+# Réécriture pour la page mon compte
+RewriteRule ^monCompte$ index.php?controller=utilisateurs&action=monCompte
+
+# Réécriture pour la deconnexion
+RewriteRule ^deconnexion$ index.php?controller=utilisateurs&action=deconnexion
+
+# Réécriture pour la gestion des utilisateur
+RewriteRule ^gestion_du_site/utilisateurs$ index.php?controller=admin&action=utilisateursAdministration
+
+# Réécriture pour la gestion des categories et type de vehicules
+RewriteRule ^gestion_du_site/categorie_type-vehicule$ index.php?controller=admin&action=categorieVehiculeAdministration
+
+# Réécriture pour la gestion des événements
+RewriteRule ^gestion_du_site/evenements$ index.php?controller=admin&action=evenementsAdministration
+
+# Réécriture pour la modification des infos perso
+RewriteRule ^monCompte/informations_personnelles$ index.php?controller=utilisateurs&action=modifierInfosPerso
+
+# Réécriture pour l'ajout d'un vehicule
+RewriteRule ^monCompte/ajout_vehicule$ index.php?controller=utilisateurs&action=ajouterVehicule
+
+
+

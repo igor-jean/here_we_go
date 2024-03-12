@@ -21,11 +21,12 @@
 
     public function showEvent() {
       try {
-        $id_utilisateur = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
         $id_event = $_GET["id_event"];
+        $id_utilisateur = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
         if(empty($_GET["id_event"])) {
           throw new Exception("Impossible d'afficher l'événement. Réessayez ultérieurement.");
         }
+        Evenement::setCookieFor24h($id_event);
         $event = Evenement::find($id_event);
         $result = Utilisateur::verifyRegistrationEvent($id_utilisateur, $id_event);
         $covoits = Covoiturage::getCovoituragesByEventId($id_event);
@@ -33,12 +34,10 @@
         $id_covoit = Covoiturage::findCovoiturageId($id_utilisateur, $id_event);
         $vehicule = Vehicule::utilisateurPossedeVehicule($id_utilisateur);
         require_once('views/evenements/showEvent.php');
-        exit();
       } catch(Exception $e) {
         $errorMessage = urlencode($e->getMessage());
         header("Location: ?controller=pages&action=home&error=$errorMessage");
-        exit();
-    }
+      }
     }
     
     public function add() {
@@ -156,9 +155,19 @@
         $id_event = $_GET["id_event"];
         require_once('views/evenements/confirmerSuppression.php');
       }  catch(Exception $e) {
-                echo "Erreur :".$e->getMessage();
-            }
+        echo "Erreur :".$e->getMessage();
       }
+    }
+    
+    public function resultsSearch() {
+      if(isset($_POST["date"]) && $_POST["date"]) {
+        $keyword = $_POST["date"];
+      }elseif(isset($_POST["search"])) {
+        $keyword = $_POST['search'];
+      }
+      $events = Evenement::searchEventKeyword($keyword);
+      require_once('views/evenements/resultsSearch.php');
+    }
       
    
 

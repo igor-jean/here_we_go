@@ -121,9 +121,6 @@ public static function find($id_event) {
     $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
     $req->execute();
     $event = $req->fetch();
-    if (!$event) {
-        throw new Exception('Une erreure s\'est produite.');
-    }
     return new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
   }
 // trouver les evenement créé par l'utilisateur 
@@ -170,9 +167,6 @@ public static function find($id_event) {
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
-        if (!$events) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],
@@ -207,9 +201,6 @@ public static function find($id_event) {
         $req->bindParam(":id_utilisateur", $id_user, PDO::PARAM_STR);
         $req->execute();
         $events = $req->fetchAll();
-        if (!$events) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
         foreach ($events as $event) {
             $list[] = new Evenement(
                 $event['id_event'],
@@ -425,6 +416,8 @@ public static function find($id_event) {
         $req2->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req2->execute();
 
+        
+
         // Exécuter la première requête de suppression
         if (!$req1->execute()) {
             throw new Exception('Une erreur s\'est produite lors de la suppression des inscriptions à l\'événement.');
@@ -557,6 +550,59 @@ public static function find($id_event) {
         }
     
         return $list;
+    }
+    //Rechercher un evenement par un mot clé
+    public static function searchEventKeyword($keyword){ 
+        $db = Db::getInstance(); 
+        $req = $db->prepare('SELECT * FROM evenement WHERE titre like :keyword OR description_courte like :keyword OR description_longue like :keyword OR nom_structure like :keyword OR date_event like :keyword'); 
+        $req->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $req->execute();
+        $events = $req->fetchAll(); 
+        $list = [];
+        foreach ($events as $event) {
+            $list[] = new Evenement(
+                $event['id_event'],
+                $event['titre'],
+                $event['date_event'],
+                $event['heure_event'],
+                $event['ville'],
+                $event['adresse'],
+                $event['code_postal'],
+                $event['description_courte'],
+                $event['description_longue'],
+                $event['nb_places'],
+                $event['prix'],
+                $event['lien_billeterie'],
+                $event['lien_event'],
+                $event['nom_structure'],
+                $event['nb_visiteur'],
+                $event['code_unique_label'],
+                $event['id_utilisateur'],
+                $event['id_categorie']
+            );
+        }
+        return $list;
+    }
+    //Incrementer le nombre de visiteurs d'un événement
+    public static function incrementNbVisitor($id_event) {
+        $db = Db::getInstance(); 
+        $req = $db->prepare('UPDATE evenement SET nb_visiteur = nb_visiteur + 1 WHERE id_event = :id_event'); 
+        $req->bindParam(':id_event', $id_event, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    // Création d'un cookie de 24h pour enregistrer le nombre de visites d'un événement 
+    public static function setCookieFor24h($id_event) {
+        $expire = time() + 24 * 60 * 60;
+
+        $visitedEvents = isset($_COOKIE['visited_events']) ? json_decode($_COOKIE['visited_events'], true) : array();
+
+        if (!in_array($id_event, $visitedEvents)) {
+            $visitedEvents[] = $id_event;
+
+            setcookie('visited_events', json_encode($visitedEvents), $expire);
+            self::incrementNbVisitor($id_event);
+        }
     }
 
     // Getters

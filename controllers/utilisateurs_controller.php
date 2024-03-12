@@ -57,11 +57,10 @@
       session_start();
       session_unset();
       session_destroy();
-      header("Location: ?controller=pages&action=home");
+      header("Location: /here_we_go/accueil");
     }
 
     public function monCompte() {
-      try {
         $id_utilisateur = intval($_SESSION["id_utilisateur"]);
         $user = Utilisateur::find($id_utilisateur);
         $vehicules = Vehicule::findVehicule($id_utilisateur);
@@ -70,10 +69,9 @@
         $listEventsRegistered = Evenement::listEventsRegistered($id_utilisateur);
         $covoits = Covoiturage::getCovoituragesFutursUtilisateur($id_utilisateur);
         $covoitsInscrit = Covoiturage::getCovoituragesInscritUtilisateur($id_utilisateur);
+        $premium = Utilisateur::premiumAccount($id_utilisateur);
         require_once('views/utilisateurs/monCompte.php');
-      } catch(Exception $e) {
-                echo "Erreur :".$e->getMessage();
-            }
+
     }
     
     public function modifierInfosPerso() {

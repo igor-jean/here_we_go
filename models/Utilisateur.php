@@ -275,7 +275,16 @@
                 }
                 return $list;
         }
-
+        // Verifier si l'utilisateur a participé a 10 evenement ou plus 
+        public static function premiumAccount($id_utilisateur){
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT COUNT(id_event) FROM inscription_utilisateur_event WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+                $count = $req->fetchColumn();
+                return $count >= 10;
+        }
+        
         public function getId_utilisateur()
         {
                 return $this->id_utilisateur;

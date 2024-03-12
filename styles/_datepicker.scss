@@ -1,0 +1,55 @@
+.datepicker {
+    display: none;
+    width: 300px;
+    margin-left: 30px;
+
+    #search {
+        width: 100%;
+    }
+}
+
+#boutton-datepicker {
+    cursor: pointer;
+
+    span {
+        height: 38px;
+        width: 102px;
+        padding: 0.5rem 0rem;
+        background: #77c9dd;
+        color: white;
+        text-align: center;
+        font-size: 1.1rem;
+        border-radius: 0 4px 4px 0;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        &:hover {
+            background: #40897E;
+        }
+    }
+
+}
+
+.none {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+#boutton-rechercher {
+    background: transparent;
+    border: none;
+    margin-right: 30px;
+}
+
+.iframeText {
+    background: transparent;
+    border: none;
+    resize: none;
+    overflow: hidden;
+
+    &:focus {
+        outline: none;
+    }
+}

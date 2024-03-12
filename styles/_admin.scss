@@ -11,3 +11,13 @@
     top: -20px;
     left: 90%;
 }
+
+.toggleAvatar::after {
+    content: none;
+}
+
+.dropdownAvatar {
+    position: absolute;
+    right: 70px !important;
+    top: 5px;
+}
