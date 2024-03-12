@@ -48,6 +48,38 @@ if(isset($_GET['errorMessage'])) {
     </div>
     </section>
     <section>
-        <iframe class="map-iframe" width="1000" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=0.17663955688476565%2C46.534067099437756%2C0.46331405639648443%2C46.6350579278567&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small>
-            </section>
-        </div>
+    <div id="mapAccueil"></div>
+    <!-- JS pour la map -->
+    
+    <script>
+        const ville = '<?php echo $event->ville;?>';
+        const url = `https://api-adresse.data.gouv.fr/search/?q=${ville}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features.length > 0) {
+                    const longitude = data.features[0].geometry.coordinates[0];
+                    const latitude = data.features[0].geometry.coordinates[1];
+                    console.log(`Longitude: ${longitude}, Latitude: ${latitude}`);
+
+                    const map = L.map('mapAccueil').setView([46.603354, 1.888334], 6);
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 13,
+                        minZoom: 6,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+
+                    var marker = L.marker([latitude, longitude]).addTo(map);
+                } else {
+                    console.log('Ville introuvable.');
+                }
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données :', error));
+    </script>
+
+    <!-- Fin JS -->
+</div>
+    </section>
+</div>

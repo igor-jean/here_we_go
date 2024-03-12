@@ -47,7 +47,37 @@
         <span>Lien de l'événement</span>
         <span><?php echo $event->lien_event; ?></span>
     </div>
-    
+    <div id="map"></div>
+<!-- JS pour la map -->
+<script>
+    const ville = '<?php echo $event->ville;?>';
+    const url = `https://api-adresse.data.gouv.fr/search/?q=${ville}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.features.length > 0) {
+                const longitude = data.features[0].geometry.coordinates[0];
+                const latitude = data.features[0].geometry.coordinates[1];
+                console.log(`Longitude: ${longitude}, Latitude: ${latitude}`);
+
+                var map = L.map('map').setView([latitude, longitude], 9);
+
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 13,
+                    minZoom: 6,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                var marker = L.marker([latitude, longitude]).addTo(map);
+            } else {
+                console.log('Ville introuvable.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données :', error));
+</script>
+
+<!-- Fin JS -->
     <?php if (isset($_SESSION["login"])) { ?>
     <h3>Covoiturage</h3>
     <table class="table">
