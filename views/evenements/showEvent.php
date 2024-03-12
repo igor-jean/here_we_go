@@ -47,6 +47,7 @@
         <span>Lien de l'événement</span>
         <span><?php echo $event->lien_event; ?></span>
     </div>
+    
     <?php if (isset($_SESSION["login"])) { ?>
     <h3>Covoiturage</h3>
     <table class="table">
