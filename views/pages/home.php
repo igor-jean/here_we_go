@@ -50,33 +50,49 @@ if(isset($_GET['errorMessage'])) {
     <section>
     <div id="mapAccueil"></div>
     <!-- JS pour la map -->
-    
-    <script>
-        const ville = '<?php echo $event->ville;?>';
-        const url = `https://api-adresse.data.gouv.fr/search/?q=${ville}`;
+    <?php 
+$listeVilles = [];
+foreach ($events as $event) {
+    $listeVilles[] = '{"ville": "'.$event->ville.'"}';
+}
+// Convertir le tableau en chaîne JSON avec virgules entre chaque élément
+$listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
+?>
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.features.length > 0) {
-                    const longitude = data.features[0].geometry.coordinates[0];
-                    const latitude = data.features[0].geometry.coordinates[1];
-                    console.log(`Longitude: ${longitude}, Latitude: ${latitude}`);
 
-                    const map = L.map('mapAccueil').setView([46.603354, 1.888334], 6);
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+     <script>
+        const evenements = <?php echo $listeVillesJSON; ?>;
 
-                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 13,
-                        minZoom: 6,
-                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
+        const map = L.map('mapAccueil').setView([46.603354, 1.888334], 6);
 
-                    var marker = L.marker([latitude, longitude]).addTo(map);
-                } else {
-                    console.log('Ville introuvable.');
-                }
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données :', error));
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 13,
+            minZoom: 6,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        evenements.forEach(event => {
+            const url = `https://api-adresse.data.gouv.fr/search/?q=${event.ville}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.features.length > 0) {
+                        let longitude = data.features[0].geometry.coordinates[0];
+                        let latitude = data.features[0].geometry.coordinates[1];
+
+                        let marker = L.marker([latitude, longitude]).addTo(map);
+                        const nbEvenements = evenements.filter(e => e.ville === event.ville).length;
+
+                        marker.bindPopup(`<b>${event.ville}</b><br>Nombre d'événements : ${nbEvenements}`).openPopup();
+
+                    } else {
+                        console.log('Ville introuvable.');
+                    }
+                })
+                .catch(error => console.error('Erreur lors de la récupération des données :', error));
+        });
     </script>
 
     <!-- Fin JS -->

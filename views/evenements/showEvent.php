@@ -59,7 +59,6 @@
             if (data.features.length > 0) {
                 const longitude = data.features[0].geometry.coordinates[0];
                 const latitude = data.features[0].geometry.coordinates[1];
-                console.log(`Longitude: ${longitude}, Latitude: ${latitude}`);
 
                 var map = L.map('map').setView([latitude, longitude], 9);
 

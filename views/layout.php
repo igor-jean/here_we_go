@@ -53,6 +53,5 @@ else {
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script src="js/main.js"></script>
-<script src="js/map.js"></script>
 </body>
 </html>
