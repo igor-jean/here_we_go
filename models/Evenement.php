@@ -583,7 +583,28 @@ public static function find($id_event) {
         }
         return $list;
     }
-    
+    //Incrementer le nombre de visiteurs d'un événement
+    public static function incrementNbVisitor($id_event) {
+        $db = Db::getInstance(); 
+        $req = $db->prepare('UPDATE evenement SET nb_visiteur = nb_visiteur + 1 WHERE id_event = :id_event'); 
+        $req->bindParam(':id_event', $id_event, PDO::PARAM_STR);
+        $req->execute();
+    }
+
+    // Création d'un cookie de 24h pour enregistrer le nombre de visites d'un événement 
+    public static function setCookieFor24h($id_event) {
+        $expire = time() + 24 * 60 * 60;
+
+        $visitedEvents = isset($_COOKIE['visited_events']) ? json_decode($_COOKIE['visited_events'], true) : array();
+
+        if (!in_array($id_event, $visitedEvents)) {
+            $visitedEvents[] = $id_event;
+
+            setcookie('visited_events', json_encode($visitedEvents), $expire);
+            self::incrementNbVisitor($id_event);
+        }
+    }
+
     // Getters
     public function getIdEvent() {
           return $this->id_event;

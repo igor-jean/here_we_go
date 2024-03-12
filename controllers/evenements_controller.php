@@ -21,11 +21,12 @@
 
     public function showEvent() {
       try {
-        $id_utilisateur = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
         $id_event = $_GET["id_event"];
+        $id_utilisateur = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
         if(empty($_GET["id_event"])) {
           throw new Exception("Impossible d'afficher l'événement. Réessayez ultérieurement.");
         }
+        Evenement::setCookieFor24h($id_event);
         $event = Evenement::find($id_event);
         $result = Utilisateur::verifyRegistrationEvent($id_utilisateur, $id_event);
         $covoits = Covoiturage::getCovoituragesByEventId($id_event);
@@ -36,7 +37,7 @@
       } catch(Exception $e) {
         $errorMessage = urlencode($e->getMessage());
         header("Location: ?controller=pages&action=home&error=$errorMessage");
-    }
+      }
     }
     
     public function add() {

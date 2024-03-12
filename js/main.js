@@ -7,7 +7,6 @@ btnAudio.addEventListener("click", () => {
     htmlAudio.style.display = "inline-block";
     btnAudio.style.display = "none";
 
-    // Envoyer une requête AJAX vers le fichier PHP avec le texte-long
     fetch('models/generateAudio.php', {
         method: 'POST',
         headers: {
@@ -19,7 +18,6 @@ btnAudio.addEventListener("click", () => {
     })
         .then(response => response.json())
         .then(data => {
-            // Traiter la réponse
             if (data.success) {
                 const sourceAudio = document.createElement("source");
                 sourceAudio.src = data.audio;

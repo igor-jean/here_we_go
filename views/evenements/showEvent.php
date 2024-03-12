@@ -1,5 +1,6 @@
 <div class="container">
     <h1><?php echo $event->titre; ?></h1>
+    <?php echo $event->nb_visiteur;?>
         <p><span><?php echo date('d/m/Y', strtotime($event->date_event)); ?></span> - <span><?php echo date('H:i', strtotime($event->heure_event)); ?></span> - <span><?php echo $event->ville; ?></span></p>
         <p>
             <?php
