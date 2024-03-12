@@ -1,13 +1,21 @@
 <div class="container">
     <h2>infos persos</h2>
-    <ul>
-        <li><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100px;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>"></li>
-        <li>Mail : <?php echo $user->getMail();?></li>
-        <li>Ville : <?php echo $user->getVille();?></li>
-        <li>Nom : <?php echo $user->getNom();?></li>
-        <li>Prenom : <?php echo $user->getPrenom();?></li>
-        <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
-    </ul>
+    <div class="row">
+        <div class="col-3">
+            <img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100%;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>">
+        </div>
+        <div class="col-9">
+            <ul>
+                <li>Mail : <?php echo $user->getMail();?></li>
+                <li>Ville : <?php echo $user->getVille();?></li>
+                <li>Nom : <?php echo $user->getNom();?></li>
+                <li>Prenom : <?php echo $user->getPrenom();?></li>
+                <li>Téléphone : <?php echo $user->getTelephone();?></li>
+                <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
+            </ul>
+        </div>
+    </div>
+    
     <h2>Mes vehicules :</h2>
     <table>
         <thead>
@@ -43,31 +51,36 @@
     </table>
     <h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
     <a href="?controller=utilisateurs&action=telechargerTousCSV" >Telecharger le CSV de tous les Evenements créé</a>
-    <section class="articles mt-5 mb-5">
-        <?php foreach ($eventsUpcoming as $event) { ?>
-        <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
-            <div class="article-wrapper">
-                <figure>
-                    <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" alt="" />
-                </figure>
-                <ul>
-                    <div class="article-body">
-                        <li><h3><?php echo $event->getTitre(); ?></h3></li>
-                        <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
-                        <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
-                        <li>Prix : <?php echo $event->getPrix(); ?> €</li>
-                        <li><?php echo $event->getDescriptionCourte(); ?></li>
-                        <a href="/here_we_go/monCompte/modifier_mon_evenement/<?php echo $event->getIdEvent();?>" class="read-more">
-                            Modifier <span class="sr-only">about this is some title</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
+    <section class="my-5">
+        <div class="row g-3">
+            <?php foreach ($eventsUpcoming as $event) {?>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card position-relative h-100" style="width: 20rem;">
+                        <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
+                            <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
                         </a>
+                        <div class="card-body">
+                            <p class="mb-0"><?php echo date('d/m/Y', strtotime($event->date_event))." - ".date('H:i', strtotime($event->heure_event)); ?></p>
+                            <h5 class="card-title" style="color : <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>;"><?php echo $event->titre; ?></h5>
+                            <p class="card-text"><?php echo $event->description_courte; ?></p>
+                        </div>
+                        <div class="d-flex" style="color : white; background: <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>; width : 100%; height : 70px">
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->prix; ?> <i class="fa-solid fa-euro-sign"></i></span>
+                            </div>
+                            <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></span>
+                                <span><i class="fa-solid fa-location-dot"></i></span>
+                            </div>
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo Covoiturage::getCovoituragesCountByEventId($event->id_event);?></span>
+                                <span><i class="fa-solid fa-car"></i></span>
+                            </div>
+                        </div>
                     </div>
-                </ul>
-            </div>
-        </article>
+                </div>
         <?php } ?>
+    </div>
     </section>
     
     
@@ -77,26 +90,37 @@
     <h2>Liste des evenements créé et qui se sont deja passé:</h2>
     
     
-    <section class="articles mt-5 mb-5">
-        <?php foreach ($events as $event) { ?>
-            <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
-                <div class="article-wrapper">
-                    <figure>
-                        <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
-                    </figure>
-                    <ul>
-                        <div class="article-body">
-                            <li><h3><?php echo $event->getTitre(); ?></h3></li>
-                            <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
-                            <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
-                            <li>Prix : <?php echo $event->getPrix(); ?> €</li>
-                            <li><?php echo $event->getDescriptionCourte(); ?></li>
+    <section class="my-5">
+        <div class="row g-3">
+            <?php foreach ($events as $event) {?>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card position-relative h-100" style="width: 20rem;">
+                        <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
+                            <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <p class="mb-0"><?php echo date('d/m/Y', strtotime($event->date_event))." - ".date('H:i', strtotime($event->heure_event)); ?></p>
+                            <h5 class="card-title" style="color : <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>;"><?php echo $event->titre; ?></h5>
+                            <p class="card-text"><?php echo $event->description_courte; ?></p>
                         </div>
-                    </ul>
+                        <div class="d-flex" style="color : white; background: <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>; width : 100%; height : 70px">
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->prix; ?> <i class="fa-solid fa-euro-sign"></i></span>
+                            </div>
+                            <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></span>
+                                <span><i class="fa-solid fa-location-dot"></i></span>
+                            </div>
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo Covoiturage::getCovoituragesCountByEventId($event->id_event);?></span>
+                                <span><i class="fa-solid fa-car"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </article>
-            <?php } ?>
-        </section>
+        <?php } ?>
+    </div>
+    </section>
         
         
         
@@ -104,32 +128,37 @@
         <h2>Liste des Evenements auxquel je suis inscrit </h2>
         
         
-        <section class="articles mt-5 mb-5">
-            <?php foreach ($listEventsRegistered as $event) { ?>
-                <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
-                    <div class="article-wrapper">
-                        <figure>
-                            <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"];; ?>" alt="" />
-                        </figure>
-                        <ul>
-                            <div class="article-body">
-                                <li><h3><?php echo $event->getTitre(); ?></h3></li>
-                                <li><?php echo date('d/m/Y', strtotime($event->getDateEvent()))." - ".date('H:i', strtotime($event->getHeureEvent())); ?></li>
-                                <li><?php echo $event->getVille()." (".substr($event->getCodePostal(), 0, 2).")"; ?></li>
-                                <li>Prix : <?php echo $event->getPrix(); ?> €</li>
-                                <li><?php echo $event->getDescriptionCourte(); ?></li>
-                                <a href="/here_we_go/fiche_evenement/<?php echo $event->getIdEvent();?>" class="read-more">
-                                    Voir <span class="sr-only">about this is some title</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
+        <section class="my-5">
+        <div class="row g-3">
+            <?php foreach ($listEventsRegistered as $event) {?>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card position-relative h-100" style="width: 20rem;">
+                        <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
+                            <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <p class="mb-0"><?php echo date('d/m/Y', strtotime($event->date_event))." - ".date('H:i', strtotime($event->heure_event)); ?></p>
+                            <h5 class="card-title" style="color : <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>;"><?php echo $event->titre; ?></h5>
+                            <p class="card-text"><?php echo $event->description_courte; ?></p>
+                        </div>
+                        <div class="d-flex" style="color : white; background: <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>; width : 100%; height : 70px">
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->prix; ?> <i class="fa-solid fa-euro-sign"></i></span>
                             </div>
-                        </ul>
+                            <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></span>
+                                <span><i class="fa-solid fa-location-dot"></i></span>
+                            </div>
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo Covoiturage::getCovoituragesCountByEventId($event->id_event);?></span>
+                                <span><i class="fa-solid fa-car"></i></span>
+                            </div>
+                        </div>
                     </div>
-                </article>
-                <?php } ?>
-            </section>
+                </div>
+        <?php } ?>
+    </div>
+    </section>
             
             
             <h2>Covoiturage que je propose :</h2>
