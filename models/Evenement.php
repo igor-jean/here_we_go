@@ -243,9 +243,6 @@ public static function find($id_event) {
     $req->bindParam(":current_date", $currentDate, PDO::PARAM_STR);
     $req->execute();
     $events = $req->fetchAll();
-    if (!$events) {
-        throw new Exception('Une erreure s\'est produite.');
-    }
 
     foreach ($events as $event) {
         $list[] = new Evenement(

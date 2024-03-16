@@ -62,11 +62,7 @@ class Covoiturage {
     public static function getCovoituragesByEventId($id_event) {
         $db = Db::getInstance();
         $req = $db->prepare("
-            SELECT c.*, u.prenom AS prenom_conducteur
-            FROM covoiturage c 
-            JOIN vehicule_utilisateur vu ON c.id_vehicule_utilisateur = vu.id_vehicule_utilisateur 
-            JOIN utilisateur u ON vu.id_utilisateur = u.id_utilisateur 
-            WHERE c.id_event = :id_event
+            SELECT c.*, u.prenom AS prenom_conducteur FROM covoiturage c  JOIN vehicule_utilisateur vu ON c.id_vehicule_utilisateur = vu.id_vehicule_utilisateur  JOIN utilisateur u ON vu.id_utilisateur = u.id_utilisateur  WHERE c.id_event = :id_event AND nb_place > 0
         ");
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->execute();
@@ -233,9 +229,6 @@ class Covoiturage {
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->execute();
-        if (!$req->execute()) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
     }
     // se desinscrire d'un covoit
     public static function unsubscribeCovoiturage($id_covoiturage, $id_utilisateur) {
@@ -244,9 +237,6 @@ class Covoiturage {
         $req->bindParam(":id_covoiturage", $id_covoiturage, PDO::PARAM_INT);
         $req->bindParam(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
         $req->execute();
-        if (!$req->execute()) {
-            throw new Exception('Une erreure s\'est produite.');
-        }
     }
     // verifier si l'utilisateur est inscrit au covoiturage
     public static function verificationInscriptionCovoit($id_utilisateur, $id_covoiturage) {
@@ -327,6 +317,13 @@ class Covoiturage {
         return $list;
     }
     
+    // Modifier le nombres de place disponnible pour un covoit
+    public static function setNbPlaceDispo($id_covoiturage, $operation) {
+        $db = Db::getInstance();
+        $req = $db->prepare( "UPDATE covoiturage SET nb_place = nb_place $operation 1 WHERE id_covoiturage = :id_covoiturage");
+        $req->bindParam(':id_covoiturage', $id_covoiturage);
+        $req->execute();
+    }
     
     // Getters
     public function getIdCovoiturage() {

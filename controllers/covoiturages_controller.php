@@ -5,7 +5,7 @@
             try {
                 $id_utilisateur = $_SESSION["id_utilisateur"];
                 $id_covoiturage = $_GET["id_covoiturage"];
-                $id_event = $_GET["id_event"];
+                $id_event = isset($_GET["id_event"])?$_GET["id_event"]:"";
                 $inscrit = Covoiturage::verificationInscriptionCovoit($id_utilisateur, $id_covoiturage);
                 $conducteur = Covoiturage::getNomConducteur($id_covoiturage);
                 $covoit = Covoiturage::find($id_covoiturage);
@@ -85,25 +85,23 @@
             }
         }
         public function inscriptionCovoiturage() {
-            try {
-                $id_covoiturage = $_GET["id_covoiturage"];
-                $id_utilisateur = $_SESSION["id_utilisateur"];
-                Covoiturage::registrationCovoiturage($id_covoiturage, $id_utilisateur);
-                $this->showCovoiturage();
-            } catch(Exception $e) {
-                echo "Erreur :".$e->getMessage();
-            }
+            $id_covoiturage = $_GET["id_covoiturage"];
+            $id_utilisateur = $_SESSION["id_utilisateur"];
+            $operation = "-";
+            Covoiturage::setNbPlaceDispo($id_covoiturage, $operation);
+            Covoiturage::registrationCovoiturage($id_covoiturage, $id_utilisateur);
+            $this->showCovoiturage();
+
         }
         
         public function desinscriptionCovoiturage() {
-            try {
-                $id_covoiturage = $_GET["id_covoiturage"];
-                $id_utilisateur = $_SESSION["id_utilisateur"];
-                Covoiturage::unsubscribeCovoiturage($id_covoiturage, $id_utilisateur);
-                $this->showCovoiturage();
-            } catch(Exception $e) {
-                echo "Erreur :".$e->getMessage();
-            }
+            $id_covoiturage = $_GET["id_covoiturage"];
+            $id_utilisateur = $_SESSION["id_utilisateur"];
+            $operation = "+";   
+            Covoiturage::setNbPlaceDispo($id_covoiturage, $operation);
+            Covoiturage::unsubscribeCovoiturage($id_covoiturage, $id_utilisateur);
+            $this->showCovoiturage();
+
         }
         
         public function confirmationSuppression() {
