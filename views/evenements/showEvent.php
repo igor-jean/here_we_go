@@ -3,7 +3,7 @@
     <?php setlocale(LC_TIME, 'fr_FR.utf8', 'fra');?>
     <div class="row">
         <div class="col-8">
-            <p class="date-heure-event"><span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)); ?></span> - <span><?php echo date('H:i', strtotime($event->heure_event)); ?></span> - <span><?php echo ucfirst($event->ville); ?></span></p>
+            <p class="date-heure-event mb-5 style= font-size : 22px"><span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)); ?></span> - <span><?php echo date('H:i', strtotime($event->heure_event)); ?></span> - <span><?php echo ucfirst($event->ville); ?></span></p>
             <h2 class="h2-line-height"><?php echo $event->titre; ?></h2>            
         </div>
         <div class="col-4 position-relative ">
