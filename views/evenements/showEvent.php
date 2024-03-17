@@ -2,11 +2,14 @@
     <div class="photo-event-div"><img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" alt="" class="photo-event-fiche"/></div>
     <?php setlocale(LC_TIME, 'fr_FR.utf8', 'fra');?>
     <div class="row">
+    <h1 class="h1-Autres "><?php echo $event->titre; ?></h1>
         <div class="col-8">
-            <p class="date-heure-event mb-5 style= font-size : 22px"><span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)); ?></span> - <span><?php echo date('H:i', strtotime($event->heure_event)); ?></span> - <span><?php echo ucfirst($event->ville); ?></span></p>
-            <h2 class="h2-line-height"><?php echo $event->titre; ?></h2>            
+        <p class="heure-date mt-2">
+            <span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)),date(' - H:i', strtotime($event->heure_event)); ?></span><br>
+            <span><?php echo ucfirst($event->ville); ?></span>
+        </p>
         </div>
-        <div class="col-4 position-relative ">
+        <div class="col-4 position-relative mt-3">
             <?php
             if (isset($_SESSION["login"])) {
                 if ($checkIfOnlyOne) {
@@ -25,28 +28,43 @@
         <button id="btn-audio">Ecouté l'Audio de la description</button>
         <div id="text-to-audio"></div>
     </div>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block" style="border-bottom: 2px solid black;">
+                <p id="texte-long" class="my-5 fs-3">
+                    <?php echo $event->description_longue; ?>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="block my-5 fs-3">
+                <h2>Détails</h2>
+                <div>
+                    <span>Adresse</span>
+                    <span><?php echo $event->adresse; ?></span>
+                </div>
+                <div>
+                    <span>Places</span>
+                    <span><?php echo $event->nb_places; ?></span>
+                </div>
+                <div>
+                    <span>Prix</span>
+                    <span><?php echo $event->prix; ?></span>
+                </div>
+                <div>
+                    <span>Lien de la billetterie</span>
+                    <span><?php echo $event->lien_billeterie; ?></span>
+                </div>
+                <div>
+                    <span>Lien de l'événement</span>
+                    <span><?php echo $event->lien_event; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p id="texte-long" class="my-5 fs-3 "><?php echo $event->description_longue; ?></p>
-    <div>
-        <span>Adresse</span>
-        <span><?php echo $event->adresse; ?></span>
-    </div>
-    <div>
-        <span>Places</span>
-        <span><?php echo $event->nb_places; ?></span>
-    </div>
-    <div>
-        <span>Prix</span>
-        <span><?php echo $event->prix; ?></span>
-    </div>
-    <div>
-        <span>Lien de la billetterie</span>
-        <span><?php echo $event->lien_billeterie; ?></span>
-    </div>
-    <div>
-        <span>Lien de l'événement</span>
-        <span><?php echo $event->lien_event; ?></span>
-    </div>
     <div id="map"></div>
 <!-- JS pour la map -->
 <script>

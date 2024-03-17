@@ -104,9 +104,15 @@ h3 {
 }
 
 .h1-Autres {
-  margin-top: 10rem !important;
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-weight: 400;
+  font-style: normal;
   font-size: 65px;
+  color: #3e6c77;
+  text-align: center;
+  margin-bottom: 60px;
 }
+
 
 /* Page évenements */
 
@@ -121,14 +127,17 @@ img {
 }
 
 .heure-date {
-  color: rgba(0, 123, 255, .5);
+  color: rgb(105, 186, 206);
   font-size: 35px;
   font-weight: 600;
   margin-bottom: 20px;
   margin-top: 55px;
   position: relative;
-
+  text-transform: capitalize;
+  -webkit-text-stroke: 1px #000000;
+  text-shadow: 0px 1px 4px #23430C;
 }
+
 
 .btn-primary {
   padding: 15px;
