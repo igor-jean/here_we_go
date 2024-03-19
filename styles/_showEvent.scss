@@ -1,0 +1,76 @@
+h3 {
+    color: #69BACE;
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-top: 55px;
+    position: relative;
+}
+
+.h1-Autres {
+    font-family: "Rubik Doodle Shadow", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 65px;
+    color: #3e6c77;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+
+/* Page évenements */
+
+.texte-long {
+    line-height: 2;
+    font-size: 25px;
+}
+
+img {
+    max-width: 100%;
+    transform-origin: center;
+}
+
+.text-description {
+    font-size: 25px;
+}
+
+.heure-date {
+    color: rgb(105, 186, 206);
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 55px;
+    position: relative;
+    text-transform: capitalize;
+    -webkit-text-stroke: 1px #000000;
+    text-shadow: 0px 1px 4px #23430C;
+}
+
+.photo-event-div img {
+    margin-top: 50px;
+}
+
+.btn-primary {
+    padding: 15px;
+    width: 180px;
+    font-size: 15px;
+    background: #69BACE;
+    border-radius: 30px;
+    font-weight: 500;
+    box-shadow: 5px 5px 0px 0px #000;
+}
+
+.link {
+    font-weight: 800;
+}
+
+.info-evenenment {
+    font-weight: 500;
+    color: #048b9a;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.description-detail {
+    margin: 15%;
+}
