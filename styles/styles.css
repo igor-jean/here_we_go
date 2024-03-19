@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap");
-
 *,
 *::before,
 *::after {
@@ -20,7 +19,6 @@ li {
     margin-left: 30px;
   }
 }
-
 main {
   margin-top: 75px;
 }
@@ -32,22 +30,18 @@ main {
     background: transparent;
     border: none;
   }
-
   .navbar .form-inline {
     display: block;
   }
-
   .navbar .input-group {
     width: 100%;
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
   }
 }
-
 body {
   margin: 0 auto;
   font-family: "Rubik", sans-serif;
@@ -92,83 +86,6 @@ h2 {
   font-style: normal;
   font-size: 43px;
   color: #69BACE;
-}
-
-h3 {
-  color: #69BACE;
-  font-size: 35px;
-  font-weight: 600;
-  margin-bottom: 30px;
-  margin-top: 55px;
-  position: relative;
-}
-
-.h1-Autres {
-  font-family: "Rubik Doodle Shadow", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 65px;
-  color: #3e6c77;
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-
-/* Page évenements */
-
-.texte-long {
-  line-height: 2;
-  font-size: 25px;
-}
-
-img {
-  max-width: 100%;
-  transform-origin: center;
-}
-
-.text-description {
-  font-size: 25px;
-}
-
-.heure-date {
-  color: rgb(105, 186, 206);
-  font-size: 35px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  margin-top: 55px;
-  position: relative;
-  text-transform: capitalize;
-  -webkit-text-stroke: 1px #000000;
-  text-shadow: 0px 1px 4px #23430C;
-}
-
-.photo-event-div img {
-  margin-top: 50px;
-}
-
-.btn-primary {
-  padding: 15px;
-  width: 180px;
-  font-size: 15px;
-  background: #69BACE;
-  border-radius: 30px;
-  font-weight: 500;
-  box-shadow: 5px 5px 0px 0px #000;
-}
-
-.link {
-  font-weight: 800;
-}
-
-.info-evenenment {
-  font-weight: 500;
-  color: #048b9a;
-  margin-top: 5px;
-  font-size: 15px;
-}
-
-.description-detail {
-  margin: 15%;
 }
 
 .covoiturage {
@@ -463,36 +380,30 @@ article:has(:hover, :focus) {
   article {
     container: card/inline-size;
   }
-
   .article-body p {
     display: none;
   }
 }
-
 @container card (min-width: 380px) {
   .article-wrapper {
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: 16px;
   }
-
   .article-body {
     padding-left: 0;
   }
-
   figure {
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
-
   figure img {
     height: 100%;
     aspect-ratio: 1;
     object-fit: cover;
   }
 }
-
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -737,7 +648,6 @@ ul {
   width: 300px;
   margin-left: 30px;
 }
-
 .datepicker #searchDate {
   width: 100%;
 }
@@ -745,7 +655,6 @@ ul {
 #boutton-datepicker {
   cursor: pointer;
 }
-
 #boutton-datepicker span {
   height: 38px;
   width: 102px;
@@ -757,7 +666,6 @@ ul {
   border-radius: 0 4px 4px 0;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-
 #boutton-datepicker span:hover {
   background: #40897E;
 }
@@ -782,7 +690,6 @@ ul {
   resize: none;
   overflow: hidden;
 }
-
 .iframeText:focus {
   outline: none;
 }
@@ -802,7 +709,6 @@ textarea {
 .photo-event-div {
   margin: 150px auto 50px;
 }
-
 .photo-event-div img {
   width: 100%;
   height: 570px;
@@ -846,7 +752,6 @@ textarea {
   transition: 0.3s ease-out;
   background: rgba(0, 0, 0, 0.027);
 }
-
 .card:hover {
   transform: scale(1.02) !important;
 }
@@ -867,3 +772,78 @@ textarea {
   color: black;
   font-weight: bold;
 }
+
+h3 {
+  color: #69BACE;
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  margin-top: 55px;
+  position: relative;
+}
+
+.h1-Autres {
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 65px;
+  color: #3e6c77;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Page évenements */
+.texte-long {
+  line-height: 2;
+  font-size: 25px;
+}
+
+img {
+  max-width: 100%;
+  transform-origin: center;
+}
+
+.text-description {
+  font-size: 25px;
+}
+
+.heure-date {
+  color: rgb(105, 186, 206);
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  margin-top: 55px;
+  position: relative;
+  text-transform: capitalize;
+  -webkit-text-stroke: 1px #000000;
+  text-shadow: 0px 1px 4px #23430C;
+}
+
+.photo-event-div img {
+  margin-top: 50px;
+}
+
+.btn-primary {
+  padding: 15px;
+  width: 180px;
+  font-size: 15px;
+  background: #69BACE;
+  border-radius: 30px;
+  font-weight: 500;
+  box-shadow: 5px 5px 0px 0px #000;
+}
+
+.link {
+  font-weight: 800;
+}
+
+.info-evenenment {
+  font-weight: 500;
+  color: #048b9a;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.description-detail {
+  margin: 15%;
+}/*# sourceMappingURL=styles.css.map */
