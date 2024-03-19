@@ -18,9 +18,9 @@ if(isset($_GET['errorMessage'])) {
 <div class="container">
     <section class="my-5">
         <div class="row g-3">
-            <?php foreach ($events as $event) {?>
+            <?php foreach ($eventsForPage as $event) {?>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="card position-relative h-100" style="width: 20rem;">
+                    <div class="card position-relative h-100" style="width: 22rem;">
                         <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
                             <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
                         </a>
@@ -45,25 +45,31 @@ if(isset($_GET['errorMessage'])) {
                     </div>
                 </div>
         <?php } ?>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                    <li class="page-item"><a class="page-link" href='?controller=pages&action=home&page=<?php echo $i; ?>&perPage=<?php echo $perPage; ?>'><?php echo $i; ?></a></li>
+                <?php } ?>
+            </ul>
+        </nav>
     </div>
     </section>
     <section>
     <div id="mapAccueil"></div>
-    <!-- JS pour la map -->
     <?php 
 $listeVilles = [];
-foreach ($events as $event) {
-    $listeVilles[] = '{"ville": "'.$event->ville.'"}';
+foreach ($eventsForPage as $event) {
+    $titre = htmlspecialchars($event->titre, ENT_QUOTES, 'UTF-8');
+    $ville = htmlspecialchars($event->ville, ENT_QUOTES, 'UTF-8');
+    $listeVilles[] = '{"ville": "'.$ville.'", "id_event": "'.$event->id_event.'", "titre": "'.$titre.'"}';
 }
-// Convertir le tableau en chaîne JSON avec virgules entre chaque élément
 $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
 ?>
 
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-     <script>
-        const evenements = <?php echo $listeVillesJSON; ?>;
-
+    <script>
+       const evenements = <?php echo $listeVillesJSON; ?>;
         const map = L.map('mapAccueil').setView([46.603354, 1.888334], 6);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -83,9 +89,12 @@ $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
                         let latitude = data.features[0].geometry.coordinates[1];
 
                         let marker = L.marker([latitude, longitude]).addTo(map);
-                        const nbEvenements = evenements.filter(e => e.ville === event.ville).length;
 
-                        marker.bindPopup(`<b>${event.ville}</b><br>Nombre d'événements : ${nbEvenements}`).openPopup();
+                        let popupContent = `<a href="fiche_evenement/${event.id_event}">${event.titre}</a>`;
+                        marker.bindPopup(popupContent)
+                        marker.on('click', function() {
+                            marker.openPopup();
+                        });
 
                     } else {
                         console.log('Ville introuvable.');
@@ -93,6 +102,8 @@ $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
                 })
                 .catch(error => console.error('Erreur lors de la récupération des données :', error));
         });
+
+
     </script>
 
     <!-- Fin JS -->

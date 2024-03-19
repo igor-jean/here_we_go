@@ -738,7 +738,7 @@ ul {
   margin-left: 30px;
 }
 
-.datepicker #search {
+.datepicker #searchDate {
   width: 100%;
 }
 
@@ -811,6 +811,13 @@ textarea {
   border-radius: 24px;
 }
 
+.card-img-top {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .date-heure-event {
   font-weight: bolder;
   font-size: 1.2rem;
@@ -855,4 +862,8 @@ textarea {
   margin: 20px auto 50px;
 }
 
-/*# sourceMappingURL=styles.css.map */
+.leaflet-container a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}

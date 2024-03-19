@@ -111,6 +111,42 @@
         }
     }
 
+// AFFICHER LES EVENEMENTS ET FAIRE UNE PAGINATION 10/20/30
+    public static function homePagination($page = 1, $perPage = 10) {
+        try {
+            $list = [];
+            $db = Db::getInstance();
+
+            // Calculer le décalage pour la pagination
+            $offset = ($page - 1) * $perPage;
+
+            // Sélectionner le nombre total d'événements
+            $countQuery = $db->query('SELECT COUNT(*) AS total FROM evenement');
+            $totalEvents = $countQuery->fetchColumn();
+
+            // Calculer le nombre total de pages
+            $totalPages = ceil($totalEvents / $perPage);
+            $currentDate = date('Y-m-d');
+            // Sélectionner les événements pour la page donnée
+            $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 AND date_event >= '.$currentDate.' ORDER BY date_event ASC LIMIT :perPage OFFSET :offset ');
+            $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+            $req->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $req->execute();
+
+            foreach($req->fetchAll() as $event) {
+                $list[] = new Evenement($event['id_event'], $event['titre'], $event['date_event'], $event['heure_event'], $event['ville'], $event['adresse'], $event['code_postal'], $event['description_courte'], $event['description_longue'], $event['nb_places'], $event['prix'], $event['lien_billeterie'], $event['lien_event'], $event['nom_structure'], $event['nb_visiteur'], $event['code_unique_label'], $event['id_utilisateur'], $event['id_categorie']);
+            }
+
+            return [
+                'events' => $list,
+                'totalPages' => $totalPages,
+                'currentPage' => $page
+            ];
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des événements pour la pagination : " . $e->getMessage());
+        }
+    }
+
 
 
 
@@ -379,7 +415,7 @@ public static function find($id_event) {
 // Modifier un evenement 
     public static function updateEvent($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_categorie) {
         $db = Db::getInstance();
-        $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, inscrit = 0 WHERE id_event = :id_event");
+        $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure WHERE id_event = :id_event");
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->bindParam(":titre", $titre, PDO::PARAM_STR);
         $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);

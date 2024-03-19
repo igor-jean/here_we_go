@@ -18,7 +18,7 @@
             </div>
             <form action="/here_we_go/recherche" method="post" class="navbar-form form-inline d-flex ">
                 <div class="datepicker">
-                    <input type="date" name="date" id="search" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
+                    <input type="date" name="date" id="searchDate" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
                 </div> 
                 <div id="searchBox" class="input-group search-box">								
                     <input type="text" id="search" class="form-control" name="search" placeholder="Recherche .." style="border-radius: 4px 0px 0px 4px !important;">
@@ -32,6 +32,11 @@
             <div class="nav-item">
                 <a href="/here_we_go/gestion_du_site" class="nav-item nav-link">Gestion du site</a>
             </div>
+            <?php if($premium) { ?>
+                <div class="nav-item">
+                    <a href="/here_we_go/jai_de_la_chance" class="btn btn-warning  ">J'ai de la chance</a>
+                </div>
+            <?php } ?>
             <div class="dropdown dropdownAvatar">
                 <a href="#" data-toggle="dropdown" class="nav-item dropdown-toggle toggleAvatar"><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width : 60px; height : 60px; object-fit : cover; border-radius : 100%;<?php if($premium) echo "border: 5px solid gold;"?>"></a>
                 <div class="dropdown-menu">

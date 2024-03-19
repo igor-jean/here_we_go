@@ -19,7 +19,7 @@
         </div>
         <form action="/here_we_go/recherche" method="post" class="navbar-form form-inline d-flex ">
             <div class="datepicker">
-                <input type="date" name="date" id="search" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
+                <input type="date" name="date" id="searchDate" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
             </div> 
             <div id="searchBox" class="input-group search-box">								
                 <input type="text" id="search" class="form-control" name="search" placeholder="Recherche .." style="border-radius: 4px 0px 0px 4px !important;">
@@ -33,9 +33,9 @@
                 <div class="dropdown-menu action-form">
                     <form action="?controller=utilisateurs&action=login" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Votre mail" required="required" name="mail" id="">
+                        <input type="text" class="form-control" placeholder="Votre mail" required="required" name="mail">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mot de  passe" required="required" name="pwd" id="">
+                        <input type="password" class="form-control" placeholder="Mot de  passe" required="required" name="pwd">
                     </div>
                     <input type="submit" class="btn btn-primary btn-block" value="Connexion">
                     </form>

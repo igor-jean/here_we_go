@@ -284,7 +284,12 @@
             }
   }
   
-  
+  public function premiumAccount() {
+    $id_utilisateur = $_SESSION["id_utilisateur"];
+    $events = Evenement::allFuturEvent();
+    $villeUtilisateur = Utilisateur::findVille($id_utilisateur);
+    require_once('views/utilisateurs/premiumAccount.php');
+  }
     
   }
 ?>

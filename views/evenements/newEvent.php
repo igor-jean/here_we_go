@@ -12,7 +12,7 @@
     <form action="?controller=evenements&action=add" method="post">
             <div class="mb-3">
                 <label for="titre" class="form-label">Titre de l'événement :</label>
-                <input type="text" class="form-control" id="titre" name="titre">
+                <input type="text" class="form-control" id="titre" name="titre" maxlength="50">
             </div>
             <div class="mb-3">
                 <label for="date_event" class="form-label">Date de l'événement :</label>
@@ -24,11 +24,11 @@
             </div>
             <div class="mb-3">
                 <label for="ville" class="form-label">Ville :</label>
-                <input type="text" class="form-control" id="ville" name="ville">
+                <input type="text" class="form-control" id="ville" name="ville" maxlength="75">
             </div>
             <div class="mb-3">
                 <label for="adresse" class="form-label">Adresse :</label>
-                <input type="text" class="form-control" id="adresse" name="adresse">
+                <input type="text" class="form-control" id="adresse" name="adresse" maxlength="75">
             </div>
             <div class="mb-3">
                 <label for="code_postal" class="form-label">Code Postal :</label>
@@ -36,7 +36,7 @@
             </div>
             <div class="mb-3">
                 <label for="description_courte" class="form-label">Description courte :</label>
-                <textarea class="form-control" id="description_courte" name="description_courte"></textarea>
+                <textarea class="form-control" id="description_courte" name="description_courte" maxlength="100"></textarea>
             </div>
             <div class="mb-3">
                 <label for="description_longue" class="form-label">Description longue :</label>
@@ -52,15 +52,15 @@
             </div>
             <div class="mb-3">
                 <label for="lien_billeterie" class="form-label">Lien vers la billetterie :</label>
-                <input type="text" class="form-control" id="lien_billeterie" name="lien_billeterie">
+                <input type="text" class="form-control" id="lien_billeterie" name="lien_billeterie" maxlength="75">
             </div>
             <div class="mb-3">
                 <label for="lien_event" class="form-label">Lien vers l'événement :</label>
-                <input type="text" class="form-control" id="lien_event" name="lien_event">
+                <input type="text" class="form-control" id="lien_event" name="lien_event" maxlength="75">
             </div>
             <div class="mb-3">
                 <label for="nom_structure" class="form-label">Nom de la structure :</label>
-                <input type="text" class="form-control" id="nom_structure" name="nom_structure">
+                <input type="text" class="form-control" id="nom_structure" name="nom_structure" maxlength="75">
             </div>
             <div class="mb-3">
                 <label for="id_categorie" class="form-label">Choisir une categorie :</label>

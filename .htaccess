@@ -61,5 +61,6 @@ RewriteRule ^monCompte/informations_personnelles$ index.php?controller=utilisate
 # Réécriture pour l'ajout d'un vehicule
 RewriteRule ^monCompte/ajout_vehicule$ index.php?controller=utilisateurs&action=ajouterVehicule
 
-
+# Réécriture pour la page premiumAccount
+RewriteRule ^jai_de_la_chance$ index.php?controller=utilisateurs&action=premiumAccount
 
