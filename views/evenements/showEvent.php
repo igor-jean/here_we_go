@@ -119,7 +119,7 @@
             <tr>
                 <td class=p-5>" . $covoit->getNbPlace() . "</td>
                 <td class= p-5 >" . $covoit->getMontantParPers() . "</td>
-                <td class= p-4 style=font-size:15px>" . $covoit->getLieuDepart() . "</td>
+                <td class= p-4 style=font-size:20px>" . $covoit->getLieuDepart() . "</td>
                 <td class= p-5>" . $covoit->getHeureDepart() . "</td>
                 <td class=  p-5>" . $covoit->prenom_conducteur . "</td>
                 <td class= p-5 ><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir plus</a></td>
