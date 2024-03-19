@@ -9,29 +9,30 @@
         <span class="ms-2"><?php echo ucfirst($event->ville); ?></span>
         </p>
         </div>
-        <div class="col-4 position-relative mt-3">
-            <?php
-            if (isset($_SESSION["login"])) {
-                if ($checkIfOnlyOne) {
-                    echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event=' . $event->id_event . '&id_covoiturage=' . $id_covoit . '" class="btn btn-primary position-absolute right-O">Se désinscrire</a>';
-                } elseif ($result) {
-                    echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary position-absolute right-O">Se désinscrire</a>';
-                } else {
-                    echo '<a href="?controller=evenements&action=inscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primar position-absolute right-O">S\'inscrire</a>';
-                }
+        <div class="row justify-content-center">
+    <div class="col-4 position-relative mt-5 text-end">
+        <?php
+        if (isset($_SESSION["login"])) {
+            if ($checkIfOnlyOne) {
+                echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event=' . $event->id_event . '&id_covoiturage=' . $id_covoit . '" class="btn btn-primary position-absolute">Se désinscrire</a>';
+            } elseif ($result) {
+                echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary position-absolute">Se désinscrire</a>';
+            } else {
+                echo '<a href="?controller=evenements&action=inscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary position-absolute">S\'inscrire</a>';
             }
-            ?>
-        </div>
+        }
+        ?>
     </div>
+</div>
     <div class="my-3">
         <button id="btn-audio">Ecouté l'Audio de la description</button>
         <div id="text-to-audio"></div>
     </div>
     <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
             <div class="block" style="border-bottom: 2px solid black;">
-                <p class="texte-long mb-5" class="my-5 fs-3">
+                <p class="texte-long mb-5 mt-5" class="my-5 fs-3">
                     <?php echo $event->description_longue; ?>
                 </p>
             </div>
@@ -40,14 +41,14 @@
     <div class="block my-5 fs-3">
         <h3 class="heure-date">Détails</h3>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-5">
                 <div>
                     <span class="text-info mb-2">Adresse : </span>
                     <span><?php echo $event->adresse; ?></span>
                 </div>
                 <div>
                     <span class="text-info mb-2">Places : </span>
-                    <span><?php echo $event->nb_places; ?> €</span>
+                    <span><?php echo $event->nb_places; ?></span>
                 </div>
                 <div>
                     <span class="text-info mb-2">Prix : </span>
@@ -94,17 +95,17 @@
 </div>
 <!-- Fin JS -->
     <?php if (isset($_SESSION["login"])) { ?>
-    <h3>Covoiturage</h3>
-    <table class="table">
+        <h3 class="heure-date">Covoiturage</h3>
+    <table class="table mb-5 mt-5">
         <thead>
         <tr>
-            <th>Nombre de places</th>
-            <th>Prix (€)</th>
-            <th>Ville de départ</th>
-            <th>Heure de départ</th>
-            <th>Conducteur</th>
-            <th>Actions</th>
-        </tr>
+        <th class="col-3 text-center">Nombre places</th>
+        <th class="col-3 text-center">Prix (€)</th>
+        <th class="col-3 text-center">Ville départ</th>
+        <th class="col-3 text-center">Heure départ</th>
+        <th class="col-3 text-center">Conducteur</th>
+        <th class="col-2 text-center">Actions</th>
+    </tr>
         </thead>
         <tbody>
         <?php
@@ -116,12 +117,12 @@
         foreach ($covoits as $covoit) {
             echo "
             <tr>
-                <td>" . $covoit->getNbPlace() . "</td>
-                <td>" . $covoit->getMontantParPers() . "</td>
-                <td>" . $covoit->getLieuDepart() . "</td>
-                <td>" . $covoit->getHeureDepart() . "</td>
-                <td>" . $covoit->prenom_conducteur . "</td>
-                <td><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir plus</a></td>
+                <td class=p-5>" . $covoit->getNbPlace() . "</td>
+                <td class= p-5 >" . $covoit->getMontantParPers() . "</td>
+                <td class= p-4 style=font-size:15px>" . $covoit->getLieuDepart() . "</td>
+                <td class= p-5>" . $covoit->getHeureDepart() . "</td>
+                <td class=  p-5>" . $covoit->prenom_conducteur . "</td>
+                <td class= p-5 ><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir plus</a></td>
             </tr>
         ";}?>
         </tbody>
