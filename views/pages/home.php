@@ -49,21 +49,20 @@ if(isset($_GET['errorMessage'])) {
     </section>
     <section>
     <div id="mapAccueil"></div>
-    <!-- JS pour la map -->
     <?php 
 $listeVilles = [];
 foreach ($events as $event) {
-    $listeVilles[] = '{"ville": "'.$event->ville.'"}';
+    $titre = htmlspecialchars($event->titre, ENT_QUOTES, 'UTF-8');
+    $ville = htmlspecialchars($event->ville, ENT_QUOTES, 'UTF-8');
+    $listeVilles[] = '{"ville": "'.$ville.'", "id_event": "'.$event->id_event.'", "titre": "'.$titre.'"}';
 }
-// Convertir le tableau en chaîne JSON avec virgules entre chaque élément
 $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
 ?>
 
 
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-     <script>
-        const evenements = <?php echo $listeVillesJSON; ?>;
-
+    <script>
+       const evenements = <?php echo $listeVillesJSON; ?>;
         const map = L.map('mapAccueil').setView([46.603354, 1.888334], 6);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -83,9 +82,12 @@ $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
                         let latitude = data.features[0].geometry.coordinates[1];
 
                         let marker = L.marker([latitude, longitude]).addTo(map);
-                        const nbEvenements = evenements.filter(e => e.ville === event.ville).length;
 
-                        marker.bindPopup(`<b>${event.ville}</b><br>Nombre d'événements : ${nbEvenements}`).openPopup();
+                        let popupContent = `<a href="fiche_evenement/${event.id_event}">${event.titre}</a>`;
+                        marker.bindPopup(popupContent)
+                        marker.on('click', function() {
+                            marker.openPopup();
+                        });
 
                     } else {
                         console.log('Ville introuvable.');
@@ -93,6 +95,8 @@ $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
                 })
                 .catch(error => console.error('Erreur lors de la récupération des données :', error));
         });
+
+
     </script>
 
     <!-- Fin JS -->
