@@ -3,7 +3,7 @@
     <?php setlocale(LC_TIME, 'fr_FR.utf8', 'fra');?>
     <div class="row">
     <h1 class="h1-Autres "><?php echo $event->titre; ?></h1>
-        <div class="col-8">
+        <div class="col-10">
         <p class="heure-date mt-2 d-flex align-items-center">
         <span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)),date(' - H:i', strtotime($event->heure_event)); ?></span><br>
         <span class="ms-2"><?php echo ucfirst($event->ville); ?></span>
@@ -31,14 +31,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="block" style="border-bottom: 2px solid black;">
-                <p id="texte-long" class="my-5 fs-3">
+                <p class="texte-long mb-5" class="my-5 fs-3">
                     <?php echo $event->description_longue; ?>
                 </p>
             </div>
         </div>
-       <div class="col-md-6">
+    <div class="col-md-12">
     <div class="block my-5 fs-3">
-        <h3>Détails</h3>
+        <h3 class="heure-date">Détails</h3>
         <div class="row">
             <div class="col-md-6">
                 <div>
@@ -55,52 +55,43 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div>
-                    <span class="text-info mb-2">Lien de la billetterie : </span>
-                    <span><?php echo $event->lien_billeterie; ?></span>
-                </div>
-                <div>
-                    <span class="text-info mb-2">Lien de l'événement : </span>
-                    <span><?php echo $event->lien_event; ?></span>
-                </div>
-            </div>
-        </div>
+    <div>
+        <a href="<?php echo $event->lien_billeterie; ?>" class="text-info mb-2 mt-3">La billetterie</a>
     </div>
-</div>
-
-        </div>
+    <div>
+        <a href="<?php echo $event->lien_event; ?>" class="text-info mb-2">Le site de l'événement</a>
     </div>
-</div>
-
+    </div>
+<div class="container">
     <div id="map"></div>
 <!-- JS pour la map -->
-<script>
-    const ville = '<?php echo $event->ville;?>';
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${ville}`;
+    <script>
+        const ville = '<?php echo $event->ville;?>';
+        const url = `https://api-adresse.data.gouv.fr/search/?q=${ville}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data.features.length > 0) {
-                const longitude = data.features[0].geometry.coordinates[0];
-                const latitude = data.features[0].geometry.coordinates[1];
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.features.length > 0) {
+                    const longitude = data.features[0].geometry.coordinates[0];
+                    const latitude = data.features[0].geometry.coordinates[1];
 
-                var map = L.map('map').setView([latitude, longitude], 9);
+                    var map = L.map('map').setView([latitude, longitude], 9);
 
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 13,
-                    minZoom: 6,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 13,
+                        minZoom: 6,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
 
-                var marker = L.marker([latitude, longitude]).addTo(map);
-            } else {
-                console.log('Ville introuvable.');
-            }
-        })
-        .catch(error => console.error('Erreur lors de la récupération des données :', error));
-</script>
-
+                    var marker = L.marker([latitude, longitude]).addTo(map);
+                } else {
+                    console.log('Ville introuvable.');
+                }
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données :', error));
+    </script>
+</div>
 <!-- Fin JS -->
     <?php if (isset($_SESSION["login"])) { ?>
     <h3>Covoiturage</h3>
