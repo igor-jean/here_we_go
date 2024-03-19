@@ -4,9 +4,9 @@
     <div class="row">
     <h1 class="h1-Autres "><?php echo $event->titre; ?></h1>
         <div class="col-8">
-        <p class="heure-date mt-2">
-            <span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)),date(' - H:i', strtotime($event->heure_event)); ?></span><br>
-            <span><?php echo ucfirst($event->ville); ?></span>
+        <p class="heure-date mt-2 d-flex align-items-center">
+        <span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)),date(' - H:i', strtotime($event->heure_event)); ?></span><br>
+        <span class="ms-2"><?php echo ucfirst($event->ville); ?></span>
         </p>
         </div>
         <div class="col-4 position-relative mt-3">
@@ -23,7 +23,6 @@
             ?>
         </div>
     </div>
-    <h3>Description:</h3>
     <div class="my-3">
         <button id="btn-audio">Ecouté l'Audio de la description</button>
         <div id="text-to-audio"></div>
@@ -37,30 +36,38 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="block my-5 fs-3">
-                <h2>Détails</h2>
+       <div class="col-md-6">
+    <div class="block my-5 fs-3">
+        <h3>Détails</h3>
+        <div class="row">
+            <div class="col-md-6">
                 <div>
-                    <span>Adresse</span>
+                    <span class="text-info mb-2">Adresse : </span>
                     <span><?php echo $event->adresse; ?></span>
                 </div>
                 <div>
-                    <span>Places</span>
-                    <span><?php echo $event->nb_places; ?></span>
+                    <span class="text-info mb-2">Places : </span>
+                    <span><?php echo $event->nb_places; ?> €</span>
                 </div>
                 <div>
-                    <span>Prix</span>
-                    <span><?php echo $event->prix; ?></span>
+                    <span class="text-info mb-2">Prix : </span>
+                    <span><?php echo $event->prix; ?> €</span>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div>
-                    <span>Lien de la billetterie</span>
+                    <span class="text-info mb-2">Lien de la billetterie : </span>
                     <span><?php echo $event->lien_billeterie; ?></span>
                 </div>
                 <div>
-                    <span>Lien de l'événement</span>
+                    <span class="text-info mb-2">Lien de l'événement : </span>
                     <span><?php echo $event->lien_event; ?></span>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </div>
