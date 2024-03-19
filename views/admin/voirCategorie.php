@@ -1,5 +1,5 @@
 <h2>Modifier une catégorie</h2>
-
+<div class="container">
     <form action="?controller=admin&action=updateCategorie" method="post">
         <input type="hidden" name="id_categorie" value="<?php echo $categorie->getIdCategorie();?>">
         <div class="mb-3">
@@ -14,3 +14,4 @@
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
     <a href="?controller=admin&action=categorieVehiculeAdministration" class="btn btn-secondary mt-3">Retour</a>
+</div>

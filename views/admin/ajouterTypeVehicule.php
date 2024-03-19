@@ -1,5 +1,5 @@
 <h2>Ajouter un type de véhicule</h2>
-
+<div class="container">
     <form action="?controller=admin&action=addTypeVehicule" method="post">
         <div class="mb-3">
             <label for="nom" class="form-label">Nom Type vehicule :</label>
@@ -10,3 +10,4 @@
     </form>
 
     <a href="?controller=admin&action=categorieVehiculeAdministration" class="btn btn-secondary mt-3">Retour</a>
+</div>

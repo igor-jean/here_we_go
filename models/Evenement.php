@@ -379,7 +379,7 @@ public static function find($id_event) {
 // Modifier un evenement 
     public static function updateEvent($id_event, $titre, $date_event, $heure_event, $ville, $adresse, $code_postal, $description_courte, $description_longue, $nb_places, $prix, $lien_billeterie, $lien_event, $nom_structure, $id_categorie) {
         $db = Db::getInstance();
-        $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure, inscrit = 0 WHERE id_event = :id_event");
+        $req = $db->prepare("UPDATE evenement SET titre = :titre, date_event = :date_event, heure_event = :heure_event, ville = :ville, adresse = :adresse, code_postal = :code_postal, description_courte = :description_courte, description_longue = :description_longue, nb_places = :nb_places, prix = :prix, lien_billeterie = :lien_billeterie, lien_event = :lien_event, nom_structure = :nom_structure WHERE id_event = :id_event");
         $req->bindParam(":id_event", $id_event, PDO::PARAM_STR);
         $req->bindParam(":titre", $titre, PDO::PARAM_STR);
         $req->bindParam(":date_event", $date_event, PDO::PARAM_STR);

@@ -284,7 +284,10 @@
             }
   }
   
-  
+  public function premiumAccount() {
+    $events = Evenement::allFuturEvent();
+    require_once('views/utilisateurs/premiumAccount.php');
+  }
     
   }
 ?>
