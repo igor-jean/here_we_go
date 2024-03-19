@@ -284,7 +284,13 @@
                 $count = $req->fetchColumn();
                 return $count >= 10;
         }
-        
+        public static function findVille($id_utilisateur) {
+                $db = Db::getInstance();
+                $req = $db->prepare("SELECT ville FROM utilisateur WHERE id_utilisateur = :id_utilisateur");
+                $req->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+                $req->execute();
+                return $ville = $req->fetch(PDO::FETCH_ASSOC);
+        }
         public function getId_utilisateur()
         {
                 return $this->id_utilisateur;
