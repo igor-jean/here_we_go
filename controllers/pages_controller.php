@@ -2,7 +2,12 @@
   class PagesController {
     public function home() {
       try {
-        $events = Evenement::allFuturEvent();
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $perPage = isset($_GET['perPage']) ? intval($_GET['perPage']) : 9;
+        $eventsData = Evenement::homePagination($page, $perPage);
+        $eventsForPage = $eventsData['events'];
+                $totalPages = $eventsData['totalPages'];
+                $currentPage = $eventsData['currentPage'];
         require_once('views/pages/home.php');
       } catch(Exception $e) {
         echo "Erreur :".$e->getMessage();

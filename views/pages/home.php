@@ -18,7 +18,7 @@ if(isset($_GET['errorMessage'])) {
 <div class="container">
     <section class="my-5">
         <div class="row g-3">
-            <?php foreach ($events as $event) {?>
+            <?php foreach ($eventsForPage as $event) {?>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="card position-relative h-100" style="width: 22rem;">
                         <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
@@ -45,13 +45,20 @@ if(isset($_GET['errorMessage'])) {
                     </div>
                 </div>
         <?php } ?>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                    <li class="page-item"><a class="page-link" href='?controller=pages&action=home&page=<?php echo $i; ?>&perPage=<?php echo $perPage; ?>'><?php echo $i; ?></a></li>
+                <?php } ?>
+            </ul>
+        </nav>
     </div>
     </section>
     <section>
     <div id="mapAccueil"></div>
     <?php 
 $listeVilles = [];
-foreach ($events as $event) {
+foreach ($eventsForPage as $event) {
     $titre = htmlspecialchars($event->titre, ENT_QUOTES, 'UTF-8');
     $ville = htmlspecialchars($event->ville, ENT_QUOTES, 'UTF-8');
     $listeVilles[] = '{"ville": "'.$ville.'", "id_event": "'.$event->id_event.'", "titre": "'.$titre.'"}';
