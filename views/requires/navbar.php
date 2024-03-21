@@ -58,12 +58,6 @@
                             <input type="text" class="form-control" placeholder="Votre prénom" required="required">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Votre " required="required">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Votre prénom" required="required">
-                        </div>
-                        <div class="form-group">
                             <input type="password" class="form-control" placeholder="Mot de passe" required="required">
                         </div>
                         <div class="form-group">

@@ -1,22 +1,33 @@
 <div class="container">
-    <h2>infos persos</h2>
+    <h1 class="h1-autres mb-5">Mon compte </h1>
+    <nav aria-label="breadcrumb mt-5">
+    <ol class="breadcrumb mt-3 ">
+        <li class="breadcrumb-item fs-6"><a href="monCompte#voiture">Mes véhicules </a></li>
+        <li class="breadcrumb-item fs-6"><a href="#">Evenement crée future</a></li>
+        <li class="breadcrumb-item fs-6" ><a href="#">Evénements inscrit</a></li>
+        <li class="breadcrumb-item fs-6"><a href="#">Covoiturage Proposé</a></li>
+        <li class="breadcrumb-item fs-6"><a href="#">Covoiturage inscrit</a></li>
+    </ol>
+    </nav>
+    <h2 class="mb-5 mt-5" >infos persos</h2>
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 mb-5">
             <img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100%;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>">
         </div>
-        <div class="col-9">
+        <div class="col-2"></div>
+        <div class="col-3 mt-4">
             <ul>
                 <li>Mail : <?php echo $user->getMail();?></li>
                 <li>Ville : <?php echo $user->getVille();?></li>
                 <li>Nom : <?php echo $user->getNom();?></li>
                 <li>Prenom : <?php echo $user->getPrenom();?></li>
-                <li>Téléphone : <?php echo $user->getTelephone();?></li>
-                <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
+                <li class="mb-5">Téléphone : <?php echo $user->getTelephone();?></li>
+                <li><a class="btn btn-primary" href="monCompte/informations_personnelles">Modifier infos perso</a></li>
             </ul>
         </div>
     </div>
     
-    <h2>Mes vehicules :</h2>
+    <h2 id="voiture" class="mt-5" >Mes vehicules :</h2>
     <table>
         <thead>
             <tr>
