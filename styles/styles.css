@@ -708,6 +708,22 @@ textarea {
   margin: auto;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
 .photo-event-div {
   margin: 150px auto 50px;
 }
@@ -860,4 +876,32 @@ p {
 
 li {
   font-size: 25px;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  padding: 15px;
+}
+
+.photo-event {
+  width: 60%;
+  display: block;
+  margin: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
 }/*# sourceMappingURL=styles.css.map */

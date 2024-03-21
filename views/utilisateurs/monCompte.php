@@ -9,13 +9,13 @@
         <li class="breadcrumb-item fs-6"><a href="#">Covoiturage inscrit</a></li>
     </ol>
     </nav>
-    <h2 class="mb-5 mt-5" >infos persos</h2>
+    <h2 class="mb-5 mt-5" >information personelle</h2>
     <div class="row">
         <div class="col-3 mb-5">
             <img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100%;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>">
         </div>
         <div class="col-2"></div>
-        <div class="col-3 mt-4">
+        <div class="col-3 mt-4 mb-5">
             <ul>
                 <li>Mail : <?php echo $user->getMail();?></li>
                 <li>Ville : <?php echo $user->getVille();?></li>
@@ -27,15 +27,15 @@
         </div>
     </div>
     
-    <h2 id="voiture" class="mt-5" >Mes vehicules :</h2>
+    <h2 id="voiture" class="mt-5 mb-5" >Mes vehicules :</h2>
     <table>
         <thead>
             <tr>
                 <th>Vehicule</th>
                 <th>Immatriculation</th>
-                <th>places</th>
+                <th>Nombre de places</th>
                 <th>Type de vehicule</th>
-                <th>Modifier</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -52,15 +52,9 @@
             }
             ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <a href="/here_we_go/monCompte/ajout_vehicule">Ajouter un vehicule</a>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
+        </table>
+    <a class="btn btn-primary mt-3" href="/here_we_go/monCompte/ajout_vehicule">Ajouter un vehicule</a>        
+    <h2 class="mb-3 mt-5">Liste des événements créés <br> qui n'ont pas encore eu lieu.</h2>
     <a href="?controller=utilisateurs&action=telechargerTousCSV" >Telecharger le CSV de tous les Evenements créé</a>
     <section class="my-5">
         <div class="row g-3">
