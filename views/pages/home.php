@@ -57,7 +57,9 @@
         </nav>
     </div>
     </section>
+
     <section>
+        <h2 class="heure-date mb-5"> La carte des événements </h2>
     <div id="mapAccueil"></div>
     <?php 
 $listeVilles = [];
