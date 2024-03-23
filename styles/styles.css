@@ -277,12 +277,14 @@ article:has(:hover, :focus) {
   figure img {
     height: 100%;
     aspect-ratio: 1;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
 }
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
@@ -649,22 +651,42 @@ textarea {
   margin: auto;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
 .photo-event-div {
   margin: 150px auto 50px;
 }
 .photo-event-div img {
   width: 100%;
   height: 570px;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
   border-radius: 24px;
 }
 
 .card-img-top {
   height: 220px;
   width: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .date-heure-event {
@@ -784,10 +806,6 @@ img {
   box-shadow: 5px 5px 0px 0px #000;
 }
 
-.btn-primary:hover {
-  background-color: #3f96ac;
-}
-
 .link {
   font-weight: 800;
 }
@@ -803,248 +821,5 @@ img {
   margin: 15%;
 }
 
-.golden-button {
-  z-index: 10;
-  position: fixed;
-  top: 250px;
-  right: 80px;
-  touch-action: manipulation;
-  display: inline-block;
-  outline: none;
-  font-family: inherit;
-  font-size: 1em;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 0.3em;
-  height: 2.75em;
-  line-height: 2.5em;
-  text-transform: uppercase;
-  padding: 0 1em;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4), inset 0 -2px 5px 1px rgb(139, 66, 8), inset 0 -1px 1px 3px rgb(250, 227, 133);
-  background-image: linear-gradient(160deg, #a54e07, #b47e11, #fef1a2, #bc881b, #a54e07);
-  border: 1px solid #a55d07;
-  color: rgb(120, 50, 5);
-  text-shadow: 0 2px 2px rgb(250, 227, 133);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  background-size: 100% 100%;
-  background-position: center;
-}
-@media screen and (max-width: 1400px) {
-  .golden-button {
-    top: 15px;
-    right: 50%;
-    transform: translateX(50%);
-  }
-}
-@media screen and (max-width: 700px) {
-  .golden-button {
-    top: 20px;
-    right: 40%;
-    text-transform: lowercase;
-    font-size: 0.7em;
-  }
-  .golden-button::first-letter {
-    text-transform: uppercase;
-  }
-}
 
-.golden-button a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.golden-button:focus,
-.golden-button:hover {
-  background-size: 150% 150%;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23), inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgb(250, 227, 133);
-  border: 1px solid rgba(165, 93, 7, 0.6);
-  color: rgba(120, 50, 5, 0.8);
-}
-
-.golden-button:active {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4), inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgb(250, 227, 133);
-}
-
-@media (max-width: 768px) {
-  .navbar .dropdown-menu.action-form {
-    width: 100%;
-    padding: 10px 15px;
-    background: transparent;
-    border: none;
-  }
-  .navbar .form-inline {
-    display: block;
-  }
-  .navbar .input-group {
-    width: 100%;
-  }
-}
-.navbar .form-control {
-  box-shadow: none;
-  font-weight: normal;
-  font-size: 16px;
-}
-
-.navbar {
-  background: #69bace !important;
-  padding-left: 35px;
-  padding-right: 35px;
-  border-bottom: 5px solid black;
-  border-radius: 0;
-  position: fixed;
-  /* Utilisation de 'fixed' au lieu de 'sticky' */
-  width: 100%;
-  min-height: 77.5px;
-  top: 0;
-  z-index: 9;
-}
-
-.nav-link img {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  margin: -8px 0;
-  float: left;
-  margin-right: 10px;
-}
-
-.navbar .navbar-brand {
-  padding-left: 0;
-  font-size: 35px;
-  padding-right: 50px;
-}
-@media screen and (max-width: 700px) {
-  .navbar .navbar-brand {
-    font-size: 1.5rem;
-  }
-}
-@media screen and (max-width: 425px) {
-  .navbar .navbar-brand {
-    font-size: 1.2rem;
-  }
-}
-
-.navbar .navbar-brand b {
-  color: white;
-}
-
-.navbar .form-inline {
-  display: inline-block;
-}
-
-.navbar a {
-  color: #242020;
-  font-size: 18px;
-}
-
-.navbar .sign-up-btn {
-  min-width: 110px;
-  max-height: 36px;
-}
-
-.navbar .dropdown-menu {
-  color: #999;
-  font-weight: normal;
-  border-radius: 1px;
-  border-color: #e5e5e5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.navbar a,
-.navbar a:active {
-  color: #888;
-  padding: 8px 20px;
-  background: transparent;
-  line-height: normal;
-}
-
-.navbar .navbar-form {
-  border: none;
-}
-
-.navbar .action-form {
-  width: 280px;
-  padding: 20px;
-  left: auto;
-  right: 0;
-  font-size: 14px;
-}
-
-.navbar .action-form a {
-  color: #33cabb;
-  padding: 0 !important;
-  font-size: 14px;
-}
-
-.navbar .action-form .hint-text {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 13px;
-}
-
-.navbar .btn-primary,
-.navbar .btn-primary:active {
-  color: #fff;
-  background: #048b9a !important;
-  border: none;
-}
-
-.navbar .btn-primary:hover,
-.navbar .btn-primary:focus {
-  color: #fff;
-  background: #31bfb1 !important;
-}
-
-.navbar .social-btn .btn,
-.navbar .social-btn .btn:hover {
-  color: #fff;
-  margin: 0;
-  padding: 0 !important;
-  font-size: 13px;
-  border: none;
-  transition: all 0.4s;
-  text-align: center;
-  line-height: 34px;
-  width: 47%;
-  text-decoration: none;
-}
-
-.navbar .social-btn .btn i {
-  margin-right: 5px;
-  font-size: 16px;
-  position: relative;
-  top: 2px;
-}
-
-.navbar .action-buttons .dropdown-toggle::after {
-  display: none;
-}
-
-@media screen and (max-width: 1400px) {
-  .nav-item a:not(.dropdown-item) {
-    display: inline;
-  }
-}
-
-.dropdown-menu {
-  transition: 2s ease;
-}
-@media screen and (max-width: 1400px) {
-  .dropdown-menu {
-    width: 329px;
-  }
-}
-
-.menuHidden {
-  display: none;
-}
-@media screen and (max-width: 1400px) {
-  .menuHidden {
-    display: initial;
-  }
-}
-
-.navbar-nav {
-  gap: 15px;
 }/*# sourceMappingURL=styles.css.map */

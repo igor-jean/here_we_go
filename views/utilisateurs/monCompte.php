@@ -1,30 +1,41 @@
 <div class="container">
-    <h2>infos persos</h2>
+    <h1 class="h1-autres mb-5">Mon compte </h1>
+    <nav aria-label="breadcrumb" class="mt-5 d-flex justify-content-center">
+    <ol class="breadcrumb mt-3 bg-transparent p-3 rounded">
+        <li class="breadcrumb-item fs-5"><a href="monCompte#voiture" style="text-decoration:none;">Mes véhicules</a></li>
+        <li class="breadcrumb-item fs-5"><a href="monCompte#futur" style="text-decoration:none;">Événements créés à venir</a></li>
+        <li class="breadcrumb-item fs-5"><a href="monCompte#passée" style="text-decoration:none;">Événements créés passés</a></li>
+        <li class="breadcrumb-item fs-5"><a href="monCompte#inscrit" style="text-decoration:none;">Événements inscrit</a></li>
+        <li class="breadcrumb-item fs-5"><a href="monCompte#covoiturage" style="text-decoration:none;">Covoiturage</a></li>
+    </ol>
+    </nav>
+    <h2 class="mb-5 mt-5" >information personelle</h2>
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 mb-5">
             <img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width: 100%;<?php if($premium) echo "border: 5px solid gold; border-radius : 100%"?>">
         </div>
-        <div class="col-9">
+        <div class="col-2"></div>
+        <div class="col-3 mt-4 mb-5">
             <ul>
                 <li>Mail : <?php echo $user->getMail();?></li>
                 <li>Ville : <?php echo $user->getVille();?></li>
                 <li>Nom : <?php echo $user->getNom();?></li>
                 <li>Prenom : <?php echo $user->getPrenom();?></li>
-                <li>Téléphone : <?php echo $user->getTelephone();?></li>
-                <li><a href="monCompte/informations_personnelles">Modifier mes infos perso</a></li>
+                <li class="mb-5">Téléphone : <?php echo $user->getTelephone();?></li>
+                <li><a class="btn btn-primary" href="monCompte/informations_personnelles">Modifier infos perso</a></li>
             </ul>
         </div>
     </div>
     
-    <h2>Mes vehicules :</h2>
+    <h2 id="voiture" class="mt-5 mb-5" >Mes vehicules :</h2>
     <table>
         <thead>
             <tr>
                 <th>Vehicule</th>
                 <th>Immatriculation</th>
-                <th>places</th>
+                <th>Nombre de places</th>
                 <th>Type de vehicule</th>
-                <th>Modifier</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,16 +52,16 @@
             }
             ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <a href="/here_we_go/monCompte/ajout_vehicule">Ajouter un vehicule</a>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <h2>Liste des evenements créé et qui ne sont pas encore passé :</h2>
-    <a href="?controller=utilisateurs&action=telechargerTousCSV" >Telecharger le CSV de tous les Evenements créé</a>
+        </table>
+    <a class="btn btn-primary mt-3" href="/here_we_go/monCompte/ajout_vehicule">Ajouter un vehicule</a> 
+    <div class="border border-dark p-3 mt-5">
+        <h3 class="text-dark ">Téléchargement des événements créés</h3>
+        <div class="d-inline-block">
+            <p class="d-inline-block me-3">Vous pouvez télécharger au format CSV en cliquant sur le bouton ci-dessous pour retrouver toutes les informations de vos événements créés.</p>
+            <a href="?controller=utilisateurs&action=telechargerTousCSV" class="btn btn-primary d-inline-block">Telecharger</a>
+        </div>
+    </div>
+        <h1 class="mb-3 mt-5 text-center" id=futur>Vos évenements crée a venir</h1>
     <section class="my-5">
         <div class="row g-3">
             <?php foreach ($eventsUpcoming as $event) {?>
@@ -82,14 +93,7 @@
         <?php } ?>
     </div>
     </section>
-    
-    
-    
-    
-    
-    <h2>Liste des evenements créé et qui se sont deja passé:</h2>
-    
-    
+    <h1 class= "mt-5 mb-5 text-center">Vos événements créés passés</h1>
     <section class="my-5">
         <div class="row g-3">
             <?php foreach ($events as $event) {?>
@@ -121,13 +125,7 @@
         <?php } ?>
     </div>
     </section>
-        
-        
-        
-        
-        <h2>Liste des Evenements auxquel je suis inscrit </h2>
-        
-        
+        <h1 id="inscrit" class="text-center mb-5 mt-5 " >Liste des évenements inscrit </h2>
         <section class="my-5">
         <div class="row g-3">
             <?php foreach ($listEventsRegistered as $event) {?>
@@ -159,8 +157,7 @@
         <?php } ?>
     </div>
     </section>
-            
-            
+    <h1 class="mt-5 mb-5" id="covoiturage">Covoiturage</h1>
             <h2>Covoiturage que je propose :</h2>
             <table>
                 <tr>
@@ -181,8 +178,8 @@
                     <?php } ?>
                 </table>
                 
-                <h2>Covoiturage auxquels je suis inscrit :</h2>
-                <table>
+                <h2 class="mt-5">Covoiturage auxquels je suis inscrit :</h2>
+                <table class="mb-5">
                     <tr>
                         <th>Evenenement</th>
                         <th>Date</th>
@@ -200,5 +197,4 @@
                         </tr>
                         <?php } ?>
                     </table>
-                    
 </div>
