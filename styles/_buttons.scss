@@ -29,6 +29,11 @@
     background-position: center;
 }
 
+.golden-button a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .golden-button:focus,
 .golden-button:hover {
     background-size: 150% 150%;
