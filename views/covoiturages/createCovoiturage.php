@@ -1,47 +1,48 @@
-
-    <h2>Ajouter un covoiturage à un événement</h2>
-    <?php if(isset($_GET['error'])) {
+<div class="container">
+<h2>Ajouter un covoiturage à un événement</h2>
+<?php if(isset($_GET['error'])) {
     $errorMessage = urldecode($_GET['error']);
-    echo '<div class="error-message">' . $errorMessage . '</div>';
+    echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
 }
 ?>
     <form action="?controller=covoiturages&action=addCovoiturage" method="POST">
-        <div>
-            <label for="information_de_contact">Information de contact:</label><br>
-            <input type="text" id="information_de_contact" name="information_de_contact" required><br>
+        <div class="mb-3">
+            <label for="information_de_contact" class="form-label">Information de contact:</label>
+            <input type="text" class="form-control" id="information_de_contact" name="information_de_contact" required>
         </div>
-        <div>
-            <label for="montant_par_pers">Montant par personne:</label><br>
-            <input type="text" id="montant_par_pers" name="montant_par_pers" required><br>
+        <div class="mb-3">
+            <label for="montant_par_pers" class="form-label">Montant par personne:</label>
+            <input type="text" class="form-control" id="montant_par_pers" name="montant_par_pers" required>
         </div>
-        <div>
-            <label for="lieu_depart">Lieu de départ:</label><br>
-            <input type="text" id="lieu_depart" name="lieu_depart" required><br>
+        <div class="mb-3">
+            <label for="lieu_depart" class="form-label">Lieu de départ:</label>
+            <input type="text" class="form-control" id="lieu_depart" name="lieu_depart" required>
         </div>
-        <div>
-            <label for="descriptif">Descriptif:</label><br>
-            <textarea id="descriptif" name="descriptif" required></textarea><br>
+        <div class="mb-3">
+            <label for="descriptif" class="form-label">Descriptif:</label>
+            <textarea class="form-control" id="descriptif" name="descriptif" required></textarea>
         </div>
-        <div>
-            <label for="nb_place">Nombre de places:</label><br>
-            <input type="number" id="nb_place" name="nb_place" required><br>
+        <div class="mb-3">
+            <label for="nb_place" class="form-label">Nombre de places:</label>
+            <input type="number" class="form-control" id="nb_place" name="nb_place" required>
         </div>
-        <div>
-            <label for="heure_depart">Heure de départ:</label><br>
-            <input type="time" id="heure_depart" name="heure_depart" required><br>
+        <div class="mb-3">
+            <label for="heure_depart" class="form-label">Heure de départ:</label>
+            <input type="time" class="form-control" id="heure_depart" name="heure_depart" required>
         </div>
-        <div>
-            <label for="id_vehicule_utilisateur">Véhicule utilisateur:</label><br>
-            <select id="id_vehicule_utilisateur" name="id_vehicule_utilisateur" required>
+        <div class="mb-3">
+            <label for="id_vehicule_utilisateur" class="form-label">Véhicule utilisateur:</label>
+            <select class="form-select" id="id_vehicule_utilisateur" name="id_vehicule_utilisateur" required>
                 <option value="">Sélectionnez le véhicule utilisateur</option>
                 <?php foreach ($vehicules as $vehicule) {
                     echo "<option value='".$vehicule->getId_vehicule_utilisateur()."'>".$vehicule->getLibelle_vehicule()."</option>";
                 }
                 ?>
-            </select><br>
+            </select>
         </div>
-            <input type="hidden" id="id_event" name="id_event" value="<?php echo $id_event;  ?>">
-        <div>
-            <input type="submit" value="Ajouter">
+        <input type="hidden" id="id_event" name="id_event" value="<?php echo $id_event; ?>">
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
         </div>
     </form>
+</div>
