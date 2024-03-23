@@ -35,13 +35,22 @@
     z-index: 9;
 }
 
-.nav-link img {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    margin: -8px 0;
-    float: left;
-    margin-right: 10px;
+.nav-link {
+    color: white !important;
+    transition: 0.4s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    img {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        margin: -8px 0;
+        float: left;
+        margin-right: 10px;
+    }
 }
 
 .navbar .navbar-brand {
@@ -86,7 +95,6 @@
 
 .navbar a,
 .navbar a:active {
-    color: #888;
     padding: 8px 20px;
     background: transparent;
     line-height: normal;

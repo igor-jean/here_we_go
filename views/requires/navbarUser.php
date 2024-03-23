@@ -48,9 +48,4 @@
         </div>
     </div>
 </nav>
-<?php if($premium) { ?>
-            <button role="button" class="golden-button">
-                <a href="/here_we_go/jai_de_la_chance" class="golden-text">J'ai de la chance</a>
-            </button>
-<?php } ?>
 <script src="js/datepicker.js"></script>
