@@ -18,12 +18,21 @@
             </div>
             <form action="/here_we_go/recherche" method="post" class="navbar-form form-inline d-flex ">
                 <div class="datepicker">
-                    <input type="date" name="date" id="searchDate" class="form-control" style="border-radius: 4px 0px 0px 4px !important;">
+                    <input type="date" name="date" id="searchDate" class="form-control">
                 </div> 
                 <div id="searchBox" class="input-group search-box">								
-                    <input type="text" id="search" class="form-control" name="search" placeholder="Recherche .." style="border-radius: 4px 0px 0px 4px !important;">
+                    <input type="text" id="search" class="form-control" name="search" placeholder="Recherche ..">
                 </div>
-                <div id="boutton-datepicker" class="nav-item"><span class="nav-item nav-link boutton-datepicker-textcontent">Par Date</span></div>
+                <div id="boutton-datepicker" class="nav-item">
+                    <input id="checkbox_toggle" type="checkbox" class="check">
+                    <div class="checkbox">
+                        <label class="slide" for="checkbox_toggle">
+                            <label class="toggle" for="checkbox_toggle"></label>
+                            <label class="text" for="checkbox_toggle">Mot-clé</label>
+                            <label class="text" for="checkbox_toggle">Date</label>
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" id="boutton-rechercher"><i class="fa fa-search">&#xE8B6;</i></button>
             </form>
             <div class="nav-item">
