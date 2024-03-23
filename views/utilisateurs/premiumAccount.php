@@ -1,8 +1,11 @@
 <div class="bg-color ">
-    <div class="container">
-        <h1>Liste des événements dans un rayon de 50km autour de <?php echo $villeUtilisateur["ville"];?></h1>
-    </div>
+    <h1>J'ai de la chance</h1>
 </div>
+<div class="container">
+        <h2 class=text-center>Les événements  autour de <?php echo $villeUtilisateur["ville"];?></h2>
+    </div>
+
+    <p class="text-center mt-5 mb-5">Pour vous remercier d'avoir créé plusieurs événements,<br> vous pouvez voir les événements qui se situent à 50 km autour de vous.</p>
 <div class="container">
    
     <div id="mapAccueil"></div>
