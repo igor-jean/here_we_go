@@ -6,8 +6,8 @@
         $perPage = isset($_GET['perPage']) ? intval($_GET['perPage']) : 9;
         $eventsData = Evenement::homePagination($page, $perPage);
         $eventsForPage = $eventsData['events'];
-                $totalPages = $eventsData['totalPages'];
-                $currentPage = $eventsData['currentPage'];
+        $totalPages = $eventsData['totalPages'];
+        $currentPage = $eventsData['currentPage'];
         require_once('views/pages/home.php');
       } catch(Exception $e) {
         echo "Erreur :".$e->getMessage();
@@ -16,10 +16,6 @@
 
     public function error() {
       require_once('views/pages/error.php');
-    }
-
-    public function connexion() {
-      require_once('views/pages/connexion.php');
     }
     
     public function categorie() {

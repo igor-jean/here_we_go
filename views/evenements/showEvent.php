@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-md-12 ">
             <div class="block" style="border-bottom: 2px solid black;">
-                <p class="texte-long mb-5 mt-5" class="my-5 fs-3">
+                <p id="texte-long" class="my-5 fs-3">
                     <?php echo $event->description_longue; ?>
                 </p>
             </div>

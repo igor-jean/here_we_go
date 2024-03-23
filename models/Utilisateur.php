@@ -65,7 +65,7 @@
                     ":telephone" => $telephone,
                     ":id_role" => $role
                 ));
-                header("Location: ?controller=pages&action=connexion");
+                
             } catch (Exception $e) {
                 echo "Une erreur s'est produite : ".$e->getMessage()."<br>Redirection automatique...";
                 header("Location: ?controller=pages&action=home");

@@ -1,0 +1,181 @@
+@media (max-width: 768px) {
+    .navbar .dropdown-menu.action-form {
+        width: 100%;
+        padding: 10px 15px;
+        background: transparent;
+        border: none;
+    }
+
+    .navbar .form-inline {
+        display: block;
+    }
+
+    .navbar .input-group {
+        width: 100%;
+    }
+}
+
+.navbar .form-control {
+    box-shadow: none;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.navbar {
+    background: #69bace !important;
+    padding-left: 35px;
+    padding-right: 35px;
+    border-bottom: 5px solid black;
+    border-radius: 0;
+    position: fixed;
+    /* Utilisation de 'fixed' au lieu de 'sticky' */
+    width: 100%;
+    min-height: 77.5px;
+    top: 0;
+    z-index: 9;
+}
+
+.nav-link img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin: -8px 0;
+    float: left;
+    margin-right: 10px;
+}
+
+.navbar .navbar-brand {
+    padding-left: 0;
+    font-size: 35px;
+    padding-right: 50px;
+
+    @media screen and (max-width: 700px) {
+        font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: 425px) {
+        font-size: 1.2rem;
+    }
+}
+
+.navbar .navbar-brand b {
+    color: white;
+}
+
+.navbar .form-inline {
+    display: inline-block;
+}
+
+.navbar a {
+    color: #242020;
+    font-size: 18px;
+}
+
+.navbar .sign-up-btn {
+    min-width: 110px;
+    max-height: 36px;
+}
+
+.navbar .dropdown-menu {
+    color: #999;
+    font-weight: normal;
+    border-radius: 1px;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+.navbar a,
+.navbar a:active {
+    color: #888;
+    padding: 8px 20px;
+    background: transparent;
+    line-height: normal;
+}
+
+.navbar .navbar-form {
+    border: none;
+}
+
+.navbar .action-form {
+    width: 280px;
+    padding: 20px;
+    left: auto;
+    right: 0;
+    font-size: 14px;
+}
+
+.navbar .action-form a {
+    color: #33cabb;
+    padding: 0 !important;
+    font-size: 14px;
+}
+
+.navbar .action-form .hint-text {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.navbar .btn-primary,
+.navbar .btn-primary:active {
+    color: #fff;
+    background: #048b9a !important;
+    border: none;
+}
+
+.navbar .btn-primary:hover,
+.navbar .btn-primary:focus {
+    color: #fff;
+    background: #31bfb1 !important;
+}
+
+.navbar .social-btn .btn,
+.navbar .social-btn .btn:hover {
+    color: #fff;
+    margin: 0;
+    padding: 0 !important;
+    font-size: 13px;
+    border: none;
+    transition: all 0.4s;
+    text-align: center;
+    line-height: 34px;
+    width: 47%;
+    text-decoration: none;
+}
+
+.navbar .social-btn .btn i {
+    margin-right: 5px;
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+}
+
+.navbar .action-buttons .dropdown-toggle::after {
+    display: none;
+}
+
+.nav-item a:not(.dropdown-item) {
+    @media screen and (max-width: 1400px) {
+        display: inline;
+    }
+}
+
+.dropdown-menu {
+    transition: 2s ease;
+
+    @media screen and (max-width: 1400px) {
+        width: 329px;
+    }
+}
+
+.menuHidden {
+    display: none;
+
+    @media screen and (max-width: 1400px) {
+        display: initial;
+    }
+}
+
+.navbar-nav {
+    gap: 15px
+}

@@ -1,29 +1,34 @@
 <h1><?php echo $categorie->getLibelleCategorie();?></h1>
-
-<section class="articles mt-5 mb-5">
-    <?php foreach ($events as $event) {?>
-    <article style="border: 7px solid <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>">
-        <div class="article-wrapper">
-            <figure>
-                <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" alt="" />
-            </figure>
-            <ul>
-                <div class="article-body">
-                    <li><h3><?php echo $event->titre; ?></h3></li>
-                    <li><?php echo date('d/m/Y', strtotime($event->date_event))." - ".date('H:i', strtotime($event->heure_event)); ?></li>
-                    <li><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></li>
-                    <li>Prix : <?php echo $event->prix; ?> €</li>
-                    <li><?php echo $event->description_courte; ?></li>
-                    <a href="?controller=evenements&action=showEvent&id_event=<?php echo $event->id_event;?>" class="read-more">
-                        En savoir + <span class="sr-only">about this is some title</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <p><?php if(Covoiturage::getCovoituragesCountByEventId($event->id_event) > 0) {echo "Il y a ".Covoiturage::getCovoituragesCountByEventId($event->id_event)." covoiturage(s) de disponnible pour cet événement.";}   ?></p>
+<div class="container">
+    <section class="my-5">
+        <div class="row g-3">
+            <?php foreach ($events as $event) {?>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card position-relative h-100" style="width: 22rem;">
+                        <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
+                            <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <p class="mb-0"><?php echo date('d/m/Y', strtotime($event->date_event))." - ".date('H:i', strtotime($event->heure_event)); ?></p>
+                            <h5 class="card-title" style="color : <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>;"><?php echo $event->titre; ?></h5>
+                            <p class="card-text"><?php echo $event->description_courte; ?></p>
+                        </div>
+                        <div class="d-flex" style="color : white; background: <?php echo Categorie::findByEventId($event->id_event)->getCouleur(); ?>; width : 100%; height : 70px">
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->prix; ?> <i class="fa-solid fa-euro-sign"></i></span>
+                            </div>
+                            <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo $event->ville." (".substr($event->code_postal, 0, 2).")"; ?></span>
+                                <span><i class="fa-solid fa-location-dot"></i></span>
+                            </div>
+                            <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                <span><?php echo Covoiturage::getCovoituragesCountByEventId($event->id_event);?></span>
+                                <span><i class="fa-solid fa-car"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </ul>
+            <?php } ?>
         </div>
-    </article>
-    <?php } ?>
-</section>
+    </section>
+</div>

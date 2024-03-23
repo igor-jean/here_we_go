@@ -34,6 +34,10 @@
         foreach ($requiredFields as $field) {
           if (empty($_POST[$field])) {
             throw new Exception("Veuillez remplir tous les champs obligatoires.");
+          }elseif ( $_POST["mail"] != $_POST["confirmMail"]) {
+            throw new Exception("Le mail et sa confirmation ne correspondent pas.");
+          }elseif($_POST["pwd"] != $_POST["confirmPwd"]) {
+            throw new Exception("La password et sa confirmation ne correspondent pas.");
           }
         }
 
@@ -43,12 +47,11 @@
         $confirmPwd = $_POST["confirmPwd"];
         $prenom = $_POST["prenom"];
         Utilisateur::addUser($mail, $pwd, $nom, $prenom, $ville, $telephone);
-        header("Location: ?controller=pages&action=home");
-        exit();
+        $message = "Félicitation ! Vous êtes maintenant inscrit à notre site.";
+        header("Location: ?controller=pages&action=home&message=$message");
       } catch(Exception $e) {
           $errorMessage = urlencode($e->getMessage());
           header("Location: ?controller=pages&action=home&error=$errorMessage");
-          exit();
             }
       }
   
