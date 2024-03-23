@@ -1,26 +1,29 @@
-<?php
-if(isset($_GET['errorMessage'])) {
-    $errorMessage = urldecode($_GET['errorMessage']);
-    echo '<div class="error-message">' . $errorMessage . '</div>';
-}elseif(isset($_GET['error'])) {
-    $error = urldecode($_GET['error']);
-    echo '<div class="error-message">' . $error . '</div>';
-}
-?>
-<div class="background-index "></div>
+<section class="header-color">
+    <div class="background-index ">
+    <?php
+        if(isset($_GET['errorMessage'])) {
+            $errorMessage = urldecode($_GET['errorMessage']);
+            echo '<div class="error-message">' . $errorMessage . '</div>';
+        }elseif(isset($_GET['error'])) {
+            $error = urldecode($_GET['error']);
+            echo '<div class="error-message">' . $error . '</div>';
+        }elseif(isset($_GET["message"])) {
+            echo '<div class="success-message">' . $_GET["message"] . '</div>';
+        }
+    ?>
+    </div>
+</section>
     <div class="bg-color ">
         <div class="container">
             <h1>Liste des événements</h1>
         </div>
     </div>
-
-
 <div class="container">
     <section class="my-5">
         <div class="row g-3">
             <?php foreach ($eventsForPage as $event) {?>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="card position-relative h-100" style="width: 22rem;">
+                <div class="col-xl-4 col-lg-6 col-12">
+                    <div class="card position-relative h-100 mx-auto" style="width: 22rem;">
                         <a href="/here_we_go/fiche_evenement/<?php echo $event->id_event;?>">
                             <img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" class="card-img-top" alt="...">
                         </a>

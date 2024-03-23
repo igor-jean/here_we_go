@@ -1,12 +1,19 @@
 #map {
     height: 350px;
     width: 100%;
+    z-index: 3;
 }
 
 #mapAccueil {
     height: 500px;
     width: 50%;
     margin: 20px auto 50px;
+    z-index: 3;
+
+    @media screen and (max-width: 1200px) {
+        width: 80%;
+        height: 300px;
+    }
 }
 
 .leaflet-container a {

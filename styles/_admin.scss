@@ -18,6 +18,10 @@
 
 .dropdownAvatar {
     position: absolute;
-    right: 70px !important;
+    right: 30px !important;
     top: 7px;
+
+    @media screen and (max-width: 1400px) {
+        display: none;
+    }
 }
