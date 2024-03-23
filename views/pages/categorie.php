@@ -1,7 +1,4 @@
 <h1><?php echo $categorie->getLibelleCategorie();?></h1>
-
-
-
 <div class="container">
     <section class="my-5">
         <div class="row g-3">
