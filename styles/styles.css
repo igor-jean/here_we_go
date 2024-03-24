@@ -490,6 +490,33 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+@media screen and (max-width: 1200px) {
+  table {
+    font-size: 1rem;
+  }
+  table .btn-primary {
+    padding: 8px;
+    width: 100px;
+  }
+}
+@media screen and (max-width: 700px) {
+  table {
+    font-size: 0.8rem;
+  }
+  table .btn-primary {
+    padding: 0px;
+    width: 70px;
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 770px) {
+  table {
+    font-size: 0.8rem;
+  }
+  table .none-conducteur {
+    display: none;
+  }
+}
 
 th,
 td {
@@ -574,6 +601,11 @@ th {
   object-fit: cover;
   object-position: center;
   border-radius: 24px;
+}
+@media screen and (max-width: 770px) {
+  .photo-event-div img {
+    height: 300px;
+  }
 }
 
 .card-img-top {
@@ -698,6 +730,11 @@ img {
   -webkit-text-stroke: 1px #000000;
   text-shadow: 0px 1px 4px #23430C;
 }
+@media screen and (max-width: 1000px) {
+  .heure-date span {
+    font-size: 1.7rem;
+  }
+}
 
 .photo-event-div img {
   margin-top: 50px;
@@ -706,7 +743,7 @@ img {
 .btn-primary {
   padding: 15px;
   width: 180px;
-  font-size: 15px;
+  font-size: 20px;
   background: #69BACE;
   border-radius: 30px;
   font-weight: 500;
@@ -732,6 +769,12 @@ img {
   margin: 15%;
 }
 
+@media screen and (max-width: 1150px) {
+  .event-description {
+    font-size: 1.2rem;
+  }
+}
+
 p {
   font-size: 25px;
 }
@@ -755,6 +798,33 @@ textarea {
 table {
   border-collapse: collapse;
   width: 100%;
+}
+@media screen and (max-width: 1200px) {
+  table {
+    font-size: 1rem;
+  }
+  table .btn-primary {
+    padding: 8px;
+    width: 100px;
+  }
+}
+@media screen and (max-width: 700px) {
+  table {
+    font-size: 0.8rem;
+  }
+  table .btn-primary {
+    padding: 0px;
+    width: 70px;
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 770px) {
+  table {
+    font-size: 0.8rem;
+  }
+  table .none-conducteur {
+    display: none;
+  }
 }
 
 th,

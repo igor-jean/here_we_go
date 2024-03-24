@@ -13,6 +13,33 @@ textarea {
 table {
     border-collapse: collapse;
     width: 100%;
+
+    @media screen and (max-width:1200px) {
+        font-size: 1rem;
+
+        .btn-primary {
+            padding: 8px;
+            width: 100px;
+        }
+    }
+
+    @media screen and (max-width:700px) {
+        font-size: .8rem;
+
+        .btn-primary {
+            padding: 0px;
+            width: 70px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @media screen and (max-width: 770px) {
+        font-size: 0.8rem;
+
+        .none-conducteur {
+            display: none;
+        }
+    }
 }
 
 th,

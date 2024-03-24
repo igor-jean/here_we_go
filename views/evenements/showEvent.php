@@ -1,29 +1,27 @@
 <div class="container">
     <div class="photo-event-div"><img src="photo_evenement/<?php echo PhotosEvenement::findByIdEvent($event->id_event)["chemin"]; ?>" alt="" class="photo-event-fiche"/></div>
     <?php setlocale(LC_TIME, 'fr_FR.utf8', 'fra');?>
-    <div class="row">
     <h1 class="h1-Autres "><?php echo $event->titre; ?></h1>
-        <div class="col-10">
-        <p class="heure-date mt-2 d-flex align-items-center">
-        <span><?php echo strftime('%A %d %B %Y', strtotime($event->date_event)),date(' - H:i', strtotime($event->heure_event)); ?></span><br>
-        <span class="ms-2"><?php echo ucfirst($event->ville); ?></span>
-        </p>
+    <div class="row">
+        <div class="col-sm-8 col-12">
+            <p class="heure-date mt-2 d-flex align-items-center">
+                <span><?php echo utf8_encode(strftime('%A %d %B %Y', strtotime($event->date_event))).date(' - H:i', strtotime($event->heure_event))." - ".ucfirst($event->ville); ?></span>
+            </p>
         </div>
-        <div class="row justify-content-center">
-    <div class="col-4 position-relative mt-5 text-end">
-        <?php
-        if (isset($_SESSION["login"])) {
-            if ($checkIfOnlyOne) {
-                echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event=' . $event->id_event . '&id_covoiturage=' . $id_covoit . '" class="btn btn-primary position-absolute">Se désinscrire</a>';
-            } elseif ($result) {
-                echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary position-absolute">Se désinscrire</a>';
-            } else {
-                echo '<a href="?controller=evenements&action=inscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary position-absolute">S\'inscrire</a>';
+        <div class="col-sm-4 col-12 text-center">
+            <?php
+            if (isset($_SESSION["login"])) {
+                if ($checkIfOnlyOne) {
+                    echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event=' . $event->id_event . '&id_covoiturage=' . $id_covoit . '" class="btn btn-primary">Se désinscrire</a>';
+                } elseif ($result) {
+                    echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary">Se désinscrire</a>';
+                } else {
+                    echo '<a href="?controller=evenements&action=inscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary">S\'inscrire</a>';
+                }
             }
-        }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
     <div class="my-3">
         <button id="btn-audio">Ecouté l'Audio de la description</button>
         <div id="text-to-audio"></div>
@@ -32,7 +30,7 @@
     <div class="row">
         <div class="col-md-12 ">
             <div class="block" style="border-bottom: 2px solid black;">
-                <p id="texte-long" class="my-5 fs-3">
+                <p id="texte-long" class="my-5 fs-3 event-description">
                     <?php echo $event->description_longue; ?>
                 </p>
             </div>
@@ -98,13 +96,13 @@
         <h3 class="heure-date">Covoiturage</h3>
     <table class="table mb-5 mt-5">
         <thead>
-        <tr>
-        <th class="col-3 text-center">Nombre places</th>
-        <th class="col-3 text-center">Prix (€)</th>
-        <th class="col-3 text-center">Ville départ</th>
-        <th class="col-3 text-center">Heure départ</th>
-        <th class="col-3 text-center">Conducteur</th>
-        <th class="col-2 text-center">Actions</th>
+        <tr class="text-center">
+        <th>Nombre places</th>
+        <th>Prix (€)</th>
+        <th>Ville départ</th>
+        <th>Heure départ</th>
+        <th class='none-conducteur'>Conducteur</th>
+        <th>Actions</th>
     </tr>
         </thead>
         <tbody>
@@ -116,13 +114,13 @@
         }
         foreach ($covoits as $covoit) {
             echo "
-            <tr>
-                <td class=p-5>" . $covoit->getNbPlace() . "</td>
-                <td class= p-5 >" . $covoit->getMontantParPers() . "</td>
-                <td class= p-4 style=font-size:20px>" . $covoit->getLieuDepart() . "</td>
-                <td class= p-5>" . $covoit->getHeureDepart() . "</td>
-                <td class=  p-5>" . $covoit->prenom_conducteur . "</td>
-                <td class= p-5 ><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir plus</a></td>
+            <tr class='text-center'>
+                <td>" . $covoit->getNbPlace() . "</td>
+                <td>" . $covoit->getMontantParPers() . "</td>
+                <td>" . $covoit->getLieuDepart() . "</td>
+                <td>" . date("H\hi", strtotime($covoit->getHeureDepart())). "</td>
+                <td class='none-conducteur'>" . $covoit->prenom_conducteur . "</td>
+                <td><a href='?controller=covoiturages&action=showCovoiturage&id_covoiturage=" . $covoit->getIdCovoiturage() . "&id_event=".$event->id_event."' class='btn btn-primary'>Voir</a></td>
             </tr>
         ";}?>
         </tbody>

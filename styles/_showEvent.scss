@@ -44,6 +44,12 @@ img {
     text-transform: capitalize;
     -webkit-text-stroke: 1px #000000;
     text-shadow: 0px 1px 4px #23430C;
+
+    span {
+        @media screen and (max-width: 1000px) {
+            font-size: 1.7rem;
+        }
+    }
 }
 
 .photo-event-div img {
@@ -53,7 +59,7 @@ img {
 .btn-primary {
     padding: 15px;
     width: 180px;
-    font-size: 15px;
+    font-size: 20px;
     background: #69BACE;
     border-radius: 30px;
     font-weight: 500;
@@ -78,4 +84,12 @@ img {
 
 .description-detail {
     margin: 15%;
+}
+
+.event-description {
+    @media screen and (max-width: 1150px) {
+        font-size: 1.2rem;
+    }
+
+
 }

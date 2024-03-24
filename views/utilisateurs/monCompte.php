@@ -65,12 +65,12 @@
             <h3 class="text-dark ">Téléchargement des événements créés</h3>
             <div class="d-inline-block">
                 <p class="d-inline-block me-3">Vous pouvez télécharger au format CSV en cliquant sur le bouton ci-dessous pour retrouver toutes les informations de vos événements créés.</p>
-                <a href="?controller=utilisateurs&action=telechargerTousCSV" class="btn btn-primary d-inline-block">Telecharger</a>
+                <a href="?controller=utilisateurs&action=telechargerTousCSV" id="futur" class="btn btn-primary d-inline-block">Telecharger</a>
             </div>
         </div>
         <div class="accordion mt-5">
             <div class="accordion-item">
-                <h2 id="futur">
+                <h2 id="passe">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
                         <span>Vos évenements crée a venir</span>
                     </button>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <h2 id="passe">
+                <h2 id="inscrit">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                         <span >Vos événements créés passés</span>
                     </button>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <h2 id="inscrit">
+                <h2>
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                         <span >Liste des évenements inscrit </span>
                     </button>
