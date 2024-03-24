@@ -70,3 +70,20 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4),
         inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
 }
+
+// connexion
+.action-buttons {
+    .btn-primary {
+        margin-top: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 1400px) {
+        .nav-item {
+            margin: 15px 0;
+        }
+    }
+}

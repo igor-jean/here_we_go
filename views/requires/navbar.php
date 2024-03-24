@@ -5,9 +5,9 @@
     </button>
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
         <div class="navbar-nav">
-            <a href="/here_we_go/accueil" class="nav-item nav-link">Accueil</a>		
+            <a href="/here_we_go/accueil" class="nav-item nav-link"><span class="black-hover">Acc</span>ueil</a>		
             <div class="nav-item dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categorie</a>
+                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><span class="black-hover">Cate</span>gorie</a>
                 <div class="dropdown-menu">					
                 <?php foreach (Categorie::all() as $key) {
                         echo '<a href="/here_we_go/categorie/'.$key->getIdCategorie().'" class="dropdown-item">'.$key->getLibelleCategorie().'</a>';
@@ -37,7 +37,7 @@
         </form>
         <div class="navbar-nav ms-auto action-buttons">
             <div class="nav-item dropdown">
-                <a href="?controller=pages&action=connexion" data-toggle="dropdown" class="nav-link dropdown-toggle mr-4">Connexion</a>
+                <a href="?controller=pages&action=connexion" data-toggle="dropdown" class="nav-link dropdown-toggle mr-4"><span class="black-hover">Conn</span>exion</a>
                 <div class="dropdown-menu action-form">
                     <form action="?controller=utilisateurs&action=login" method="post">
                     <div class="form-group">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="nav-item dropdown">
-    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle sign-up-btn">Crée votre compte</a>
+    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle sign-up-btn"><span class="black-hover">Crée </span>votre compte</a>
     <div class="dropdown-menu action-form">
         <form action="?controller=utilisateurs&action=register" method="post">
             <div class="form-group">

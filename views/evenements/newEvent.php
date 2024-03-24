@@ -9,6 +9,7 @@ if(isset($_GET['error'])) {
     }
     ?>
 <form action="?controller=evenements&action=add" method="post">
+<p class="heure-date"> Les Informations</p>
 <div class="row">
         <div class="col-md-7">
         <label for="titre" class="form-label">Nom de l'événement :</label>

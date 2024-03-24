@@ -1,16 +1,14 @@
-<div class="bg-color ">
-    <div class="container">
-        <h1>Liste des événements dans un rayon de 200km autour de <?php echo $villeUtilisateur["ville"];?></h1>
-    </div>
+<div class="container">
+    <h1>Liste des événements dans un rayon de 200km autour de <?php echo $villeUtilisateur["ville"];?></h1>
 </div>
 <div class="container">
         <h2 class=text-center>Les événements  autour de <?php echo $villeUtilisateur["ville"];?></h2>
     </div>
 
-    <p class="text-center mt-5 mb-5">Pour vous remercier d'avoir créé plusieurs événements,<br> vous pouvez voir les événements qui se situent à 50 km autour de vous.</p>
+    <p class="text-center mt-5 mb-5">Pour vous remercier d'avoir participé à plusieurs événements,<br> vous pouvez voir les événements qui se situent à 200 km autour de vous.</p>
 <div class="container">
    
-    <div id="mapAccueil"></div>
+    <div id="mapPremium"></div>
     <?php 
 
     $listeVilles = [];
@@ -51,7 +49,7 @@
 
         console.log(`Ville: ${userVille}, Longitude: ${longitudeUser}, Latitude: ${latitudeUser}`);
 
-        const map = L.map('mapAccueil').setView([latitudeUser, longitudeUser], 9);
+        const map = L.map('mapPremium').setView([latitudeUser, longitudeUser], 9);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 13,

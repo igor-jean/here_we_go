@@ -5,9 +5,9 @@
     </button>
     <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
         <div class="navbar-nav">
-            <a href="/here_we_go/accueil" class="nav-item nav-link">Accueil</a>		
+            <a href="/here_we_go/accueil" class="nav-item nav-link"><span class="black-hover">Acc</span>ueil</a>		
             <div class="nav-item dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Categories</a>
+                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><span class="black-hover">Cate</span>gories</a>
                 <div class="dropdown-menu">
                     <?php foreach (Categorie::all() as $key) {
                         echo '<a href="/here_we_go/categorie/'.$key->getIdCategorie().'" class="dropdown-item">'.$key->getLibelleCategorie().'</a>';
@@ -36,24 +36,24 @@
                 <button type="submit" id="boutton-rechercher"><i class="fa fa-search">&#xE8B6;</i></button>
             </form>
             <div class="nav-item">
-                <a href="/here_we_go/creation_evenement" class="nav-item nav-link">Ajouter un evenement</a>
+                <a href="/here_we_go/creation_evenement" class="nav-item nav-link"><span class="black-hover">Ajouter </span>un evenement</a>
             </div>
             <div class="dropdown dropdownAvatar">
                 <a href="#" data-toggle="dropdown" class="nav-item dropdown-toggle toggleAvatar"><img src="imgUploaded/<?php echo $user->getAvatar();?>" alt="" style="width : 60px; height : 60px; object-fit : cover; border-radius : 100%;<?php if($premium) echo "border: 5px solid gold;"?>"></a>
                 <div class="dropdown-menu">
-                    <a href="/here_we_go/monCompte" class="dropdown-item">Mon compte</a>
-                    <a href="/here_we_go/deconnexion" class="dropdown-item">Deconnexion</a>
-                    <a href="/here_we_go/gestion_du_site" class="dropdown-item">Gestion du site</a>
+                    <a href="/here_we_go/monCompte" class="dropdown-item"><span class="black-hover">Mon </span>compte</a>
+                    <a href="/here_we_go/deconnexion" class="dropdown-item"><span class="black-hover">Decon</span>nexion</a>
+                    <a href="/here_we_go/gestion_du_site" class="dropdown-item"><span class="black-hover">Gestion </span>du site</a>
                 </div>
             </div>
             <div class="nav-item menuHidden">
-                <a href="/here_we_go/monCompte" class="nav-item nav-link">Mon compte</a>
+                <a href="/here_we_go/monCompte" class="nav-item nav-link"><span class="black-hover">Mon </span>compte</a>
             </div>
             <div class="nav-item menuHidden">
-                <a href="/here_we_go/deconnexion" class="nav-item nav-link">Deconnexion</a>
+                <a href="/here_we_go/gestion_du_site" class="nav-item nav-link"><span class="black-hover">Gestion </span>du site</a>
             </div>
             <div class="nav-item menuHidden">
-                <a href="/here_we_go/gestion_du_site" class="nav-item nav-link">Gestion du site</a>
+                <a href="/here_we_go/deconnexion" class="nav-item nav-link"><span class="black-hover">Decon</span>nexion</a>
             </div>
     </div>
 </nav>

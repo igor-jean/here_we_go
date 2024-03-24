@@ -22,7 +22,7 @@ if(Utilisateur::premiumAccount($id_user)) { ?>
 </section>
     <div class="bg-color ">
         <div class="container">
-            <h1>Liste des événements</h1>
+            <h1 class="h1-home">événements à venir !</h1>
         </div>
     </div>
 <div class="container">

@@ -73,7 +73,7 @@ h1 {
   font-size: 85px;
   color: #3e6c77;
   text-align: center;
-  margin-bottom: 100px;
+  margin: 150px 0 100px;
 }
 @media screen and (max-width: 870px) {
   h1 {
@@ -85,6 +85,13 @@ h1 {
   h1 {
     font-size: 40px;
   }
+}
+
+.h1-home {
+  margin-top: 0;
+}
+.h1-home::first-letter {
+  text-transform: uppercase;
 }
 
 h2 {
@@ -277,14 +284,12 @@ article:has(:hover, :focus) {
   figure img {
     height: 100%;
     aspect-ratio: 1;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 }
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
@@ -497,26 +502,85 @@ th {
   background-color: #f2f2f2;
 }
 
+.ancre-monCompte button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+}
+.ancre-monCompte button a {
+  text-decoration: none;
+}
+.ancre-monCompte .button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 0.75em 1.5em;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+.ancre-monCompte button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+.ancre-monCompte button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 770px) {
+  .infosPerso li {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .none-vehicule {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .table-covoit {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .mon-compte h2 {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 530px) {
+  .mon-compte h2 {
+    font-size: 1.2rem;
+  }
+}
+
 .photo-event-div {
   margin: 150px auto 50px;
 }
 .photo-event-div img {
   width: 100%;
   height: 570px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  object-fit: cover;
+  object-position: center;
   border-radius: 24px;
 }
 
 .card-img-top {
   height: 220px;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+  object-fit: cover;
+  object-position: center;
 }
 
 .date-heure-event {
@@ -565,6 +629,19 @@ th {
 }
 @media screen and (max-width: 1200px) {
   #mapAccueil {
+    width: 80%;
+    height: 300px;
+  }
+}
+
+#mapPremium {
+  height: 500px;
+  width: 70%;
+  margin: 20px auto 50px;
+  z-index: 3;
+}
+@media screen and (max-width: 1200px) {
+  #mapPremium {
     width: 80%;
     height: 300px;
   }
@@ -691,6 +768,69 @@ th {
   background-color: #f2f2f2;
 }
 
+.ancre-monCompte button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+}
+.ancre-monCompte button a {
+  text-decoration: none;
+}
+.ancre-monCompte .button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button_outline_color);
+  border-radius: var(--button_radius);
+  padding: 0.75em 1.5em;
+  background: var(--button_color);
+  color: var(--button_outline_color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+.ancre-monCompte button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+.ancre-monCompte button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 770px) {
+  .infosPerso li {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .none-vehicule {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .table-covoit {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .mon-compte h2 {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 530px) {
+  .mon-compte h2 {
+    font-size: 1.2rem;
+  }
+}
+
 .golden-button {
   z-index: 10;
   position: fixed;
@@ -754,8 +894,20 @@ th {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4), inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgb(250, 227, 133);
 }
 
+.action-buttons .btn-primary {
+  margin-top: 15px;
+}
+.action-buttons .form-group {
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 1400px) {
+  .action-buttons .nav-item {
+    margin: 15px 0;
+  }
+}
+
 @media (max-width: 768px) {
-  .navbar .dropdown-menu.action-form {
+  .navbar .dropdown-menu.action-form:not(.action-form) {
     width: 100%;
     padding: 10px 15px;
     background: transparent;
@@ -791,9 +943,6 @@ th {
 .nav-link {
   color: white !important;
   transition: 0.4s ease;
-}
-.nav-link:hover {
-  transform: scale(1.1);
 }
 .nav-link img {
   border-radius: 50%;
@@ -941,6 +1090,14 @@ th {
 
 .navbar-nav {
   gap: 15px;
+}
+
+.nav-item.nav-link:hover .black-hover {
+  color: black;
+}
+
+.dropdown-toggle:hover .black-hover {
+  color: black;
 }
 
 /* footer */

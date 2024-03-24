@@ -1,5 +1,5 @@
 @media (max-width: 768px) {
-    .navbar .dropdown-menu.action-form {
+    .navbar .dropdown-menu.action-form:not(.action-form) {
         width: 100%;
         padding: 10px 15px;
         background: transparent;
@@ -38,10 +38,6 @@
 .nav-link {
     color: white !important;
     transition: 0.4s ease;
-
-    &:hover {
-        transform: scale(1.1);
-    }
 
     img {
         border-radius: 50%;
@@ -186,4 +182,12 @@
 
 .navbar-nav {
     gap: 15px
+}
+
+.nav-item.nav-link:hover .black-hover {
+    color: black;
+}
+
+.dropdown-toggle:hover .black-hover {
+    color: black
 }
