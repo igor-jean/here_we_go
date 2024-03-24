@@ -13,6 +13,13 @@ textarea {
 table {
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
+
+    td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+    }
 
     @media screen and (max-width:1200px) {
         font-size: 1rem;

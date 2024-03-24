@@ -297,6 +297,27 @@ article:has(:hover, :focus) {
   width: 1px;
 }
 
+.show-link {
+  display: none;
+}
+@media screen and (max-width: 670px) {
+  .show-link {
+    display: table-cell;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .hide-link {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .list-unstyled li {
+    font-size: 1.2rem !important;
+  }
+}
+
 .notifUser {
   width: 30px;
   height: 30px;
@@ -489,6 +510,12 @@ textarea {
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
+}
+table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 @media screen and (max-width: 1200px) {
   table {
@@ -798,6 +825,12 @@ textarea {
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
+}
+table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 @media screen and (max-width: 1200px) {
   table {

@@ -322,3 +322,26 @@ article:has(:hover, :focus) {
     white-space: nowrap;
     width: 1px;
 }
+
+.show-link {
+    display: none;
+
+    @media screen and (max-width: 670px) {
+        display: table-cell;
+    }
+}
+
+.hide-link {
+    @media screen and (max-width: 670px) {
+        display: none;
+    }
+}
+
+.list-unstyled {
+    @media screen and (max-width: 670px) {
+        li {
+            font-size: 1.2rem !important;
+        }
+
+    }
+}

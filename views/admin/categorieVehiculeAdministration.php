@@ -14,7 +14,7 @@
                    <tr>
                         <td>".$categorie->getLibelleCategorie()."</td>
                         <td><input type='color' value='".$categorie->getCouleur()."'></td>
-                        <td><a href='?controller=admin&action=voirCategorie&id_categorie=".$categorie->getIdCategorie()."'>Modifier</a></td>
+                        <td><a href='?controller=admin&action=voirCategorie&id_categorie=".$categorie->getIdCategorie()."'><i class='fa-solid fa-pen-to-square'></i></a></td>
                     </tr> 
                 ";
             }
@@ -24,7 +24,7 @@
         <tfoot>
             <tr>
                 <td>
-                    <a href="?controller=admin&action=ajouterCategorie">Ajouter une categorie</a>
+                    <a href="?controller=admin&action=ajouterCategorie"><i style="font-size: 2rem" class="fa-solid fa-plus"></i></a>
                 </td>
             </tr>
         </tfoot>
@@ -43,7 +43,7 @@
                 echo "
                    <tr>
                         <td>".$vehicule->getType()."</td>
-                        <td><a href='?controller=admin&action=voirTypeVehicule&id_vehicule=".$vehicule->getIdVehicule()."'>Modifier</a></td>
+                        <td><a href='?controller=admin&action=voirTypeVehicule&id_vehicule=".$vehicule->getIdVehicule()."'><i class='fa-solid fa-pen-to-square'></i></a></td>
                     </tr> 
                 ";
             }
@@ -53,7 +53,7 @@
         <tfoot>
             <tr>
                 <td>
-                    <a href="?controller=admin&action=ajouterTypeVehicule">Ajouter un type de vehicule</a>
+                    <a href="?controller=admin&action=ajouterTypeVehicule"><i style="font-size: 2rem" class="fa-solid fa-plus"></i></a>
                 </td>
             </tr>
         </tfoot>

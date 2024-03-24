@@ -8,8 +8,7 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Mail</th>
-                <th>Valider</th>
-                <th>Refuser</th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,8 +17,10 @@
                     <td><?php echo $toValidate->getNom(); ?></td>
                     <td><?php echo $toValidate->getPrenom(); ?></td>
                     <td><?php echo $toValidate->getMail(); ?></td>
-                    <td><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-success">Valider</a></td>
-                    <td><a href='?controller=admin&action=deleteUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-danger">Refuser</a></td>
+                    <td class=" hide-link"><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-success">Valider</a></td>
+                    <td class=" hide-link"><a href='?controller=admin&action=deleteUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-danger">Refuser</a></td>
+                    <td class="show-link"><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>'><i style="color: green" class="fa-solid fa-check"></i></a></td>
+                    <td class="show-link"><a href='?controller=admin&action=deleteUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>'><i style="color: red" class="fa-solid fa-circle-xmark"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -32,7 +33,7 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Mail</th>
-                <th>Modifier</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +42,8 @@
                     <td><?php echo $utilisateur->getNom(); ?></td>
                     <td><?php echo $utilisateur->getPrenom(); ?></td>
                     <td><?php echo $utilisateur->getMail(); ?></td>
-                    <td><a href='?controller=admin&action=voirUser&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>' class="btn btn-primary">Modifier</a></td>
+                    <td class="hide-link"><a href='?controller=admin&action=voirUser&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>' class="btn btn-primary">Modifier</a></td>
+                    <td class="show-link"><a href='?controller=admin&action=voirUser&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>'><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>

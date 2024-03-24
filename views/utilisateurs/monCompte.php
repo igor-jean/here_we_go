@@ -53,7 +53,7 @@
                             <td>".$vehicule->getImmatriculation()."</td>
                             <td class='none-vehicule'>".$vehicule->getNb_places()."</td>
                             <td class='none-vehicule'>".Vehicule::findTypeVehicule($vehicule->getId_vehicule())."</td>
-                            <td><a href='/here_we_go/monCompte/modifier_mon_vehicule/".$vehicule->getId_vehicule_utilisateur()."'>Modifier</a></td>
+                            <td><a href='/here_we_go/monCompte/modifier_mon_vehicule/".$vehicule->getId_vehicule_utilisateur()."'><i class='fa-solid fa-pen-to-square'></i></a></td>
                         </tr> 
                     ";
                 }
@@ -212,7 +212,7 @@
                     <td><?php echo date("m/d/y", strtotime(Evenement::find($covoit->getIdEvent())->getDateEvent())); ?></td>
                     <td><?php echo date("H\hi", strtotime($covoit->getHeureDepart())); ?></td>
                     <td class="none-vehicule"><?php echo $covoit->getLieuDepart(); ?></td>
-                    <td><a href="/here_we_go/monCompte/modifier_mon_covoiturage/<?php echo $covoit->getIdCovoiturage(); ?>">Voir</a></td>
+                    <td><a href="/here_we_go/monCompte/modifier_mon_covoiturage/<?php echo $covoit->getIdCovoiturage(); ?>"><i class="fa-solid fa-eye"></i></a></td>
                 </tr>
                 <?php } ?>
             </table>
@@ -232,7 +232,7 @@
                         <td><?php echo date("m/d/y", strtotime(Evenement::find($covoit->getIdEvent())->getDateEvent())); ?></td>
                         <td><?php echo date("H\hi", strtotime($covoit->getHeureDepart())); ?></td>
                         <td class="none-vehicule"><?php echo $covoit->getLieuDepart(); ?></td>
-                        <td><a href="/here_we_go/covoiturage/<?php echo $covoit->getIdCovoiturage(); ?>">Voir</a></td>
+                        <td><a href="/here_we_go/covoiturage/<?php echo $covoit->getIdCovoiturage(); ?>"><i class="fa-solid fa-eye"></i></a></td>
                     </tr>
                     <?php } ?>
                 </table>
