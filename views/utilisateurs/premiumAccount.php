@@ -1,5 +1,7 @@
 <div class="bg-color ">
-    <h1>J'ai de la chance</h1>
+    <div class="container">
+        <h1>Liste des événements dans un rayon de 200km autour de <?php echo $villeUtilisateur["ville"];?></h1>
+    </div>
 </div>
 <div class="container">
         <h2 class=text-center>Les événements  autour de <?php echo $villeUtilisateur["ville"];?></h2>
@@ -49,7 +51,7 @@
 
         console.log(`Ville: ${userVille}, Longitude: ${longitudeUser}, Latitude: ${latitudeUser}`);
 
-        const map = L.map('mapAccueil').setView([latitudeUser, longitudeUser], 10);
+        const map = L.map('mapAccueil').setView([latitudeUser, longitudeUser], 9);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 13,
@@ -69,7 +71,7 @@
                     const latitudeEvent = data.features[0].geometry.coordinates[1];
 
                     const distance = calculateDistance(latitudeUser, longitudeUser, latitudeEvent, longitudeEvent);
-                    if (distance <= 50000) { // 50 km en mètres
+                    if (distance <= 200000) { 
                         let marker = L.marker([latitudeEvent, longitudeEvent]).addTo(map);
 
                         let popupContent = `<a href="fiche_evenement/${event.id_event}">${event.titre}</a>`;

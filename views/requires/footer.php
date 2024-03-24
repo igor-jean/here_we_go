@@ -51,25 +51,26 @@
         </div>
     </div>
     <div class="copyright-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                    <div class="copyright-text">
-                        <p>Copyright &copy; 2023, All Right Reserved <a href="https://codepen.io/anupkumar92/">Anup</a></p>
-                    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center text-lg-left">
+                <div class="copyright-text">
+                    <p>&copy; 2023, Tous droits réservés</p>
                 </div>
-                <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                    <div class="footer-menu">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Policy</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block text-right">
+                <div class="footer-menu">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#" class="link-offset-2 link-light link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Accueil</a></li>
+                        <li class="list-inline-item"><a href="#" class="link-offset-2 link-light link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Conditions</a></li>
+                        <li class="list-inline-item"><a href="#" class="link-offset-2 link-light link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Confidentialité</a></li>
+                        <li class="list-inline-item"><a href="#" class="link-offset-2 link-light link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Politique</a></li>
+                        <li class="list-inline-item"><a href="#" class="link-offset-2 link-light link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </footer>

@@ -1,3 +1,10 @@
+<?php 
+$id_user = isset($_SESSION["id_utilisateur"])?$_SESSION["id_utilisateur"]:"";
+if(Utilisateur::premiumAccount($id_user)) { ?>
+            <button role="button" class="golden-button">
+                <a href="/here_we_go/jai_de_la_chance" class="golden-text">J'ai de la chance</a>
+            </button>
+<?php } ?>
 <section class="header-color">
     <div class="background-index ">
     <?php
