@@ -12,11 +12,11 @@
             <?php
             if (isset($_SESSION["login"])) {
                 if ($checkIfOnlyOne) {
-                    echo '<a href="?controller=covoiturages&action=confirmationSuppression&id_event=' . $event->id_event . '&id_covoiturage=' . $id_covoit . '" class="btn btn-primary">Se désinscrire</a>';
+                    echo '<a href="/here_we_go/confirmation_desinscription/' . $event->id_event . '/' . $id_covoit . '" class="btn btn-primary">Se désinscrire</a>';
                 } elseif ($result) {
-                    echo '<a href="?controller=evenements&action=desinscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary">Se désinscrire</a>';
+                    echo '<a href="/here_we_go/desinscription/' . $event->id_event . '" class="btn btn-primary">Se désinscrire</a>';
                 } else {
-                    echo '<a href="?controller=evenements&action=inscriptionEvent&id_event=' . $event->id_event . '" class="btn btn-primary">S\'inscrire</a>';
+                    echo '<a href="/here_we_go/inscription/' . $event->id_event . '" class="btn btn-primary">S\'inscrire</a>';
                 }
             }
             ?>
@@ -108,9 +108,9 @@
         <tbody>
         <?php
         if (!$vehicule) {
-            echo '<a href="?controller=utilisateurs&action=ajouterVehicule" class="btn btn-primary">Proposer son covoiturage</a>';
+            echo '<a href="/here_we_go/monCompte/ajout_vehicule" class="btn btn-primary">Proposer son covoiturage</a>';
         } elseif ($result && !$checkIfOnlyOne) {
-            echo '<a href="?controller=covoiturages&action=createCovoiturage&id_event=' . $event->id_event . '" class="btn btn-primary">Proposer son covoiturage</a>';
+            echo '<a href="/here_we_go/ajouter_covoiturage/' . $event->id_event . '" class="btn btn-primary">Proposer son covoiturage</a>';
         }
         foreach ($covoits as $covoit) {
             echo "
@@ -126,5 +126,5 @@
         </tbody>
     </table>
     <?php } ?>
-    <a href="?controller=pages&action=home" class="btn btn-primary">Retour</a>
+    <a href="/here_we_go/accueil" class="btn btn-primary">Retour</a>
 </div>

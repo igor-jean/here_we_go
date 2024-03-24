@@ -77,13 +77,11 @@
         PhotosEvenement::addPhotoParDefault($id_event);
     
         // Redirection vers la page du compte utilisateur
-        header("Location: ?controller=utilisateurs&action=monCompte");
-        exit(); // Assure que le script s'arrête ici après la redirection
+        header("Location: /here_we_go/monCompte");
       } catch(Exception $e) {
           // En cas d'erreur, redirection vers la page d'ajout d'événement avec un message d'erreur
           $errorMessage = urlencode($e->getMessage());
-          header("Location: ?controller=evenements&action=newEvent&error=$errorMessage");
-          exit();
+          header("Location: /here_we_go/submitEvent/error/$errorMessage");
       }
     }
     
@@ -144,7 +142,7 @@
       try {
         $id_event = $_GET["id_event"];
         Evenement::deleteEvent($id_event);
-        header("Location: ?controller=utilisateurs&action=monCompte");
+        header("Location: /here_we_go/monCompte");
       }  catch(Exception $e) {
                 echo "Erreur :".$e->getMessage();
             }

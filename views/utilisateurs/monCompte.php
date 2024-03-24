@@ -65,7 +65,7 @@
             <h3 class="text-dark ">Téléchargement des événements créés</h3>
             <div class="d-inline-block">
                 <p class="d-inline-block me-3">Vous pouvez télécharger au format CSV en cliquant sur le bouton ci-dessous pour retrouver toutes les informations de vos événements créés.</p>
-                <a href="?controller=utilisateurs&action=telechargerTousCSV" id="futur" class="btn btn-primary d-inline-block">Telecharger</a>
+                <a href="/here_we_go/telecharger_csv_evenements" id="futur" class="btn btn-primary d-inline-block">Telecharger</a>
             </div>
         </div>
         <div class="accordion mt-5">

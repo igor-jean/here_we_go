@@ -1,6 +1,6 @@
 <h1>Modifier utilisateur</h1>
 <div class="container">
-    <form action="?controller=admin&action=modifierUtilisateur" method="POST">
+    <form action="/here_we_go/modification_utilisateur" method="POST">
         <input type="hidden" name="id_utilisateur" value="<?php echo $utilisateur->getId_utilisateur(); ?>">
         <div class="mb-3">
             <label for="mail" class="form-label">Mail :</label><br>
@@ -34,9 +34,9 @@
             </select><br>
         </div>
     
-        <button type="submit" class="btn btn-primary">Modifier</button>
-        <a href="?controller=admin&action=supprimerUtilisateur&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>" class="btn btn-danger">Supprimer</a>
+        <button type="submit" class="btn btn-primary me-5">Modifier</button>
+        <a href="/here_we_go/supprimer_utilisateur/<?php echo $utilisateur->getId_utilisateur(); ?>" class="btn btn-danger">Supprimer</a>
     </form>
     
-    <a href="?controller=admin&action=utilisateursAdministration" class="btn btn-secondary mt-3">Retour</a>
+    <a href="/here_we_go/gestion_du_site/utilisateurs" class="btn btn-secondary mt-3">Retour</a>
 </div>

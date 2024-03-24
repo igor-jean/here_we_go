@@ -18,8 +18,8 @@
                     <td><?php echo $event->getTitre(); ?></td>
                     <td><?php echo $event->getDateEvent(); ?></td>
                     <td><?php echo $event->getVille(); ?></td>
-                    <td class="hide-link"><a href='?controller=admin&action=validateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-success">Valider</a></td>
-                    <td class="show-link"><a href='?controller=admin&action=validateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>'><i style="color: green"class="fa-solid fa-check"></i></a></td>
+                    <td class="hide-link"><a href='/here_we_go/validation/<?php echo $event->getIdEvent(); ?>' class="btn btn-success">Valider</a></td>
+                    <td class="show-link"><a href='/here_we_go/validation/<?php echo $event->getIdEvent(); ?>'><i style="color: green"class="fa-solid fa-check"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -41,8 +41,8 @@
                         <td><?php echo $event->getTitre(); ?></td>
                         <td><?php echo $event->getDateEvent(); ?></td>
                         <td><?php echo $event->getVille(); ?></td>
-                        <td class="hide-link"><a href='?controller=admin&action=updateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>' class="btn btn-primary">Modifier</a></td>
-                        <td class="show-link"><a href='?controller=admin&action=updateAnEvent&id_event=<?php echo $event->getIdEvent(); ?>'><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td class="hide-link"><a href='/here_we_go/modifier/<?php echo $event->getIdEvent(); ?>' class="btn btn-primary">Modifier</a></td>
+                        <td class="show-link"><a href='/here_we_go/modifier/<?php echo $event->getIdEvent(); ?>'><i class="fa-solid fa-pen-to-square"></i></a></td>
                     </tr>
                 <?php } ?>
             </tbody>

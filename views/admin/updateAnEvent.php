@@ -9,7 +9,7 @@
     <div class="text-center ">
         <a class="btn btn-secondary" href="evenement/ajout_photo/<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter/Modifier une photo d'Evenement</a>
     </div>
-    <form action="?controller=admin&action=update" method="post">
+    <form action="/here_we_go/modifier_evenement" method="post">
         <input type="hidden" name="id_event" value="<?php echo $event->getIdEvent() ;?>">
         <div class="mb-3">
             <label for="titre" class="form-label">Titre de l'événement:</label>
@@ -79,8 +79,8 @@
         </div>
         <div class="d-flex justify-content-around">
             <input type="submit" value="Modifier" class="btn btn-success btn-lg">
-            <a href="?controller=evenements&action=confirmerSuppression&id_event=<?php echo $event->getIdEvent() ;?>" class="btn btn-danger btn-lg">Supprimer</a>
+            <a href="/here_we_go/supprimer_evenement/<?php echo $event->getIdEvent() ;?>" class="btn btn-danger btn-lg">Supprimer</a>
         </div>
     </form>
-    <a href="?controller=admin&action=evenementsAdministration" class="btn btn-danger my-5 btn-lg">Retour</a>
+    <a href="/here_we_go/gestion_du_site/evenements" class="btn btn-danger my-5 btn-lg">Retour</a>
 </div>

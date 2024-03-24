@@ -8,7 +8,7 @@ if(isset($_GET['error'])) {
     echo '<div class="error-message">' . $errorMessage . '</div>';
     }
     ?>
-<form action="?controller=evenements&action=add" method="post">
+<form action="/here_we_go/submitEvent" method="post">
 <p class="heure-date"> Les Informations</p>
 <div class="row">
         <div class="col-md-7">
@@ -91,7 +91,7 @@ if(isset($_GET['error'])) {
         <div class="mt-5">
             <button type="submit" class="btn btn-primary mb-5">Ajouter</button>
             <div class="text-end">
-                <a href="?controller=pages&action=home" class="btn btn-danger mb-5 text-end" tabindex="-1" role="button">Retour</a>
+                <a href="/here_we_go/accueil" class="btn btn-danger mb-5 text-end" tabindex="-1" role="button">Retour</a>
             </div>
         </div>
     </form>

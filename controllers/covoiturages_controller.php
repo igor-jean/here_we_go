@@ -45,10 +45,10 @@
                 }
 
                 Covoiturage::add($montant_par_pers, $information_de_contact, $lieu_depart, $descriptif, $nb_place, $heure_depart, $id_vehicule_utilisateur, $id_event);
-                header("Location: ?controller=evenements&action=showEvent&id_event=$id_event");
+                header("Location: /here_we_go/fiche_evenement/$id_event");
             } catch(Exception $e) {
                 $errorMessage = urlencode($e->getMessage());
-                header("Location: ?controller=covoiturages&action=createCovoiturage&id_event=$id_event&error=$errorMessage");
+                header("Location: /here_we_go/ajouter_covoiturage/error/$id_event/$errorMessage");
             }
         }
         
@@ -118,7 +118,7 @@
             try {
                 $id_covoiturage = $_GET["id_covoiturage"];
                 Covoiturage::deleteCovoiturage($id_covoiturage);
-                header("Location: ?controller=pages&action=home");
+                header("Location: /here_we_go/accueil");
             } catch(Exception $e) {
                 echo "Erreur :".$e->getMessage();
             }

@@ -5,7 +5,7 @@
     echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
 }
 ?>
-    <form action="?controller=covoiturages&action=addCovoiturage" method="POST">
+    <form action="/here_we_go/submit_covoiturage" method="POST">
         <div class="mb-3">
             <label for="information_de_contact" class="form-label">Information de contact:</label>
             <input type="text" class="form-control" id="information_de_contact" name="information_de_contact" required>

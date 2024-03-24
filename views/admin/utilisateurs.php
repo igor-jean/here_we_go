@@ -42,8 +42,8 @@
                     <td><?php echo $utilisateur->getNom(); ?></td>
                     <td><?php echo $utilisateur->getPrenom(); ?></td>
                     <td><?php echo $utilisateur->getMail(); ?></td>
-                    <td class="hide-link"><a href='?controller=admin&action=voirUser&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>' class="btn btn-primary">Modifier</a></td>
-                    <td class="show-link"><a href='?controller=admin&action=voirUser&id_utilisateur=<?php echo $utilisateur->getId_utilisateur(); ?>'><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td class="hide-link"><a href='/here_we_go/modifier_utilisateur/<?php echo $utilisateur->getId_utilisateur(); ?>' class="btn btn-primary">Modifier</a></td>
+                    <td class="show-link"><a href='/here_we_go/modifier_utilisateur/<?php echo $utilisateur->getId_utilisateur(); ?>'><i class="fa-solid fa-pen-to-square"></i></a></td>
                 </tr>
             <?php } ?>
         </tbody>

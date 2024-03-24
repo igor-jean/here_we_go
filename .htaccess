@@ -64,3 +64,70 @@ RewriteRule ^monCompte/ajout_vehicule$ index.php?controller=utilisateurs&action=
 # Réécriture pour la page premiumAccount
 RewriteRule ^jai_de_la_chance$ index.php?controller=utilisateurs&action=premiumAccount
 
+# Réécriture pour la page envoyer ajout event 
+RewriteRule ^submitEvent$ index.php?controller=evenements&action=add
+
+# Réécriture pour la page envoyer ajout event  avec parametre 
+RewriteRule ^submitEvent/error/([^/]+)/?$ index.php?controller=evenements&action=newEvent&error=$1 [L]
+
+# Réécriture pour la desinscription a un evenement 
+RewriteRule ^desinscription/([^/]+)/?$ index.php?controller=evenements&action=desinscriptionEvent&id_event=$1 [L]
+
+# Réécriture pour la inscription a un evenement 
+RewriteRule ^inscription/([^/]+)/?$ index.php?controller=evenements&action=inscriptionEvent&id_event=$1 [L]
+
+# Réécriture pour la confirmation de desinscription
+RewriteRule ^confirmation_desinscription/([^/]+)/([^/]+)$ index.php?controller=covoiturages&action=confirmationSuppression&id_event=$1&id_covoiturage=$2 [L]
+
+# Réécriture pour la desinscription a un evenement + suppression des covoit
+RewriteRule ^force_desinscription/([^/]+)/?$ index.php?controller=covoiturages&action=supprimerToutCovoit&id_covoiturage=$1 [L]
+
+# Réécriture pour la page ajout covoiturage
+RewriteRule ^ajouter_covoiturage/([^/]+)/?$ index.php?controller=covoiturages&action=createCovoiturage&id_event=$1 [L]
+
+# Réécriture pour la page envoyer ajout covoit
+RewriteRule ^submit_covoiturage$ index.php?controller=covoiturages&action=addCovoiturage
+
+# Réécriture pour la page erreur covoiturage
+RewriteRule ^ajouter_covoiturage/error/([^/]+)/([^/]+)$ index.php?controller=covoiturages&action=createCovoiturage&id_event=$1&error=$2 [L]
+
+# Réécriture pour le telechargement du CSV de tous les evenement d'un utilisateur
+RewriteRule ^telecharger_csv_evenements$ index.php?controller=utilisateurs&action=telechargerTousCSV
+
+# Réécriture pour la page modifier un utilisateur (admin)
+RewriteRule ^modifier_utilisateur/([^/]+)/?$ index.php?controller=admin&action=voirUser&id_utilisateur=$1
+
+# Réécriture pour modifier un utilisateur (admin)
+RewriteRule ^modification_utilisateur$ index.php?controller=admin&action=modifierUtilisateur
+
+# Réécriture pour supprimer un utilisateur (admin)
+RewriteRule ^supprimer_utilisateur/([^/]+)/?$ index.php?controller=admin&action=supprimerUtilisateur&id_utilisateur=$1 [L]
+
+# Réécriture pour aller a la page de validation d'un evenement (admin)
+RewriteRule ^validation/([^/]+)/?$ index.php?controller=admin&action=validateAnEvent&id_event=$1 [L]
+
+# Réécriture pour aller a la page de modificationd'un evenement (admin)
+RewriteRule ^modifier/([^/]+)/?$ index.php?controller=admin&action=updateAnEvent&id_event=$1 [L]
+
+# Réécriture pour modifier un evenement (admin)
+RewriteRule ^modifier_evenement$ index.php?controller=admin&action=update
+
+# Réécriture pour aller a la page confirmation de suppression d'un evenement (admin)
+RewriteRule ^supprimer_evenement/([^/]+)/?$ index.php?controller=evenements&action=confirmerSuppression&id_event=$1 [L]
+
+# Réécriture pour aller a la page confirmation de suppression d'un evenement (admin)
+RewriteRule ^supprimer_evenement_autoriser/([^/]+)/?$ index.php?controller=evenements&action=delete&id_event=$1 [L]
+
+# Réécriture pour aller a la page de modification d'une categorie (admin)
+RewriteRule ^modifier_categorie/([^/]+)/?$ index.php?controller=admin&action=voirCategorie&id_categorie=$1 [L]
+
+# Réécriture pour aller a la page d'ajout d'une categorie (admin)
+RewriteRule ^ajouter_categorie$ index.php?controller=admin&action=ajouterCategorie
+
+# Réécriture pour aller a la page de modification d'un type de vehicule (admin)
+RewriteRule ^modifier_type_vehicule/([^/]+)/?$ index.php?controller=admin&action=voirTypeVehicule&id_vehicule=$1 [L]
+
+# Réécriture pour aller a la page d'ajout d'un type vehicule (admin)
+RewriteRule ^ajouter_type_vehicule$ index.php?controller=admin&action=ajouterTypeVehicule
+
+
