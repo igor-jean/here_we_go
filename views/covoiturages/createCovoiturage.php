@@ -8,30 +8,30 @@
     <form action="/here_we_go/submit_covoiturage" method="POST">
         <div class="mb-3">
             <label for="information_de_contact" class="form-label">Information de contact:</label>
-            <input type="text" class="form-control" id="information_de_contact" name="information_de_contact" required>
+            <input type="text" class="form-control" id="information_de_contact" name="information_de_contact">
         </div>
         <div class="mb-3">
-            <label for="montant_par_pers" class="form-label">Montant par personne:</label>
+            <label for="montant_par_pers" class="form-label">Montant par personne<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" id="montant_par_pers" name="montant_par_pers" required>
         </div>
         <div class="mb-3">
-            <label for="lieu_depart" class="form-label">Lieu de départ:</label>
+            <label for="lieu_depart" class="form-label">Lieu de départ<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" id="lieu_depart" name="lieu_depart" required>
         </div>
         <div class="mb-3">
             <label for="descriptif" class="form-label">Descriptif:</label>
-            <textarea class="form-control" id="descriptif" name="descriptif" required></textarea>
+            <textarea class="form-control" id="descriptif" name="descriptif"></textarea>
         </div>
         <div class="mb-3">
-            <label for="nb_place" class="form-label">Nombre de places:</label>
+            <label for="nb_place" class="form-label">Nombre de places<span class="red-star"> *</span>:</label>
             <input type="number" class="form-control" id="nb_place" name="nb_place" required>
         </div>
         <div class="mb-3">
-            <label for="heure_depart" class="form-label">Heure de départ:</label>
+            <label for="heure_depart" class="form-label">Heure de départ<span class="red-star"> *</span>:</label>
             <input type="time" class="form-control" id="heure_depart" name="heure_depart" required>
         </div>
         <div class="mb-3">
-            <label for="id_vehicule_utilisateur" class="form-label">Véhicule utilisateur:</label>
+            <label for="id_vehicule_utilisateur" class="form-label">Véhicule utilisateur<span class="red-star"> *</span>:</label>
             <select class="form-select" id="id_vehicule_utilisateur" name="id_vehicule_utilisateur" required>
                 <option value="">Sélectionnez le véhicule utilisateur</option>
                 <?php foreach ($vehicules as $vehicule) {

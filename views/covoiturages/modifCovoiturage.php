@@ -43,6 +43,7 @@
             </div>
             <div class="my-3 d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Modifier</button>
+                <a href="/here_we_go/force_desinscription/<?php echo $covoit->getIdCovoiturage();?>" class="btn btn-danger">Supprimer</a>
                 <a href="/here_we_go/monCompte" class="btn btn-secondary">Retour</a>
             </div>
         </form>

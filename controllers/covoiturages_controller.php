@@ -118,7 +118,7 @@
             try {
                 $id_covoiturage = $_GET["id_covoiturage"];
                 Covoiturage::deleteCovoiturage($id_covoiturage);
-                header("Location: /here_we_go/accueil");
+                header("Location: /here_we_go/monCompte");
             } catch(Exception $e) {
                 echo "Erreur :".$e->getMessage();
             }

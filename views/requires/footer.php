@@ -26,6 +26,7 @@
                     <div class="single-cta">
                         <div class="cta-text">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d356526.9886501355!2d5.107618842841011!3d45.72373234766646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478b313c2893fb25%3A0xd8fedb4bfd3d3e2f!2sEVCO!5e0!3m2!1sfr!2sfr!4v1711207507267!5m2!1sfr!2sfr" width="100%" height="160" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <span>197 Rue des Fardiers, 38460 Trept</span>
                         </div>
                     </div>
                 </div>
