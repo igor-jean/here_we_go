@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap");
+
 *,
 *::before,
 *::after {
@@ -19,6 +20,7 @@ li {
     margin-left: 30px;
   }
 }
+
 main {
   margin-top: 75px;
 }
@@ -28,6 +30,7 @@ main {
     scroll-behavior: smooth;
   }
 }
+
 body {
   margin: 0 auto;
   font-family: "Rubik", sans-serif;
@@ -50,6 +53,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 @media screen and (max-width: 750px) {
   .background-index {
     background-size: 200%;
@@ -75,12 +79,14 @@ h1 {
   text-align: center;
   margin: 150px 0 100px;
 }
+
 @media screen and (max-width: 870px) {
   h1 {
     font-size: 60px;
     margin-bottom: 50px;
   }
 }
+
 @media screen and (max-width: 460px) {
   h1 {
     font-size: 40px;
@@ -90,6 +96,7 @@ h1 {
 .h1-home {
   margin-top: 0;
 }
+
 .h1-home::first-letter {
   text-transform: uppercase;
 }
@@ -263,30 +270,36 @@ article:has(:hover, :focus) {
   article {
     container: card/inline-size;
   }
+
   .article-body p {
     display: none;
   }
 }
+
 @container card (min-width: 380px) {
   .article-wrapper {
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: 16px;
   }
+
   .article-body {
     padding-left: 0;
   }
+
   figure {
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
+
   figure img {
     height: 100%;
     aspect-ratio: 1;
     object-fit: cover;
   }
 }
+
 .sr-only:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -300,6 +313,7 @@ article:has(:hover, :focus) {
 .show-link {
   display: none;
 }
+
 @media screen and (max-width: 670px) {
   .show-link {
     display: table-cell;
@@ -348,6 +362,7 @@ article:has(:hover, :focus) {
   right: 70px !important;
   top: 7px;
 }
+
 @media screen and (max-width: 1400px) {
   .dropdownAvatar {
     display: none;
@@ -387,11 +402,13 @@ article:has(:hover, :focus) {
   width: 300px;
   margin-left: 30px;
 }
+
 @media screen and (max-width: 1550px) {
   .datepicker {
     width: 200px;
   }
 }
+
 .datepicker #searchDate {
   width: 100%;
   height: 40px;
@@ -410,6 +427,7 @@ article:has(:hover, :focus) {
 #boutton-datepicker {
   cursor: pointer;
 }
+
 #boutton-datepicker span {
   height: 38px;
   width: 102px;
@@ -420,6 +438,7 @@ article:has(:hover, :focus) {
   font-size: 1.1rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
 #boutton-datepicker span:hover {
   background: #40897E;
 }
@@ -444,6 +463,7 @@ article:has(:hover, :focus) {
   resize: none;
   overflow: hidden;
 }
+
 .iframeText:focus {
   outline: none;
 }
@@ -491,13 +511,13 @@ article:has(:hover, :focus) {
   cursor: pointer;
 }
 
-.check:checked + .checkbox .slide .toggle {
+.check:checked+.checkbox .slide .toggle {
   transform: translateX(92px);
   background: linear-gradient(40deg, #8983F7, #A3DAFB 70%);
   box-shadow: 0px 0px 10px #8983F7, 0px 0px 3px #8983F7;
 }
 
-.check:checked + .checkbox .slide {
+.check:checked+.checkbox .slide {
   background-color: #0a1929;
   color: #fff;
 }
@@ -519,34 +539,41 @@ table {
   width: 100%;
   table-layout: fixed;
 }
+
 table td {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
 }
+
 @media screen and (max-width: 1200px) {
   table {
     font-size: 1rem;
   }
+
   table .btn-primary {
     padding: 8px;
     width: 100px;
   }
 }
+
 @media screen and (max-width: 700px) {
   table {
     font-size: 0.8rem;
   }
+
   table .btn-primary {
     padding: 0px;
     width: 70px;
     font-size: 0.8rem;
   }
 }
+
 @media screen and (max-width: 770px) {
   table {
     font-size: 0.8rem;
   }
+
   table .none-conducteur {
     display: none;
   }
@@ -574,9 +601,11 @@ th {
   border-radius: var(--button_radius);
   background: var(--button_outline_color);
 }
+
 .ancre-monCompte button a {
   text-decoration: none;
 }
+
 .ancre-monCompte .button_top {
   display: block;
   box-sizing: border-box;
@@ -588,10 +617,12 @@ th {
   transform: translateY(-0.2em);
   transition: transform 0.1s ease;
 }
+
 .ancre-monCompte button:hover .button_top {
   /* Pull the button upwards when hovered */
   transform: translateY(-0.33em);
 }
+
 .ancre-monCompte button:active .button_top {
   /* Push the button downwards when pressed */
   transform: translateY(0);
@@ -620,6 +651,7 @@ th {
     font-size: 1.5rem;
   }
 }
+
 @media screen and (max-width: 530px) {
   .mon-compte h2 {
     font-size: 1.2rem;
@@ -629,6 +661,7 @@ th {
 .photo-event-div {
   margin: 150px auto 50px;
 }
+
 .photo-event-div img {
   width: 100%;
   height: 570px;
@@ -636,6 +669,7 @@ th {
   object-position: center;
   border-radius: 24px;
 }
+
 @media screen and (max-width: 770px) {
   .photo-event-div img {
     height: 300px;
@@ -677,6 +711,7 @@ th {
   transition: 0.3s ease-out;
   background: rgba(0, 0, 0, 0.027);
 }
+
 .card:hover {
   transform: scale(1.02) !important;
 }
@@ -693,6 +728,7 @@ th {
   margin: 20px auto 50px;
   z-index: 3;
 }
+
 @media screen and (max-width: 1200px) {
   #mapAccueil {
     width: 80%;
@@ -706,6 +742,7 @@ th {
   margin: 20px auto 50px;
   z-index: 3;
 }
+
 @media screen and (max-width: 1200px) {
   #mapPremium {
     width: 80%;
@@ -764,6 +801,7 @@ img {
   -webkit-text-stroke: 1px #000000;
   text-shadow: 0px 1px 4px #23430C;
 }
+
 @media screen and (max-width: 1000px) {
   .heure-date span {
     font-size: 1.7rem;
@@ -820,34 +858,41 @@ table {
   width: 100%;
   table-layout: fixed;
 }
+
 table td {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
 }
+
 @media screen and (max-width: 1200px) {
   table {
     font-size: 1rem;
   }
+
   table .btn-primary {
     padding: 8px;
     width: 100px;
   }
 }
+
 @media screen and (max-width: 700px) {
   table {
     font-size: 0.8rem;
   }
+
   table .btn-primary {
     padding: 0px;
     width: 70px;
     font-size: 0.8rem;
   }
 }
+
 @media screen and (max-width: 770px) {
   table {
     font-size: 0.8rem;
   }
+
   table .none-conducteur {
     display: none;
   }
@@ -875,9 +920,11 @@ th {
   border-radius: var(--button_radius);
   background: var(--button_outline_color);
 }
+
 .ancre-monCompte button a {
   text-decoration: none;
 }
+
 .ancre-monCompte .button_top {
   display: block;
   box-sizing: border-box;
@@ -889,10 +936,12 @@ th {
   transform: translateY(-0.2em);
   transition: transform 0.1s ease;
 }
+
 .ancre-monCompte button:hover .button_top {
   /* Pull the button upwards when hovered */
   transform: translateY(-0.33em);
 }
+
 .ancre-monCompte button:active .button_top {
   /* Push the button downwards when pressed */
   transform: translateY(0);
@@ -921,6 +970,7 @@ th {
     font-size: 1.5rem;
   }
 }
+
 @media screen and (max-width: 530px) {
   .mon-compte h2 {
     font-size: 1.2rem;
@@ -954,6 +1004,7 @@ th {
   background-size: 100% 100%;
   background-position: center;
 }
+
 @media screen and (max-width: 1400px) {
   .golden-button {
     top: 15px;
@@ -961,6 +1012,7 @@ th {
     transform: translateX(50%);
   }
 }
+
 @media screen and (max-width: 700px) {
   .golden-button {
     top: 20px;
@@ -968,6 +1020,7 @@ th {
     text-transform: lowercase;
     font-size: 0.7em;
   }
+
   .golden-button::first-letter {
     text-transform: uppercase;
   }
@@ -993,9 +1046,11 @@ th {
 .action-buttons .btn-primary {
   margin-top: 15px;
 }
+
 .action-buttons .form-group {
   margin-bottom: 10px;
 }
+
 @media screen and (max-width: 1400px) {
   .action-buttons .nav-item {
     margin: 15px 0;
@@ -1045,13 +1100,16 @@ th {
     background: transparent;
     border: none;
   }
+
   .navbar .form-inline {
     display: block;
   }
+
   .navbar .input-group {
     width: 100%;
   }
 }
+
 .navbar .form-control {
   box-shadow: none;
   font-weight: normal;
@@ -1076,6 +1134,7 @@ th {
   color: white !important;
   transition: 0.4s ease;
 }
+
 .nav-link img {
   border-radius: 50%;
   width: 36px;
@@ -1090,11 +1149,13 @@ th {
   font-size: 35px;
   padding-right: 50px;
 }
+
 @media screen and (max-width: 700px) {
   .navbar .navbar-brand {
     font-size: 1.5rem;
   }
 }
+
 @media screen and (max-width: 425px) {
   .navbar .navbar-brand {
     font-size: 1.2rem;
@@ -1205,6 +1266,7 @@ th {
 .dropdown-menu {
   transition: 2s ease;
 }
+
 @media screen and (max-width: 1400px) {
   .dropdown-menu {
     width: 329px;
@@ -1214,6 +1276,7 @@ th {
 .menuHidden {
   display: none;
 }
+
 @media screen and (max-width: 1400px) {
   .menuHidden {
     display: initial;
@@ -1262,10 +1325,12 @@ ul {
   padding-left: 15px;
   display: inline-block;
 }
+
 .cta-text input[type=email] {
   height: 31.2px;
   padding-left: 10px;
 }
+
 .cta-text button {
   border: initial !important;
 }
@@ -1314,13 +1379,16 @@ ul {
 .footer-widget h4 {
   color: white;
 }
+
 .footer-widget a {
   color: inherit;
   font-size: 3rem;
 }
+
 .footer-widget a svg {
   height: 3rem;
 }
+
 .footer-widget i {
   font-size: 3rem;
 }
@@ -1370,4 +1438,6 @@ ul {
 
 .footer-menu li a {
   font-size: 14px;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/*# sourceMappingURL=styles.css.map */
