@@ -2,11 +2,11 @@
 <div class="container">
     <form action="?controller=admin&action=addCategorie" method="post">
         <div class="mb-3">
-            <label for="nom" class="form-label">Nom Catégorie :</label>
+            <label for="nom" class="form-label">Nom Catégorie<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" name="libelle_categorie" id="nom">
         </div>
         <div class="mb-3">
-            <label for="couleur" class="form-label">Couleur associée :</label>
+            <label for="couleur" class="form-label">Couleur associée<span class="red-star"> *</span>:</label>
             <input type="color" class="form-control" name="couleur" id="couleur">
         </div>
     

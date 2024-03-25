@@ -345,3 +345,10 @@ article:has(:hover, :focus) {
 
     }
 }
+
+.red-star {
+    color: red;
+    font-size: 1.2rem;
+    position: relative;
+    bottom: 5px;
+}

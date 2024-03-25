@@ -19,23 +19,23 @@
             </div>
 
             <div class="col-md-6 mt-3">
-                <label for="nom" class="form-label">Nom :</label>
+                <label for="nom" class="form-label">Nom<span class="red-star"> *</span>:</label>
                 <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $user->getNom();?>">
             </div>
             <div class="col-md-6 mt-3">
-                <label for="prenom" class="form-label">Prenom :</label>
+                <label for="prenom" class="form-label">Prenom<span class="red-star"> *</span>:</label>
                 <input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $user->getPrenom();?>">
             </div>
             <div class="mb-3 mt-3">
-                <label for="ville" class="form-label">Ville :</label>
+                <label for="ville" class="form-label">Ville<span class="red-star"> *</span>:</label>
                 <input type="text" class="form-control" name="ville" id="ville" value="<?php echo $user->getVille();?>">
             </div>
             <div class="col-md-6 mt-3 mb-5">
-                <label for="mail" class="form-label">Email :</label>
+                <label for="mail" class="form-label">Email<span class="red-star"> *</span>:</label>
                 <input type="text" class="form-control" name="mail" id="mail" value="<?php echo $user->getMail();?>">
             </div>
             <div class="col-md-6 mt-3 mb-5">
-                <label for="telephone" class="form-label">Telephone :</label>
+                <label for="telephone" class="form-label">Telephone<span class="red-star"> *</span>:</label>
                 <input type="text" class="form-control" name="telephone" id="telephone" value="<?php echo $user->getTelephone();?>">
             </div>
             </div>

@@ -7,19 +7,19 @@
     ?>
     <form action="?controller=utilisateurs&action=addVehicule" method="post">
         <div class="mb-3">
-            <label for="libelle" class="form-label">Libellé du véhicule :</label>
+            <label for="libelle" class="form-label">Libellé du véhicule<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" id="libelle" name="libelle_vehicule">
         </div>
         <div class="mb-3">
-            <label for="immatriculation" class="form-label">Immatriculation :</label>
+            <label for="immatriculation" class="form-label">Immatriculation<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" id="immatriculation" name="immatriculation">
         </div>
         <div class="mb-3">
-            <label for="nb_places" class="form-label">Nombre de places :</label>
+            <label for="nb_places" class="form-label">Nombre de places<span class="red-star"> *</span>:</label>
             <input type="number" class="form-control" id="nb_places" name="nb_places">
         </div>
         <div class="mb-3">
-            <label for="id_vehicule" class="form-label">Type du véhicule :</label>
+            <label for="id_vehicule" class="form-label">Type du véhicule<span class="red-star"> *</span>:</label>
             <select class="form-select" id="id_vehicule" name="id_vehicule">
                 <?php foreach ($types as $type) {
                     echo "<option value='".$type->getIdVehicule()."'>".$type->getType()."</option>";

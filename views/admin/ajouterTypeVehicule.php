@@ -2,7 +2,7 @@
 <div class="container">
     <form action="?controller=admin&action=addTypeVehicule" method="post">
         <div class="mb-3">
-            <label for="nom" class="form-label">Nom Type vehicule :</label>
+            <label for="nom" class="form-label">Nom Type vehicule<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" name="type" id="nom">
         </div>
 

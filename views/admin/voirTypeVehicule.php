@@ -3,7 +3,7 @@
     <form action="?controller=admin&action=updateTypeVehicule" method="post">
         <input type="hidden" name="id_vehicule" value="<?php echo $vehicule->getIdVehicule();?>">
         <div class="mb-3">
-            <label for="nom" class="form-label">Nom Type Vehicule :</label>
+            <label for="nom" class="form-label">Nom Type Vehicule<span class="red-star"> *</span>:</label>
             <input type="text" class="form-control" name="type" id="nom" value="<?php echo $vehicule->getType();?>">
         </div>
     
