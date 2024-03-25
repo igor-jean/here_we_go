@@ -128,7 +128,7 @@
             $totalPages = ceil($totalEvents / $perPage);
             $currentDate = date('Y-m-d');
             // Sélectionner les événements pour la page donnée
-            $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 AND date_event >= '.$currentDate.' ORDER BY date_event ASC LIMIT :perPage OFFSET :offset ');
+            $req = $db->prepare('SELECT * FROM evenement WHERE inscrit = 1 AND date_event >= NOW() ORDER BY date_event ASC LIMIT :perPage OFFSET :offset ');
             $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
             $req->bindValue(':offset', $offset, PDO::PARAM_INT);
             $req->execute();
