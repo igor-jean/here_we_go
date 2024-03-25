@@ -39,11 +39,9 @@
                 <input type="text" class="form-control" name="telephone" id="telephone" value="<?php echo $user->getTelephone();?>">
             </div>
             </div>
-           <div class="mt-5">
-            <button type="submit" class="btn btn-primary mb-5">Ajouter</button>
-            <div class="text-end">
-                <a href="?controller=utilisateurs&action=monCompte" class="btn btn-danger mb-5 text-end" tabindex="-1" role="button">Retour</a>
+           <div class="my-5 d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <a href="?controller=utilisateurs&action=monCompte" class="btn btn-secondary" tabindex="-1" role="button">Retour</a>
             </div>
-        </div>
         </form>
 </div>

@@ -5,7 +5,6 @@
         echo '<div class="error-message">' . $errorMessage . '</div>';
     }
     ?>
-
     <div class="text-center ">
         <a class="btn btn-secondary" href="evenement/ajout_photo/<?php echo $event->getIdEvent(); ?>" role="button" >Ajouter/Modifier une photo d'Evenement</a>
     </div>
@@ -77,10 +76,12 @@
         ?>
             </select>
         </div>
-        <div class="d-flex justify-content-around">
-            <input type="submit" value="Modifier" class="btn btn-success btn-lg">
-            <a href="/here_we_go/supprimer_evenement/<?php echo $event->getIdEvent() ;?>" class="btn btn-danger btn-lg">Supprimer</a>
+        <div class="d-flex justify-content-between">
+            <div>
+                <input type="submit" value="Modifier" class="btn btn-primary me-5">
+                <a href="/here_we_go/supprimer_evenement/<?php echo $event->getIdEvent() ;?>" class="btn btn-danger btn-lg">Supprimer</a>
+            </div>
+            <a href="/here_we_go/gestion_du_site/evenements" class="btn btn-secondary">Retour</a>
         </div>
     </form>
-    <a href="/here_we_go/gestion_du_site/evenements" class="btn btn-danger my-5 btn-lg">Retour</a>
 </div>

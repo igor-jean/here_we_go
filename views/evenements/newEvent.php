@@ -88,11 +88,9 @@ if(isset($_GET['error'])) {
             </div>
         </div>
 
-        <div class="mt-5">
-            <button type="submit" class="btn btn-primary mb-5">Ajouter</button>
-            <div class="text-end">
-                <a href="/here_we_go/accueil" class="btn btn-danger mb-5 text-end" tabindex="-1" role="button">Retour</a>
-            </div>
+        <div class="my-5 d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="/here_we_go/accueil" class="btn btn-secondary" tabindex="-1" role="button">Retour</a>
         </div>
     </form>
 </div>

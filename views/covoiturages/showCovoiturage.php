@@ -12,9 +12,9 @@
             <p>Information de contact : <span style="color:#69BACE;"><strong><?php echo $covoit->getInformationDeContact();?></strong></span></p>
             <p>Description : <span style="color:#69BACE;"><strong><?php echo $covoit->getDescriptif();?></strong></span></p>
             <p class="mb-5">Véhicule du capitaine : <span style="color:#69BACE;"><strong><?php echo $vehicule->getLibelle_vehicule();?></strong></span></p>
-            <a class="btn btn-primary mb-5 me-5" href="?controller=evenements&action=showEvent&id_event=<?php echo $covoit->getIdEvent();?>">Retour</a>
+            <a class="btn btn-secondary mb-5 me-5" href="?controller=evenements&action=showEvent&id_event=<?php echo $covoit->getIdEvent();?>">Retour</a>
             <?php if($inscrit) {
-                echo '<a class="ms-5 btn btn-primary mb-5" href="?controller=covoiturages&action=desinscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Annuler la réservation</a>';
+                echo '<a class="ms-5 btn btn-danger mb-5" href="?controller=covoiturages&action=desinscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Annuler</a>';
             } elseif(!$verif) {
                 echo '<a class="ms-5 btn btn-primary mb-5" href="?controller=covoiturages&action=inscriptionCovoiturage&id_covoiturage='.$covoit->getIdCovoiturage().'">Réserver</a>';
             }

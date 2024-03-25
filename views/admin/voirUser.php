@@ -33,10 +33,13 @@
                 <option value="2" <?php if($utilisateur->getRole() == 2) echo "selected"; ?>>Utilisateur</option>
             </select><br>
         </div>
-    
-        <button type="submit" class="btn btn-primary me-5">Modifier</button>
-        <a href="/here_we_go/supprimer_utilisateur/<?php echo $utilisateur->getId_utilisateur(); ?>" class="btn btn-danger">Supprimer</a>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button type="submit" class="btn btn-primary me-5">Modifier</button>
+                <a href="/here_we_go/supprimer_utilisateur/<?php echo $utilisateur->getId_utilisateur(); ?>" class="btn btn-danger">Supprimer</a>
+            </div>
+            <a href="/here_we_go/gestion_du_site/utilisateurs" class="btn btn-secondary mt-3">Retour</a>
+        </div>
     </form>
     
-    <a href="/here_we_go/gestion_du_site/utilisateurs" class="btn btn-secondary mt-3">Retour</a>
 </div>

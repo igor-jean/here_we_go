@@ -12,9 +12,9 @@
             <?php
             if (isset($_SESSION["login"])) {
                 if ($checkIfOnlyOne) {
-                    echo '<a href="/here_we_go/confirmation_desinscription/' . $event->id_event . '/' . $id_covoit . '" class="btn btn-primary">Se désinscrire</a>';
+                    echo '<a href="/here_we_go/confirmation_desinscription/' . $event->id_event . '/' . $id_covoit . '" class="btn btn-danger">Se désinscrire</a>';
                 } elseif ($result) {
-                    echo '<a href="/here_we_go/desinscription/' . $event->id_event . '" class="btn btn-primary">Se désinscrire</a>';
+                    echo '<a href="/here_we_go/desinscription/' . $event->id_event . '" class="btn btn-danger">Se désinscrire</a>';
                 } else {
                     echo '<a href="/here_we_go/inscription/' . $event->id_event . '" class="btn btn-primary">S\'inscrire</a>';
                 }
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="my-3">
-        <button id="btn-audio">Ecouté l'Audio de la description</button>
+        <button id="btn-audio">Ecouter l'Audiodescription</button>
         <div id="text-to-audio"></div>
     </div>
     <div class="container">
@@ -126,5 +126,5 @@
         </tbody>
     </table>
     <?php } ?>
-    <a href="/here_we_go/accueil" class="btn btn-primary">Retour</a>
+    <a href="/here_we_go/accueil" class="btn btn-secondary">Retour</a>
 </div>
