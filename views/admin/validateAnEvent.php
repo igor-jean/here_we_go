@@ -18,8 +18,11 @@
         <li><strong>Catégorie :</strong> <?php echo $categorie->getLibelleCategorie(); ?></li>
     </ul>
     
-    <a href="?controller=admin&action=validate&id_event=<?php echo $event->getIdEvent(); ?>" class="btn btn-success">Valider</a>
-    <a href="?controller=admin&action=delete&id_event=<?php echo $id_event; ?>" class="btn btn-danger">Supprimer</a>
-    <br>
-    <a href="?controller=admin&action=evenementsAdministration" class="btn btn-primary mt-3">Retour</a>
+    <div class="d-flex justify-content-between">
+        <div>
+            <a href="?controller=admin&action=validate&id_event=<?php echo $event->getIdEvent(); ?>" class="btn btn-primary me-5">Valider</a>
+            <a href="?controller=admin&action=delete&id_event=<?php echo $id_event; ?>" class="btn btn-danger">Supprimer</a>
+        </div>
+        <a href="?controller=admin&action=evenementsAdministration" class="btn btn-secondary">Retour</a>
+    </div>
 </div>

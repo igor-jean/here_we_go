@@ -18,7 +18,7 @@
                     <td><?php echo $event->getTitre(); ?></td>
                     <td><?php echo $event->getDateEvent(); ?></td>
                     <td><?php echo $event->getVille(); ?></td>
-                    <td class="hide-link"><a href='/here_we_go/validation/<?php echo $event->getIdEvent(); ?>' class="btn btn-success">Valider</a></td>
+                    <td class="hide-link"><a href='/here_we_go/validation/<?php echo $event->getIdEvent(); ?>' class="btn btn-primary">Valider</a></td>
                     <td class="show-link"><a href='/here_we_go/validation/<?php echo $event->getIdEvent(); ?>'><i style="color: green"class="fa-solid fa-check"></i></a></td>
                 </tr>
             <?php } ?>
@@ -56,5 +56,5 @@
             </ul>
         </nav>
     
-    <a href="/here_we_go/gestion_du_site" class="btn btn-danger mt-5" tabindex="-1" role="button">RETOUR</a>
+    <a href="/here_we_go/gestion_du_site" class="btn btn-secondary mt-5" tabindex="-1" role="button">RETOUR</a>
 </div>
