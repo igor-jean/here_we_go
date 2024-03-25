@@ -41,8 +41,9 @@
             </select>
         </div>
         <input type="hidden" id="id_event" name="id_event" value="<?php echo $id_event; ?>">
-        <div class="mb-3">
+        <div class="my-3 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a class="btn btn-secondary" href="/here_we_go/fiche_evenement/<?php echo $id_event; ?>">Retour</a>
         </div>
     </form>
 </div>

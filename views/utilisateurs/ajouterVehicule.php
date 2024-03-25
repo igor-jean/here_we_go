@@ -26,9 +26,9 @@
                 } ?>
             </select>
         </div>
-        <div class="mt-3">
-            <a href="?controller=utilisateurs&action=monCompte" class="btn btn-danger">Retour</a>
+        <div class="mt-3 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="?controller=utilisateurs&action=monCompte" class="btn btn-secondary">Retour</a>
         </div>
     </form>
 </div>

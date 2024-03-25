@@ -17,7 +17,7 @@
                     <td><?php echo $toValidate->getNom(); ?></td>
                     <td><?php echo $toValidate->getPrenom(); ?></td>
                     <td><?php echo $toValidate->getMail(); ?></td>
-                    <td class=" hide-link"><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-success">Valider</a></td>
+                    <td class=" hide-link"><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-primary">Valider</a></td>
                     <td class=" hide-link"><a href='?controller=admin&action=deleteUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>' class="btn btn-danger">Refuser</a></td>
                     <td class="show-link"><a href='?controller=admin&action=validateUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>'><i style="color: green" class="fa-solid fa-check"></i></a></td>
                     <td class="show-link"><a href='?controller=admin&action=deleteUser&id_utilisateur=<?php echo $toValidate->getId_utilisateur(); ?>'><i style="color: red" class="fa-solid fa-circle-xmark"></i></a></td>
@@ -49,5 +49,5 @@
         </tbody>
     </table>
     
-    <a href="/here_we_go/gestion_du_site" class="btn btn-danger mt-5" tabindex="-1" role="button">RETOUR</a>
+    <a href="/here_we_go/gestion_du_site" class="btn btn-secondary mt-5" tabindex="-1" role="button">RETOUR</a>
 </div>
