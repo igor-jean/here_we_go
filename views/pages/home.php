@@ -117,8 +117,6 @@ $listeVillesJSON = '[' . implode(',', $listeVilles) . ']';
 
 
     </script>
-
-    <!-- Fin JS -->
 </div>
-    </section>
+</section>
 </div>

@@ -40,7 +40,7 @@
             </div>
             </div>
            <div class="my-5 d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button type="submit" class="btn btn-primary">Modifier</button>
                 <a href="?controller=utilisateurs&action=monCompte" class="btn btn-secondary" tabindex="-1" role="button">Retour</a>
             </div>
         </form>
