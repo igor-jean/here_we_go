@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="my-3">
-        <button id="btn-audio">Ecouté l'Audio de la description</button>
+        <button id="btn-audio">Ecouter l'Audio de la description</button>
         <div id="text-to-audio"></div>
     </div>
     <div class="container">
