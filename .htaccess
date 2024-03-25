@@ -29,7 +29,7 @@ RewriteRule ^evenement/ajout_photo/([\w]+)/?$ index.php?controller=utilisateurs&
 RewriteRule ^accueil$ index.php?controller=pages&action=home [L]
 
 # Réécriture pour les erreurs 404
-RewriteRule erreur-404 erreur_404.php [L]
+RewriteRule erreur-404 index.php?controller=pages&action=error [L]
 
 # Réécriture pour la recherche
 RewriteRule ^recherche$ index.php?controller=evenements&action=resultsSearch
@@ -129,5 +129,4 @@ RewriteRule ^modifier_type_vehicule/([^/]+)/?$ index.php?controller=admin&action
 
 # Réécriture pour aller a la page d'ajout d'un type vehicule (admin)
 RewriteRule ^ajouter_type_vehicule$ index.php?controller=admin&action=ajouterTypeVehicule
-
 
